@@ -1,5 +1,5 @@
 <?php
-	$this->set_css($this->default_theme_path.'/flexigrid/css/flexigrid.css');
+//	$this->set_css($this->default_theme_path.'/flexigrid/css/flexigrid.css');
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);
 
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
@@ -35,8 +35,8 @@
 	var message_alert_delete = "<?php echo $this->l('alert_delete'); ?>";
 
 </script>
-<div id='list-report-error' class='report-div error'></div>
-<div id='list-report-success' class='report-div success report-list' <?php if($success_message !== null){?>style="display:block"<?php }?>><?php
+<div id='list-report-error' class='report-div error ' ></div>
+<div id='list-report-success' class='report-div success report-list'  <?php if($success_message !== null){?>style="display:block"<?php }?>><?php
 if($success_message !== null){?>
 	<p><?php echo $success_message; ?></p>
 <?php }
@@ -54,120 +54,61 @@ if($success_message !== null){?>
 	<div id='main-table-box' class="main-table-box">
 
 	<?php if(!$unset_add || !$unset_export || !$unset_print){?>
-	<div class="tDiv">
+	<div class="tDiv row">
 		<?php if(!$unset_add){?>
-		<div class="tDiv2">
+		<div class="tDiv2 col-lg-6">
         	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='add-anchor add_button'>
-			<div class="fbutton">
+			<div class="btn btn-default">
 				<div>
+                    <i class="fa fa-plus-circle"></i> 
 					<span class="add"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
 				</div>
 			</div>
             </a>
-			<div class="btnseparator">
-			</div>
+            
 		</div>
 		<?php }?>
-		<div class="tDiv3">
+		<div class="tDiv3 col-lg-6" align="right">
 			<?php if(!$unset_export) { ?>
         	<a class="export-anchor" data-url="<?php echo $export_url; ?>" target="_blank">
-				<div class="fbutton">
-					<div>
+				<div class="btn btn-default">
+					<div><i class="fa fa-print"></i> 
 						<span class="export"><?php echo $this->l('list_export');?></span>
 					</div>
 				</div>
             </a>
-			<div class="btnseparator"></div>
 			<?php } ?>
 			<?php if(!$unset_print) { ?>
         	<a class="print-anchor" data-url="<?php echo $print_url; ?>">
-				<div class="fbutton">
-					<div>
+				<div class="btn btn-default">
+					<div><i class="fa fa-file-excel-o"></i>
 						<span class="print"><?php echo $this->l('list_print');?></span>
 					</div>
 				</div>
             </a>
 			<div class="btnseparator"></div>
 			<?php }?>
-		</div>
-		<div class='clear'></div>
+		</div>        
 	</div>
+        <br/>
 	<?php }?>
 
 	<div id='ajax_list' class="ajax_list">
 		<?php echo $list_view?>
 	</div>
 	<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form" autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
-	<div class="sDiv quickSearchBox" id='quickSearchBox'>
-		<div class="sDiv2">
-			<?php echo $this->l('list_search');?>: <input type="text" class="qsbsearch_fieldox search_text" name="search_text" size="30" id='search_text'>
-			<select name="search_field" id="search_field">
-				<option value=""><?php echo $this->l('list_search_all');?></option>
-				<?php foreach($columns as $column){?>
-				<option value="<?php echo $column->field_name?>"><?php echo $column->display_as?>&nbsp;&nbsp;</option>
-				<?php }?>
-			</select>
-            <input type="button" value="<?php echo $this->l('list_search');?>" class="crud_search" id='crud_search'>
-		</div>
-        <div class='search-div-clear-button'>
-        	<input type="button" value="<?php echo $this->l('list_clear_filtering');?>" id='search_clear' class="search_clear">
-        </div>
-	</div>
-	<div class="pDiv">
-		<div class="pDiv2">
-			<div class="pGroup">
-				<div class="pSearch pButton quickSearchButton" id='quickSearchButton' title="<?php echo $this->l('list_search');?>">
-					<span></span>
-				</div>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
-				<select name="per_page" id='per_page' class="per_page">
-					<?php foreach($paging_options as $option){?>
-						<option value="<?php echo $option; ?>" <?php if($option == $default_per_page){?>selected="selected"<?php }?>><?php echo $option; ?>&nbsp;&nbsp;</option>
-					<?php }?>
-				</select>
-				<input type='hidden' name='order_by[0]' id='hidden-sorting' class='hidden-sorting' value='<?php if(!empty($order_by[0])){?><?php echo $order_by[0]?><?php }?>' />
-				<input type='hidden' name='order_by[1]' id='hidden-ordering' class='hidden-ordering'  value='<?php if(!empty($order_by[1])){?><?php echo $order_by[1]?><?php }?>'/>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
-				<div class="pFirst pButton first-button">
-					<span></span>
-				</div>
-				<div class="pPrev pButton prev-button">
-					<span></span>
-				</div>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
-				<span class="pcontrol"><?php echo $this->l('list_page'); ?> <input name='page' type="text" value="1" size="4" id='crud_page' class="crud_page">
-				<?php echo $this->l('list_paging_of'); ?>
-				<span id='last-page-number' class="last-page-number"><?php echo ceil($total_results / $default_per_page)?></span></span>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
-				<div class="pNext pButton next-button" >
-					<span></span>
-				</div>
-				<div class="pLast pButton last-button">
-					<span></span>
-				</div>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
-				<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading'>
-					<span></span>
-				</div>
-			</div>
-			<div class="btnseparator">
-			</div>
-			<div class="pGroup">
+    <script>
+        $(document).ready(function(){
+          $("#togle").hide();
+          $("#config").click(function(){
+            $("#togle").slideToggle();
+          });
+        });
+    </script>
+	<div class="sDiv quickSearchBox row" id='quickSearchBox'>
+        <div class="pGroup col-lg-8">
+                        <button type="button" id="config" class="btn btn-default"><i class="fa fa-search"></i> Search </button>
+
 				<span class="pPageStat">
 					<?php $paging_starts_from = "<span id='page-starts-from' class='page-starts-from'>1</span>"; ?>
 					<?php $paging_ends_to = "<span id='page-ends-to' class='page-ends-to'>". ($total_results < $default_per_page ? $total_results : $default_per_page) ."</span>"; ?>
@@ -178,10 +119,76 @@ if($success_message !== null){?>
 										   ); ?>
 				</span>
 			</div>
-		</div>
-		<div style="clear: both;">
+        
+            <div class="pGroup col-lg-4" align="right">
+            <div class="form-group input-group">
+                <span class="input-group-btn">
+                <div class="pFirst pButton first-button btn btn-default">
+					<span>First</span>
+				</div>
+                <div class="pPrev pButton prev-button btn btn-default">
+					<span>Previous</span>
+				</div>
+				</span>
+                
+                <input name='page' type="text" value="1" id='crud_page' class="crud_page form-control">
+				<span class="input-group-addon">
+                    <?php echo $this->l('list_paging_of'); ?> <span id='last-page-number' class="last-page-number">
+                     <?php echo ceil($total_results / $default_per_page)?>
+                </span>
+                </span>
+                <span class="input-group-btn">
+ 				<div class="pNext pButton next-button btn btn-default" >
+					<span>Next</span>
+				</div>
+				<div class="pLast pButton last-button btn btn-default">
+					<span>End</span>
+				</div>               
+                </span>
+			</div>
+			</div>
+                <div id="togle">
+
+    <div class="pGroup col-lg-3">
+				<select name="per_page" id='per_page' class="per_page form-control" style="padding-top:2px;padding-bottom:2px">
+					<?php foreach($paging_options as $option){?>
+						<option value="<?php echo $option; ?>" <?php if($option == $default_per_page){?>selected="selected"<?php }?>><?php echo $option; ?>&nbsp;&nbsp;</option>
+					<?php }?>
+				</select>
+				<input type='hidden' name='order_by[0]' id='hidden-sorting' class='hidden-sorting form-control' value='<?php if(!empty($order_by[0])){?><?php echo $order_by[0]?><?php }?>' />
+				<input type='hidden' name='order_by[1]' id='hidden-ordering' class='hidden-ordering form-control'  value='<?php if(!empty($order_by[1])){?><?php echo $order_by[1]?><?php }?>'/>
+			</div>
+        <div class="col-lg-4">
+			<select name="search_field" id="search_field" class="form-control">
+				<option value=""><?php echo $this->l('list_search_all');?></option>
+				<?php foreach($columns as $column){?>
+				<option value="<?php echo $column->field_name?>"><?php echo $column->display_as?>&nbsp;&nbsp;</option>
+				<?php }?>
+			</select>
+        </div>
+        <div class="col-lg-5">
+                <div class="input-group">
+            	<input type="text" class="qsbsearch_fieldox search_text form-control" name="search_text" id='search_text' placeholder="SEARCH"><span class="input-group-btn" align="right">
+            <input type="button" value="<?php echo $this->l('list_search');?>" class="crud_search btn btn-default" id='crud_search'>
+        	<input type="button" value="<?php echo $this->l('list_clear_filtering');?>" id='search_clear' class="search_clear btn btn-default">	</span>
+
+	           </div>
+        </div>
+        </div>
+
+    </div>
+    <br/>
+
+	<div class="pDiv row">
+		<div class="pDiv2">
+			<div class="pGroup">
+				<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading'>
+					<span></span>
+				</div>
+			</div>
 		</div>
 	</div>
+        
 	<?php echo form_close(); ?>
 	</div>
 </div>

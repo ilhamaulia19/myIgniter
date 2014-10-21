@@ -7,19 +7,16 @@
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
-<div class="flexigrid crud-form" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
-	<div class="mDiv">
+<div class="flexigrid crud-form panel panel-default" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
+	<div class="mDiv panel-heading">
 		<div class="ftitle">
 			<div class='ftitle-left'>
-				<?php echo $this->l('list_record'); ?> <?php echo $subject?>
+				<b><?php echo $this->l('list_record'); ?> <?php echo $subject?></b>
 			</div>
 			<div class='clear'></div>
 		</div>
-		<div title="<?php echo $this->l('minimize_maximize');?>" class="ptogtitle">
-			<span></span>
-		</div>
 	</div>
-<div id='main-table-box'>
+<div id='main-table-box' class="list-group">
 	<?php echo form_open( $read_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
 	<div class='form-div'>
 		<?php
@@ -29,11 +26,11 @@
 				$even_odd = $counter % 2 == 0 ? 'odd' : 'even';
 				$counter++;
 		?>
-			<div class='form-field-box <?php echo $even_odd?>' id="<?php echo $field->field_name; ?>_field_box">
-				<div class='form-display-as-box' id="<?php echo $field->field_name; ?>_display_as_box">
+			<div class='list-group-item form-field-box <?php echo $even_odd?>' id="<?php echo $field->field_name; ?>_field_box">
+				<div class='form-display-as-box' id="<?php echo $field->field_name; ?>_display_as_box"><b>
 					<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?> :
-				</div>
-				<div class='form-input-box' id="<?php echo $field->field_name; ?>_input_box">
+				</b></div>
+				<div class='form-input-box ' id="<?php echo $field->field_name; ?>_input_box">
 					<?php echo $input_fields[$field->field_name]->input?>
 				</div>
 				<div class='clear'></div>

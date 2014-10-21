@@ -4,11 +4,11 @@
 	
 	if(!empty($list)){
 ?><div class="bDiv" >
-		<table cellspacing="0" cellpadding="0" border="0" id="flex1">
+		<table class="table table-bordered table-hover table-striped" id="flex1">
 		<thead>
 			<tr class='hDiv'>
 				<?php foreach($columns as $column){?>
-				<th width='<?php echo $column_width?>%'>
+				<th width='<?php echo $column_width?>%' style="cursor:pointer">
 					<div class="text-left field-sorting <?php if(isset($order_by[0]) &&  $column->field_name == $order_by[0]){?><?php echo $order_by[1]?><?php }?>" 
 						rel='<?php echo $column->field_name?>'>
 						<?php echo $column->display_as?>
@@ -33,20 +33,24 @@
 			</td>
 			<?php }?>
 			<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
-			<td align="left" width='20%'>
+			<td align="right" width='20%'>
 				<div class='tools'>				
-					<?php if(!$unset_delete){?>
-                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" >
-                    			<span class='delete-icon'></span>
-                    	</a>
-                    <?php }?>
+					
+					
+                    <?php if(!$unset_read){?>
+						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-search'></span> Detail &nbsp;</a>   
+					<?php }?>
+                                        
                     <?php if(!$unset_edit){?>
-						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='edit-icon'></span></a>
+						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-pencil'></span> Edit &nbsp;</a> 
 					<?php }?>
-					<?php if(!$unset_read){?>
-						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='read-icon'></span></a>
-					<?php }?>
-					<?php 
+
+                    <?php if(!$unset_delete){?>
+                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" >
+                    			<span class='fa fa-trash-o'></span> Delete</a> 
+                    <?php }?>
+
+                    <?php 
 					if(!empty($row->action_urls)){
 						foreach($row->action_urls as $action_unique_id => $action_url){ 
 							$action = $actions[$action_unique_id];
