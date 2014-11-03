@@ -6,14 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Codeigniter, bootstrap, Grocerycrud">
     <meta name="author" content="Asrul Hanafi">
-	<!--GroceryCRUD-->
+
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js') ?>"></script>
-	<?php foreach($css_files as $file): ?>
-    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-	<?php endforeach; ?>
-	<?php foreach($js_files as $file): ?> 
-    <script src="<?php echo $file; ?>"></script>
-	<?php endforeach; ?>
+
 	<!--Bootstrap-->
     <title>myIgniter</title>
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
@@ -21,7 +16,9 @@
     <link href="<?php echo base_url('assets/css/sb-admin-2.css') ?>" rel="stylesheet">
     <!--Font-->
 	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link href="<?php echo base_url('assets/css/plugins/dataTables/dataTables.bootstrap.css') ?>" rel="stylesheet">
+	<link href="<?php echo base_url('assets/css/awesome.css') ?>" rel="stylesheet">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -238,7 +235,7 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $data['username']->username; ?></a>
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $username->username; ?></a>
                 </li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
@@ -268,7 +265,7 @@
                 </li>
 
                 <li>
-					<a class="active" href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow"></span></b></a>
+					<a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow"></span></b></a>
 					<ul class="nav nav-second-level">
 						<li><a href='<?= site_url('crud/offices_management')?>'>Offices</a></li>
 						<li><a href='<?= site_url('crud/employees_management')?>'>Employees</a></li>
@@ -279,7 +276,7 @@
 					</ul>
 				</li>
                 <li>
-                    <a href="<?= site_url('crud/ion_auth_admin')?>"><i class="fa fa-edit fa-fw"></i> Users</a>
+                    <a class="active" href="<?= site_url('crud/ion_auth_admin')?>"><i class="fa fa-edit fa-fw"></i> Users</a>
                 </li>
             </ul>
         </div>
@@ -287,36 +284,53 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
-
-
-<!-- Page Content -->
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-cogs"></i> myIgniter 1.5</h1>
+            <h1 class="page-header"><i class="fa fa-users"></i> <?php echo lang('index_heading');?></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
     <div class="row">
     	<div class="col-lg-12">
-    		<p>myIgniter is a custom PHP framework for web developer. 
-			Combined between Codeigniter with Bootstrap and fontawesome User Interface,
-			include auto PHP GroceryCRUD for create table with Create-Read-Update-Delete and simple authentication system.
-			</p>
-			<p>
-				<a href="" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> Download myIgniter</a>
-				<a href="https://github.com/asrul10/myIgniter" class="btn btn-primary btn-lg"><i class="fa fa-github"></i> View project on GitHub</a>
-			</p>
-    	</div>
-    </div>
-    <!--Grocery Crud view-->
-    <div class="row">
-    	<div class="col-lg-12">
-			<h2>Grocery CRUD examples</h2>
-			<div><?php echo $output; ?></div>
-    	</div>
-    </div>
+		<p><?php echo lang('index_subheading');?></p>
+		<p><a href="<?= site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> <?=lang('index_create_user_link')?></a></p>
+		<p><a href="<?= site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?=lang('index_create_group_link')?></a></p>
+
+			<div id="infoMessage"><?php echo $message;?></div>
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered" id="dataTables">
+				<thead>
+					<tr>
+						<th><?php echo lang('index_fname_th');?></th>
+						<th><?php echo lang('index_lname_th');?></th>
+						<th><?php echo lang('index_email_th');?></th>
+						<th><?php echo lang('index_groups_th');?></th>
+						<th><?php echo lang('index_status_th');?></th>
+						<th><?php echo lang('index_action_th');?></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($users as $user):?>
+					<tr>
+			            <td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8');?></td>
+			            <td><?php echo htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8');?></td>
+			            <td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
+						<td>
+							<?php foreach ($user->groups as $group):?>
+								<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
+			                <?php endforeach?>
+						</td>
+						<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td>
+						<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
+					</tr>
+				<?php endforeach;?>
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
     <!--Footer-->
     <div class="row">
     	<div class="col-md-12">
@@ -335,5 +349,13 @@
 <script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/sb-admin-2.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/dataTables/jquery.dataTables.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/dataTables/dataTables.bootstrap.js') ?>"></script>
+<script>
+	$(document).ready(function() {
+	    $('#dataTables').dataTable();
+	});
+</script>
+
 </body>
 </html>
