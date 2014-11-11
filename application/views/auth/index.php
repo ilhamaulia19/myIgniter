@@ -287,18 +287,23 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-users"></i> <?php echo lang('index_heading');?></h1>
+            <h1 class="page-header"><i class="fa fa-users"></i> <?php echo lang('index_heading');?> <small><?php echo lang('index_subheading');?></small></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
     <div class="row">
     	<div class="col-lg-12">
-		<p><?php echo lang('index_subheading');?></p>
 		<p><a href="<?= site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> <?=lang('index_create_user_link')?></a></p>
 		<p><a href="<?= site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?=lang('index_create_group_link')?></a></p>
 
-			<div id="infoMessage"><?php echo $message;?></div>
+            <?php if ($message) { ?>
+            <div class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span></button>
+              <div id="infoMessage"><?= $message;?></div>
+            </div>
+            <?php } ?>
 			<div class="table-responsive">
 			<table class="table table-hover table-bordered" id="dataTables">
 				<thead>
