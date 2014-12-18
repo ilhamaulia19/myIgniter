@@ -5,17 +5,13 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->database();
-		$this->load->library('ion_auth');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
-
-		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
 		$this->load->helper('language');
+
 	}
 
 	//redirect if needed, otherwise display the user list
@@ -34,9 +30,10 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
-			redirect('crud', 'refresh');
+			redirect('crud/index', 'refresh');
 		}
 	}
+
 
 	//log the user in
 	function login()
@@ -58,7 +55,7 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('crud', 'refresh');
+				redirect('crud/index', 'refresh');
 			}
 			else
 			{
@@ -354,7 +351,7 @@ class Auth extends CI_Controller {
 		{
 			//redirect them to the auth page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("crud/ion_auth_admin", 'refresh');
 		}
 		else
 		{
@@ -379,7 +376,10 @@ class Auth extends CI_Controller {
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 
-			$this->_render_page('auth/deactivate_user', $this->data);
+			//$this->_render_page('auth/deactivate_user', $this->data);
+			//viewne
+			$view = 'auth/deactivate_user';
+			$this->template->output($this->data, $view);
 		}
 		else
 		{
@@ -400,8 +400,9 @@ class Auth extends CI_Controller {
 			}
 
 			//redirect them back to the auth page
-			redirect('auth', 'refresh');
+			redirect('crud/ion_auth_admin', 'refresh');
 		}
+
 	}
 
 	//create a new user
@@ -456,45 +457,57 @@ class Auth extends CI_Controller {
 				'id'    => 'first_name',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('first_name'),
+				'class'	=> 'form-control'
 			);
 			$this->data['last_name'] = array(
 				'name'  => 'last_name',
 				'id'    => 'last_name',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
+				'class'	=> 'form-control'
 			);
 			$this->data['email'] = array(
 				'name'  => 'email',
 				'id'    => 'email',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('email'),
+				'class'	=> 'form-control'
 			);
 			$this->data['company'] = array(
 				'name'  => 'company',
 				'id'    => 'company',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('company'),
+				'class'	=> 'form-control'
 			);
 			$this->data['phone'] = array(
 				'name'  => 'phone',
 				'id'    => 'phone',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('phone'),
+				'class'	=> 'form-control'
 			);
 			$this->data['password'] = array(
 				'name'  => 'password',
 				'id'    => 'password',
 				'type'  => 'password',
 				'value' => $this->form_validation->set_value('password'),
+				'class'	=> 'form-control'
 			);
 			$this->data['password_confirm'] = array(
 				'name'  => 'password_confirm',
 				'id'    => 'password_confirm',
 				'type'  => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
+				'class'	=> 'form-control'
 			);
 
-			$this->_render_page('auth/create_user', $this->data);
+			//$this->_render_page('auth/create_user', $this->data);
+			//viewne
+			$view = 'auth/create_user';
+
+			$this->template->output($this->data, $view);
+
 		}
 	}
 
@@ -575,7 +588,7 @@ class Auth extends CI_Controller {
 				    $this->session->set_flashdata('message', $this->ion_auth->messages() );
 				    if ($this->ion_auth->is_admin())
 					{
-						redirect('auth', 'refresh');
+						redirect('crud/ion_auth_admin', 'refresh');
 					}
 					else
 					{
@@ -589,7 +602,7 @@ class Auth extends CI_Controller {
 				    $this->session->set_flashdata('message', $this->ion_auth->errors() );
 				    if ($this->ion_auth->is_admin())
 					{
-						redirect('auth', 'refresh');
+						redirect('crud/ion_auth_admin', 'refresh');
 					}
 					else
 					{
@@ -617,37 +630,48 @@ class Auth extends CI_Controller {
 			'id'    => 'first_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
+			'class'	=> 'form-control'
 		);
 		$this->data['last_name'] = array(
 			'name'  => 'last_name',
 			'id'    => 'last_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
+			'class'	=> 'form-control'
 		);
 		$this->data['company'] = array(
 			'name'  => 'company',
 			'id'    => 'company',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('company', $user->company),
+			'class'	=> 'form-control'
 		);
 		$this->data['phone'] = array(
 			'name'  => 'phone',
 			'id'    => 'phone',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
+			'class'	=> 'form-control'
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
 			'id'   => 'password',
-			'type' => 'password'
+			'type' => 'password',
+			'class'	=> 'form-control'
 		);
 		$this->data['password_confirm'] = array(
 			'name' => 'password_confirm',
 			'id'   => 'password_confirm',
-			'type' => 'password'
+			'type' => 'password',
+			'class'	=> 'form-control'
 		);
 
-		$this->_render_page('auth/edit_user', $this->data);
+		//$this->_render_page('auth/edit_user', $this->data);
+		//viewne
+		$view = 'auth/edit_user';
+		$this->data['username'] = $this->ion_auth->user()->row();
+
+		$this->template->output($this->data, $view);
 	}
 
 	// create a new group
@@ -672,7 +696,7 @@ class Auth extends CI_Controller {
 				// check to see if we are creating the group
 				// redirect them back to the admin page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth", 'refresh');
+				redirect("crud/ion_auth_admin", 'refresh');
 			}
 		}
 		else
@@ -686,15 +710,21 @@ class Auth extends CI_Controller {
 				'id'    => 'group_name',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('group_name'),
+				'class'	=> 'form-control'
 			);
 			$this->data['description'] = array(
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('description'),
+				'class'	=> 'form-control'
 			);
 
-			$this->_render_page('auth/create_group', $this->data);
+			//$this->_render_page('auth/create_group', $this->data);
+			//viewne
+			$view = 'auth/create_group';
+
+			$this->template->output($this->data, $view);
 		}
 	}
 
@@ -704,14 +734,14 @@ class Auth extends CI_Controller {
 		// bail if no group id given
 		if(!$id || empty($id))
 		{
-			redirect('auth', 'refresh');
+			redirect('crud/ion_auth_admin', 'refresh');
 		}
 
 		$this->data['title'] = $this->lang->line('edit_group_title');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
-			redirect('auth', 'refresh');
+			redirect('crud/ion_auth_admin', 'refresh');
 		}
 
 		$group = $this->ion_auth->group($id)->row();
@@ -734,7 +764,7 @@ class Auth extends CI_Controller {
 				{
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
-				redirect("auth", 'refresh');
+				redirect("crud/ion_auth_admin", 'refresh');
 			}
 		}
 
@@ -749,15 +779,22 @@ class Auth extends CI_Controller {
 			'id'    => 'group_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_name', $group->name),
+			'class'	=> 'form-control'
 		);
 		$this->data['group_description'] = array(
 			'name'  => 'group_description',
 			'id'    => 'group_description',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
+			'class'	=> 'form-control'
 		);
 
-		$this->_render_page('auth/edit_group', $this->data);
+		//$this->_render_page('auth/edit_group', $this->data);
+		//viewne
+		$view = 'auth/edit_group';
+		$this->data['username'] = $this->ion_auth->user()->row();
+
+		$this->template->output($this->data, $view);
 	}
 
 

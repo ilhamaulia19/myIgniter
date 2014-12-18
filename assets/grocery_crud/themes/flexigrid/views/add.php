@@ -11,7 +11,7 @@
 	<div class="mDiv panel-heading">
 		<div class="ftitle">
 			<div class='ftitle-left'>
-				<b><?php echo $this->l('form_add'); ?> <?php echo $subject?></b>
+				<?php echo $this->l('form_add'); ?> <?php echo $subject?>
 			</div>
 		</div>
 		</div>
@@ -28,7 +28,9 @@
 			?>
 			<div class='list-group-item form-field-box <?php echo $even_odd?>' id="<?php echo $field->field_name; ?>_field_box">
 				<div class='form-display-as-box col-lg-2' id="<?php echo $field->field_name; ?>_display_as_box">
-					<?php echo $input_fields[$field->field_name]->display_as; ?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""; ?> :
+					<label>
+						<?php echo $input_fields[$field->field_name]->display_as; ?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""; ?>
+					</label>
 				</div>
 				<div class='form-input-box col-lg-10' id="<?php echo $field->field_name; ?>_input_box">
 					<?php echo $input_fields[$field->field_name]->input ?>
@@ -44,21 +46,20 @@
 				?>
 			<!-- End of hidden inputs -->
 			<?php if ($is_ajax) { ?><input type="hidden" name="is_ajax" value="true" /><?php }?>
-
-            <div class="col-lg-12">
+			
+        <div class="col-lg-12">
+        	<br>
 			<div id='report-error' class='report-div error alert alert-danger' role="alert"></div>
 			<div id='report-success' class='report-div success alert alert-success'></div>
-            </div>
-		</div>
-    
+        </div>    
     
 		<div class="pDiv">
 			<div class='form-button-box'>
-				<input id="form-button-save" type='submit' value='<?php echo $this->l('form_save'); ?>'  class="btn btn-default"/>
+				<input id="form-button-save" type='submit' value='<?php echo $this->l('form_save'); ?>'  class="btn btn-primary"/>
 			</div>
 <?php 	if(!$this->unset_back_to_list) { ?>
 			<div class='form-button-box'>
-				<input type='button' value='<?php echo $this->l('form_save_and_go_back'); ?>' id="save-and-go-back-button"  class="btn btn-default"/>
+				<input type='button' value='<?php echo $this->l('form_save_and_go_back'); ?>' id="save-and-go-back-button"  class="btn btn-success"/>
 			</div>
 			<div class='form-button-box'>
 				<input type='button' value='<?php echo $this->l('form_cancel'); ?>' class="btn btn-default" id="cancel-button" />
@@ -69,6 +70,7 @@
 			</div>
 			<div class='clear'></div>
 		</div>
+	</div>
 	<?php echo form_close(); ?>
 </div>
 </div>

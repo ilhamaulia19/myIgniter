@@ -55,21 +55,6 @@
             </div>
         </div>
     </div>  
-<!-- Beginning footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="footer">
-          <span class="pull-right">Page rendered in <strong>{elapsed_time}</strong> seconds</span>
-          Made by <a href="http://www.facebook.com/hanafi.asrul" target="_blank">Asrul Hanafi</a>. 
-          Contact at <a href="mailto:hanafi.asrul@gmail.com">hanafi.asrul@gmail.com</a>.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
 <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js') ?>"></script>

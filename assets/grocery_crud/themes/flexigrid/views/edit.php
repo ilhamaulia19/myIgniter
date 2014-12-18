@@ -11,7 +11,7 @@
 	<div class="mDiv  panel-heading">
 		<div class="ftitle">
 			<div class='ftitle-left'>
-				<b><?php echo $this->l('form_edit'); ?> <?php echo $subject?></b>
+				<?php echo $this->l('form_edit'); ?> <?php echo $subject?>
 			</div>
 			<div class='clear'></div>
 		</div>
@@ -28,7 +28,9 @@
 		?>
 			<div class='list-group-item form-field-box <?php echo $even_odd?>' id="<?php echo $field->field_name; ?>_field_box">
 				<div class='form-display-as-box  col-lg-2' id="<?php echo $field->field_name; ?>_display_as_box">
-					<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?> :
+					<label>
+						<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? " <span class='required' style='color:red;'>*</span> " : ""?>
+					</label>
 				</div>
 				<div class='form-input-box  col-lg-10' id="<?php echo $field->field_name; ?>_input_box">
 					<?php echo $input_fields[$field->field_name]->input?>
@@ -54,11 +56,11 @@
 	</div>
 	<div class="pDiv">
 		<div class='form-button-box'>
-			<input  id="form-button-save" type='submit' value='<?php echo $this->l('form_update_changes'); ?>' class="btn btn-default"/>
+			<input  id="form-button-save" type='submit' value='<?php echo $this->l('form_update_changes'); ?>' class="btn btn-primary"/>
 		</div>
 <?php 	if(!$this->unset_back_to_list) { ?>
 		<div class='form-button-box'>
-			<input type='button' value='<?php echo $this->l('form_update_and_go_back'); ?>' id="save-and-go-back-button" class="btn btn-default"/>
+			<input type='button' value='<?php echo $this->l('form_update_and_go_back'); ?>' id="save-and-go-back-button" class="btn btn-success"/>
 		</div>
 		<div class='form-button-box'>
 			<input type='button' value='<?php echo $this->l('form_cancel'); ?>' class="btn btn-default" id="cancel-button" />

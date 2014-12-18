@@ -24,9 +24,6 @@
 <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-              <div class="text-center">
-                user : admin@admin.com, pass : password
-              </div>
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -62,29 +59,21 @@
                           </div>
 
                           <button class="btn btn-lg btn-success btn-block" type="submit"><i class="fa fa-sign-in"></i> <?=lang('login_submit_btn')?></button>
-                        </fieldset>
+                       
+                       </fieldset>
                         <?php echo form_close();?>
 
                         <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
                         </div>
                 </div>
+                <div>
+                  <strong>Demo</strong><br>
+                  Email : admin@admin.com <br>
+                  Pass : password
+                </div>
             </div>
         </div>
     </div>  
-<!-- Beginning footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="footer">
-          <span class="pull-right">Page rendered in <strong>{elapsed_time}</strong> seconds</span>
-          Made by <a href="http://www.facebook.com/hanafi.asrul" target="_blank">Asrul Hanafi</a>. 
-          Contact at <a href="mailto:hanafi.asrul@gmail.com">hanafi.asrul@gmail.com</a>.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
 <!-- End of Footer -->
 <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>

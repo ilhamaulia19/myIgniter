@@ -1,16 +1,13 @@
 $(document).ready(function () {
-    var url = window.location;
-    $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+    var url = site + '/' + ur_class + '/' + url_function;
+    
+    
     $('ul.nav a').filter(function() {
          return this.href == url;
-    }).parent().addClass('active');
+    }).addClass('active');
 
-    //$('ul.dropdown-menu a[href="'+ url +'"]').parent().addClass('active').filter(function(){
-    $('.dropdown-menu li.active').filter(function(){
-     $('li.dropdown').addClass('active');
+    $('.nav-second-level li a.active').filter(function(){
+     $('.collapse').addClass('in');
     });
 
-    //$('ul.dropdown-menu a').filter(function() {
-     //    return this.href == url;
-    //}).parent().addClass('active');
 });

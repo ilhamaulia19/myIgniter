@@ -1,5 +1,14 @@
-<h1><?php echo lang('deactivate_heading');?></h1>
-<p><?php echo sprintf(lang('deactivate_subheading'), $user->username);?></p>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-user"></i> 
+          <?php echo lang('deactivate_heading');?> <br/><small><?php echo sprintf(lang('deactivate_subheading'), $user->username);?></small>
+      </h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
 
 <?php echo form_open("auth/deactivate/".$user->id);?>
 
@@ -13,6 +22,9 @@
   <?php echo form_hidden($csrf); ?>
   <?php echo form_hidden(array('id'=>$user->id)); ?>
 
-  <p><?php echo form_submit('submit', lang('deactivate_submit_btn'));?></p>
+  <p>
+    <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Kembali</a>
+     <button type="submit" class="btn btn-primary"><?= lang('deactivate_submit_btn') ?></button>
+ </p>
 
 <?php echo form_close();?>

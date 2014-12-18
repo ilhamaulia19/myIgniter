@@ -114,7 +114,6 @@ table th
 */
 }
 .flexigrid div.mDiv div {
-	padding:6px;
 	white-space:nowrap;
 }
 .flexigrid div.mDiv div.ptogtitle {
@@ -823,8 +822,6 @@ div.flexigrid a:hover
 .small-loading
 {
 	background: url('images/load.gif') no-repeat;
-	width:16px;
-	height:15px;
 	padding-left:25px;
 	padding-top:1px;
 	display: none;

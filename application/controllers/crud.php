@@ -1,16 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-session_start(); //SESSION START HERE
-
 class crud extends CI_Controller {
  
     function __construct()
     {
-        parent::__construct();
-        $this->load->library('grocery_CRUD');
-        $this->load->library('ion_auth');
+		parent::__construct();
+		$this->load->library('grocery_CRUD');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
 
 		$this->load->database();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -18,19 +14,21 @@ class crud extends CI_Controller {
 		$this->lang->load('auth');
 		$this->load->helper('language');
 
-     }
- 
-    public function index()
+		$this->auth();
+    }
+ 	
+ 	public function auth()
     {
-//		$this->auth();
-//		$session_data = $this->session->userdata('logged_in');
-//		$data['username'] = $session_data['username'];
-    	if (!$this->ion_auth->logged_in())
+     	if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
-		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+    }
+
+    public function index()
+    {
+		if (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
 		{
 			//redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
@@ -38,27 +36,21 @@ class crud extends CI_Controller {
 		else
 		{
 			//list the users
-			$data['username'] = $user = $this->ion_auth->user()->row();
-
 			$notif = "<div class='alert alert-danger alert-dismissible' role='alert'>There's no table selected</div>";
-			$this->_example_output((object)array('data' => $data , 'output' => $notif , 'js_files' => array() , 'css_files' => array()));
+			$this->output_grocery((object)array('data' => '' , 'output' => $notif , 'js_files' => null , 'css_files' => null));
 		}
 	}
  
-    function _example_output($output = null)
+    function output_grocery($output = null)
     {
-        $this->load->view('crud_view.php',$output);    
+        $view = 'grocery';
+        $data = $output;
+		$this->template->output($data, $view);    
     }
     
     function ion_auth_admin()
 	{
-
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
-		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		if (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
 		{
 			//redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
@@ -66,45 +58,23 @@ class crud extends CI_Controller {
 		else
 		{
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			//list the users
-			$this->data['users'] = $this->ion_auth->users()->result();
-			foreach ($this->data['users'] as $k => $user)
+			$data['users'] = $this->ion_auth->users()->result();
+			foreach ($data['users'] as $k => $user)
 			{
-				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+				$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
-			$this->data['username'] = $user = $this->ion_auth->user()->row();
 
-			$this->load->view('auth/index', $this->data);
+			$view = 'auth/index';
+			$this->template->output($data, $view);
 		}
 	}
-/*	
-	function auth()
-	{
-		if(!$this->session->userdata('logged_in'))
-		{
-	      redirect('login', 'refresh');
-		}
-	}
-
-	function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		session_destroy();
-		redirect('crud', 'refresh');
-	}
-*/	
 
 	//Crud Table Start Here
 	public function offices_management()
 	{
-	//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 		try{
 			$crud = new grocery_CRUD();
 
@@ -118,7 +88,8 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-			$this->_example_output($output);
+			$this->output_grocery($output);
+
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -127,12 +98,6 @@ class crud extends CI_Controller {
 
 	public function employees_management()
 	{
-		//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 			$crud = new grocery_CRUD();
 
 			$crud->set_table('employees');
@@ -148,17 +113,11 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-			$this->_example_output($output);
+			$this->output_grocery($output);
 	}
 
 	public function customers_management()
 	{
-		//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 			$crud = new grocery_CRUD();
 
 			$crud->set_table('customers');
@@ -173,17 +132,11 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-			$this->_example_output($output);
+			$this->output_grocery($output);
 	}
 
 	public function orders_management()
 	{
-		//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 			$crud = new grocery_CRUD();
 
 			$crud->set_relation('customerNumber','customers','{contactLastName} {contactFirstName}');
@@ -197,17 +150,11 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-			$this->_example_output($output);
+			$this->output_grocery($output);
 	}
 
 	public function products_management()
 	{
-		//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 			$crud = new grocery_CRUD();
 
 			$crud->set_table('products');
@@ -219,7 +166,7 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-			$this->_example_output($output);
+			$this->output_grocery($output);
 	}
 
 	public function valueToEuro($value, $row)
@@ -229,12 +176,6 @@ class crud extends CI_Controller {
 
 	public function film_management()
 	{
-	//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
 		$crud = new grocery_CRUD();
 
 		$crud->set_table('film');
@@ -248,18 +189,13 @@ class crud extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$output->data = $data;
-		$this->_example_output($output);
+		$this->output_grocery($output);
 	}
 
 
 	function multigrids()
 	{
-		//	$this->auth();
-		if (!$this->ion_auth->logged_in())
-		{
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
+
 		$this->config->load('grocery_crud');
 		$this->config->set_item('grocery_crud_dialog_forms',true);
 		$this->config->set_item('grocery_crud_default_per_page',10);
@@ -295,7 +231,7 @@ class crud extends CI_Controller {
 		$output = $crud->render();
 
 		if($crud->getState() != 'list') {
-			$this->_example_output($output);
+			$this->output_grocery($output);
 		} else {
 			return $output;
 		}
@@ -320,7 +256,7 @@ class crud extends CI_Controller {
 		$output = $crud->render();
 
 		if($crud->getState() != 'list') {
-			$this->_example_output($output);
+			$this->output_grocery($output);
 		} else {
 			return $output;
 		}
@@ -344,7 +280,7 @@ class crud extends CI_Controller {
 		$output = $crud->render();
 
 		if($crud->getState() != 'list') {
-			$this->_example_output($output);
+			$this->output_grocery($output);
 		} else {
 			return $output;
 		}
