@@ -1,0 +1,13 @@
+/*fix bug grocery*/
+.small-loading{
+	background: url('../img/load.gif') no-repeat;
+	padding-left:25px;
+	padding-top:1px;
+	display: none;
+}
+.report-div{
+ 	display:none;
+}
+.datepicker-input-clear{
+	cursor: pointer;
+}

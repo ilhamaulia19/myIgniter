@@ -356,7 +356,7 @@ div.form-div input.datetime-input
 }
 .form-field-box
 {
-	padding: 5px 0px;
+	padding: 5px 10px;
 	margin: 0px 0px 5px 0px;
 	min-height: 30px;
 }
@@ -854,22 +854,9 @@ textarea.texteditor, textarea.mini-texteditor
 	width:750px;
 	height: 200px;
 }
-.flexigrid div.form-div{/*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color: #444;*/}
-.flexigrid div.form-div input[type=text],.flexigrid div.form-div textarea,.flexigrid div.form-div select{
-	display:inline-block;
-	line-height:18px;
-	color:#444;
-	border:1px solid #ccc;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
-	border-radius:3px;
-}
-.flexigrid div.form-div input[type=text],.flexigrid div.form-div select,.flexigrid div.form-div textarea{
-	font-size:100%;
-	margin:0;
-	vertical-align:baseline;
-	*vertical-align:middle;
-}
+.flexigrid div.form-div{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color: #444;}
+.flexigrid div.form-div input[type=text],.flexigrid div.form-div textarea,.flexigrid div.form-div select{display:inline-block;line-height:18px;color:#444;border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.flexigrid div.form-div input[type=text],.flexigrid div.form-div select,.flexigrid div.form-div textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}
 .flexigrid div.form-div input[type=text]{line-height:normal;*overflow:visible;}
 .flexigrid div.form-div input[type=text],.flexigrid div.form-div select,.flexigrid div.form-div textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:normal;line-height:normal;}
 .flexigrid div.form-div input[type=text],.flexigrid div.form-div textarea{-webkit-transition:border linear 0.2s,box-shadow linear 0.2s;-moz-transition:border linear 0.2s,box-shadow linear 0.2s;-ms-transition:border linear 0.2s,box-shadow linear 0.2s;-o-transition:border linear 0.2s,box-shadow linear 0.2s;transition:border linear 0.2s,box-shadow linear 0.2s;-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);}

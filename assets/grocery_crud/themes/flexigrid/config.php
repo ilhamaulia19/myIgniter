@@ -1,2 +1,2 @@
 <?php 
-$config['crud_paging'] = true;
+$config['crud_paging'] = false;

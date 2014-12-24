@@ -1,11 +1,7 @@
 <?php
-	$this->set_css($this->default_theme_path.'/flexigrid/css/plugins/dataTables/dataTables.bootstrap.css');
-	$this->set_css($this->default_theme_path.'/flexigrid/css/awesome.css');
-
-	//iki jqueryne
+//	$this->set_css($this->default_theme_path.'/flexigrid/css/flexigrid.css');
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);
-	
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
+
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 	$this->set_js_lib($this->default_javascript_path.'/common/lazyload-min.js');
@@ -14,12 +10,11 @@
 		$this->set_js_lib($this->default_javascript_path.'/common/list.js');
 	}
 
-	$this->set_js($this->default_theme_path.'/flexigrid/js/plugins/dataTables/jquery.dataTables.js');
-	$this->set_js($this->default_theme_path.'/flexigrid/js/plugins/dataTables/dataTables.bootstrap.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/jquery.form.js');
 	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.numeric.min.js');
+	//$this->set_js($this->default_theme_path.'/flexigrid/js/jquery.printElement.min.js');
 
 	/** Fancybox */
 	$this->set_css($this->default_css_path.'/jquery_plugins/fancybox/jquery.fancybox.css');
@@ -28,6 +23,7 @@
 
 	/** Jquery UI */
 	$this->load_js_jqueryui();
+
 ?>
 <script type='text/javascript'>
 	var base_url = '<?php echo base_url();?>';
@@ -38,10 +34,7 @@
 
 	var message_alert_delete = "<?php echo $this->l('alert_delete'); ?>";
 </script>
-<!--ga faham-->
 <div id='list-report-error' class='report-div error ' ></div>
-
-<!--alert-->
 <div id='list-report-success' class='report-div success report-list'  <?php if($success_message !== null){?>style="display:block"<?php }?>><?php
 	if($success_message !== null) { ?>
 	<div class="alert alert-info">
@@ -50,14 +43,13 @@
 	</div>
 	<?php }	?>
 </div>
-
-<!--panel-->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-table"></i> <?php echo $subject?></h3>
+        <?php echo $subject?>
     </div>
+    <!-- /.panel-heading -->
     <div class="panel-body">
-		<div class="flexigrid" data-unique-hash="<?php echo $unique_hash; ?>">
+		<div class="flexigrid" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
 			<div id="hidden-operations" class="hidden-operations"></div>
 			<!--
 			<div class="mDiv">
@@ -104,9 +96,7 @@
 
 			<!-- iki pencariane -->
 			<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form" autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
-		    <!--
 			<div class="row" style="margin-bottom:10px">
-
 			    <div class="pGroup col-md-2">
 					<select name="per_page" id='per_page' class="per_page form-control">
 						<?php foreach($paging_options as $option){?>
@@ -136,14 +126,13 @@
 			       	</div>
 		        </div>
 		    </div>
-			-->
 
 		    <!--iki tampil table'e-->
 			<div id='ajax_list' class="ajax_list">
 				<?php echo $list_view?>
 			</div>
 
-			<!--
+
 			<div class="sDiv quickSearchBox row" id='quickSearchBox'>
 		        <div class="pGroup col-md-7">
 					<span class="pPageStat">
@@ -185,9 +174,10 @@
 					</div>
 				</div>
 
+		       <!--gene search biyen-->
 		    </div>
-			-->
-			<div class="pDiv">
+
+			<div class="pDiv row">
 				<div class="pDiv2">
 					<div class="pGroup">
 						<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading'>
@@ -196,9 +186,10 @@
 					</div>
 				</div>
 			</div>
-		     
+		        
 			<?php echo form_close(); ?>
 		</div>
 	</div>
 </div>
     <!-- /.panel-body -->
+</div>

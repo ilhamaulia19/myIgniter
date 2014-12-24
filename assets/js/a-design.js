@@ -10,4 +10,8 @@ $(document).ready(function () {
      $('.collapse').addClass('in');
     });
 
+    //grocery fix bug
+    $('.chzn-container').css('width', '100%');
+    $('.chzn-drop').css('width', '99.8%');
+    $('.chzn-search input').css('width', '100%');
 });
