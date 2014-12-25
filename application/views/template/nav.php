@@ -247,7 +247,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= site_url('crud/ion_auth_admin')?>"><i class="fa fa-edit fa-fw"></i> Users</a>
+                    <a href="<?= site_url('crud/ion_auth_admin')?>"><i class="fa fa-lock "></i> Ion Auth</a>
                 </li>
             </ul>
         </div>

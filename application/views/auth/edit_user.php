@@ -11,7 +11,7 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Users</h3>
+            <h3 class="panel-title"><i class="fa fa-pencil"></i> User</h3>
         </div>
     <div class="panel-body">
   <?php if ($message) { ?>
@@ -124,8 +124,8 @@
       <?php echo form_hidden($csrf); ?>
 
       <p>
-        <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Back</a>
          <button type="submit" class="btn btn-primary"><?= lang('edit_user_submit_btn') ?></button>
+        <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
        </p>
 
 <?php echo form_close();?>

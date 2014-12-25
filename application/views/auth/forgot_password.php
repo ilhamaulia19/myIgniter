@@ -26,7 +26,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title"><i class="fa fa-user"></i>
                         	<?php echo lang('forgot_password_heading');?>
                         </h3>
                     </div>

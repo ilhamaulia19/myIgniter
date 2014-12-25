@@ -11,10 +11,10 @@
 	<div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Users</h3>
+                <h3 class="panel-title"><i class="fa fa-table"></i> Users</h3>
             </div>
             <div class="panel-body">
-            	<p><a href="<?= site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> <?=lang('index_create_user_link')?></a>
+            	<p><a href="<?= site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?=lang('index_create_user_link')?></a>
             	<a href="<?= site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?=lang('index_create_group_link')?></a></p>
 
                 <?php if ($message) { ?>
