@@ -14,13 +14,7 @@
             <h3 class="panel-title"><i class="fa fa-pencil"></i> User</h3>
         </div>
     <div class="panel-body">
-  <?php if ($message) { ?>
-      <div class="alert alert-warning alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
-          <span class="sr-only">Close</span></button>
-          <div id="infoMessage"><?= $message;?></div>
-      </div>
-  <?php } ?>
+    <?php echo $message;?>
 
 <?php echo form_open(uri_string());?>
 
@@ -124,8 +118,8 @@
       <?php echo form_hidden($csrf); ?>
 
       <p>
-         <button type="submit" class="btn btn-primary"><?= lang('edit_user_submit_btn') ?></button>
-        <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
+         <button type="submit" class="btn btn-primary"><?php echo  lang('edit_user_submit_btn') ?></button>
+        <a href="<?php echo  site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
        </p>
 
 <?php echo form_close();?>

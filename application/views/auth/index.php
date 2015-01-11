@@ -14,16 +14,11 @@
                 <h3 class="panel-title"><i class="fa fa-table"></i> Users</h3>
             </div>
             <div class="panel-body">
-            	<p><a href="<?= site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?=lang('index_create_user_link')?></a>
-            	<a href="<?= site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?=lang('index_create_group_link')?></a></p>
+            	<p><a href="<?php echo site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo lang('index_create_user_link')?></a>
+            	<a href="<?php echo site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?php echo lang('index_create_group_link')?></a></p>
 
-                <?php if ($message) { ?>
-                <div class="alert alert-info alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
-                  <span class="sr-only">Close</span></button>
-                  <div id="infoMessage"><?= $message;?></div>
-                </div>
-                <?php } ?>
+                <?php echo $message; ?>
+
         		<div class="table-responsive">
         		<table class="table table-hover table-bordered" id="dataTables">
         			<thead>
@@ -48,7 +43,9 @@
         		                <?php endforeach?>
         					</td>
         					<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td>
-        					<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
+        					<td align="right">
+                                <?php echo anchor("auth/edit_user/".$user->id, '<i class="fa fa-pencil"></i> Edit') ;?>
+                            </td>
         				</tr>
         			<?php endforeach;?>
         			</tbody>

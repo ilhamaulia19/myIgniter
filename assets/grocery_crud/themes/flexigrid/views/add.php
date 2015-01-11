@@ -46,7 +46,7 @@
 			<button type="button" id="save-and-go-back-button" class="btn btn-info"><?php echo $this->l('form_save_and_go_back'); ?></button>
 			<button type="button" id="cancel-button" class="btn btn-default"><?php echo $this->l('form_cancel'); ?></button>
 			<?php 	} ?>
-			<span class='small-loading' id='FormLoading'><?php echo $this->l('form_insert_loading'); ?></span>
+			<span class='small-loading' id='FormLoading'><img src="<?php echo base_url('assets/svg/gear.svg') ?>" alt="loading..."> <?php echo $this->l('form_insert_loading'); ?></span>
 	<?php echo form_close(); ?>
 	</div>
 </div>

@@ -20,47 +20,35 @@ class crud extends CI_Controller {
     {
      	if (!$this->ion_auth->logged_in())
 		{
-			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
     }
 
     public function index()
     {
-		if (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		if (!$this->ion_auth->is_admin())
 		{
-			//redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
 		}
 		else
 		{
-			//list the users
 			$notif = "<div class='alert alert-danger alert-dismissible' role='alert'>There's no table selected</div>";
 			$this->output_grocery((object)array('data' => '' , 'output' => $notif , 'js_files' => null , 'css_files' => null));
 		}
 	}
- 
-    function output_grocery($output = null)
-    {
-        $view = 'grocery';
-        $data = $output;
-		$this->template->output($data, $view);    
-    }
-    
-    function ion_auth_admin()
+
+	function ion_auth_admin()
 	{
-		if (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		if (!$this->ion_auth->is_admin()) 
 		{
-			//redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
 		}
 		else
 		{
-			//set the flash data error message if there is one
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			//list the users
 			$data['users'] = $this->ion_auth->users()->result();
+			
 			foreach ($data['users'] as $k => $user)
 			{
 				$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
@@ -70,6 +58,13 @@ class crud extends CI_Controller {
 			$this->template->output($data, $view);
 		}
 	}
+
+    function output_grocery($output = null)
+    {
+        $view = 'grocery';
+        $data = $output;
+		$this->template->output($data, $view);    
+    }
 
 	//Crud Table Start Here
 	public function offices_management()

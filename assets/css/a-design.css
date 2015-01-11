@@ -1,7 +1,18 @@
+::-moz-selection { /* Code for Firefox */
+    color: #fff;
+    background: #424242;
+}
+
+::selection {
+    color: #fff; 
+    background: #424242;
+}
+.info{
+	margin-top: 12%;
+}
 /*fix bug grocery*/
 .small-loading{
-	background: url('../img/load.gif') no-repeat;
-	padding-left:25px;
+	padding-left:10px;
 	padding-top:1px;
 	display: none;
 }

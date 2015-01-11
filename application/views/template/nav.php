@@ -206,12 +206,12 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?= $this->ion_auth->user()->row()->username ?></a>
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo  $this->ion_auth->user()->row()->username ?></a>
                 </li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?= site_url('auth/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<?php echo  site_url('auth/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -238,16 +238,16 @@
                 <li>
                     <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow"></span></b></a>
                     <ul class="nav nav-second-level">
-                        <li><a href='<?= site_url('crud/offices_management')?>'>Offices</a></li>
-                        <li><a href='<?= site_url('crud/employees_management')?>'>Employees</a></li>
-                        <li><a href='<?= site_url('crud/customers_management')?>'>Customers</a></li>
-                        <li><a href='<?= site_url('crud/orders_management')?>'>Orders</a></li>
-                        <li><a href='<?= site_url('crud/products_management')?>'>Products</a></li>
-                        <li><a href='<?= site_url('crud/film_management')?>'>Films</a></li>                 
+                        <li><a href='<?php echo  site_url('crud/offices_management')?>'>Offices</a></li>
+                        <li><a href='<?php echo  site_url('crud/employees_management')?>'>Employees</a></li>
+                        <li><a href='<?php echo  site_url('crud/customers_management')?>'>Customers</a></li>
+                        <li><a href='<?php echo  site_url('crud/orders_management')?>'>Orders</a></li>
+                        <li><a href='<?php echo  site_url('crud/products_management')?>'>Products</a></li>
+                        <li><a href='<?php echo  site_url('crud/film_management')?>'>Films</a></li>                 
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= site_url('crud/ion_auth_admin')?>"><i class="fa fa-lock "></i> Ion Auth</a>
+                    <a href="<?php echo  site_url('crud/ion_auth_admin')?>"><i class="fa fa-lock "></i> Ion Auth</a>
                 </li>
             </ul>
         </div>
