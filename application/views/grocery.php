@@ -12,7 +12,7 @@
 		include auto PHP GroceryCRUD for create table with Create-Read-Update-Delete and Ion authentication system.
 		</p>
 		<p>
-			<a href="" class="https://github.com/asrul10/myIgniter/releases"><i class="fa fa-download"></i> Download myIgniter</a>
+			<a href="https://github.com/asrul10/myIgniter/releases" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> Download myIgniter</a>
 			<a href="https://github.com/asrul10/myIgniter" class="btn btn-primary btn-lg"><i class="fa fa-github"></i> View project on GitHub</a>
 		</p>
 	</div>

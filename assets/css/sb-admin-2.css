@@ -27,6 +27,10 @@ body {
     }
 }
 
+.navbar-top-links {
+    margin-right: 0;
+}
+
 .navbar-top-links li {
     display: inline-block;
 }
@@ -218,6 +222,11 @@ body {
 .flot-chart-content {
     width: 100%;
     height: 100%;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
 }
 
 table.dataTable thead .sorting,

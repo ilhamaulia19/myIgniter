@@ -5,7 +5,7 @@ $(document).ready(function () {
          return this.href == url;
     }).addClass('active');
 
-    $('.nav-second-level li a.active').filter(function(){
+    $('.nav-second-level').filter(function('li a.active'){
      $('.collapse').addClass('in').parent().addClass('active');;
     });
 
