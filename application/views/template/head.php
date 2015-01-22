@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Codeigniter, bootstrap, Grocerycrud">
+    <meta name="keyword" content="Codeigniter, bootstrap, Grocerycrud">
+    <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
     <!--GroceryCRUD-->
     <?php if (isset($css_files)) {

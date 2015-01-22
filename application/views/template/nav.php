@@ -234,7 +234,6 @@
                     </div>
                     <!-- /input-group -->
                 </li>
-
                 <li>
                     <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow"></span></b></a>
                     <ul class="nav nav-second-level">

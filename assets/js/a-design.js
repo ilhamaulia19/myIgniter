@@ -5,9 +5,7 @@ $(document).ready(function () {
          return this.href == url;
     }).addClass('active');
 
-    $('.nav-second-level').filter(function('li a.active'){
-     $('.collapse').addClass('in').parent().addClass('active');;
-    });
+    $('.nav-second-level li a.active').parent().parent().addClass('in').parent().addClass('active');
 
     //grocery fix bug
     $('.chzn-container').css('width', '100%');
