@@ -101,7 +101,7 @@
         <br>
 
           <button type="submit" class="btn btn-primary"><?php echo  lang('create_user_submit_btn') ?></button>
-          <a href="<?php echo  site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
+          <a href="<?php echo  site_url('auth/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
   <?php echo form_close();?>
 
       </div>

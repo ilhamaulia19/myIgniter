@@ -23,7 +23,7 @@
   <?php echo form_hidden(array('id'=>$user->id)); ?>
 
   <p>
-    <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Kembali</a>
+    <a href="<?= site_url('auth/ion_auth_admin') ?>" class="btn btn-default">Kembali</a>
      <button type="submit" class="btn btn-primary"><?= lang('deactivate_submit_btn') ?></button>
  </p>
 

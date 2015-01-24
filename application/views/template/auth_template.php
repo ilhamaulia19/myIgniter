@@ -7,14 +7,9 @@
     <meta name="keyword" content="Codeigniter, bootstrap, Grocerycrud">
     <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
-    <!--GroceryCRUD-->
-    <?php if (isset($css_files)) {
-    foreach($css_files as $file): ?>
-    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-    <?php endforeach; } ?>
 
 	<!--Bootstrap-->
-    <title>myIgniter</title>
+    <title><?php echo $title ?></title>
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/plugins/metisMenu/metisMenu.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/sb-admin-2.css') ?>" rel="stylesheet">
@@ -27,10 +22,23 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php if (isset($js_files)) { foreach($js_files as $file): ?> 
-    <script src="<?php echo $file; ?>"></script>
-    <?php endforeach; } else { ?>
+
+    <!--jQuery-->
     <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js') ?>"></script> 
-    <?php } ?>       
 </head>
 <body>
+<!-- Page Content -->
+<?php echo $page ?>
+<!-- /#page-wrapper -->
+
+<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/sb-admin-2.js') ?>"></script>
+<script>
+    var site = '<?= site_url(); ?>';
+    var ur_class = '<?= $this->uri->segment(1); ?>';
+    var url_function = '<?= $this->uri->segment(2); ?>';
+</script>
+<script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>
+</body>
+</html>

@@ -13,7 +13,7 @@
                       <form action="<?php echo site_url('auth/login')?>" id="login_form" method="POST" role="form">
                           <div class="form-group">
                             <?php echo lang('login_identity_label', 'identity');?>
-                            <input type="text" name="identity" class="form-control" required="required">
+                            <input type="email" name="identity" class="form-control" required="required">
                           </div>
 
 

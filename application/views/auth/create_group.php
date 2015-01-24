@@ -49,7 +49,7 @@
       <br>
 
          <button type="submit" class="btn btn-primary"><?= lang('create_group_submit_btn') ?></button>
-         <a href="<?= site_url('crud/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
+         <a href="<?= site_url('auth/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
 <?php echo form_close();?>
         </div>
       </div>
