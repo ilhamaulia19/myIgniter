@@ -360,7 +360,7 @@ class Auth extends CI_Controller {
 			//$this->_render_page('auth/deactivate_user', $data);
 			//viewne
 			$view = 'auth/deactivate_user';
-			$this->template->output($data, $view);
+			$this->output_ionauth_admin($data, $view);
 		}
 		else
 		{
