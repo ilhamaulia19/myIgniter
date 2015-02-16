@@ -38,7 +38,7 @@
             </div>
               <div class="col-md-8">
                 <div class="info">
-                  <h1 class="anim"><i class="fa fa-gears"></i> Welcome to myIgniter</h1>
+                  <h1 class="anim-down"><i class="fa fa-gears"></i> Welcome to myIgniter</h1>
                   <br>
                   <p>myIgniter is a custom PHP framework for web developer. Combined between Codeigniter with Bootstrap and fontawesome User Interface, include auto PHP GroceryCRUD for create table with Create-Read-Update-Delete and Ion authentication system.</p>
                   <p>
@@ -52,6 +52,6 @@
     </div>
 <script>
 $(function(){
-  $('.anim').addClass('animated fadeInRight');
+  $('.anim-down').addClass('animated fadeInDown');
 });
 </script>

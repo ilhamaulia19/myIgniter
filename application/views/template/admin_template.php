@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index">myIgniter 2.0</a>
+        <a class="navbar-brand" href="index"><?php echo $title ?></a>
     </div>
     <!-- /.navbar-header -->
 
@@ -85,7 +85,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow"></span></b></a>
+                    <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <span class="fa arrow fa-fw"></span></b></a>
                     <ul class="nav nav-second-level">
                         <li><a href='<?php echo  site_url('crud/offices_management')?>'>Offices</a></li>
                         <li><a href='<?php echo  site_url('crud/employees_management')?>'>Employees</a></li>
@@ -96,7 +96,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?php echo  site_url('auth/ion_auth_admin')?>"><i class="fa fa-lock "></i> Ion Auth</a>
+                    <a href="<?php echo  site_url('auth/ion_auth_admin')?>"><i class="fa fa-lock fa-fw"></i> Ion Auth</a>
                 </li>
             </ul>
         </div>
