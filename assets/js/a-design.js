@@ -9,6 +9,6 @@ $(document).ready(function () {
 
     //grocery fix bug
     $('.chzn-container').css('width', '100%');
-    $('.chzn-drop').css('width', '99.8%');
+    $('.chzn-drop').css('width', '100%');
     $('.chzn-search input').css('width', '100%');
 });
