@@ -398,13 +398,13 @@ class Ion_auth
 		$this->session->sess_destroy();
 
 		//Recreate the session
-		if (substr(CI_VERSION, 0, 1) == '2')
+		if (substr(CI_VERSION, 0, 1) == '3')
 		{
 			$this->session->sess_create();
 		}
 		else
 		{
-			$this->session->sess_regenerate(TRUE);
+			$this->session->sess_regenerate(FALSE);
 		}
 
 		$this->set_message('logout_successful');
