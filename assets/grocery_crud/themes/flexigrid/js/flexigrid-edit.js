@@ -103,9 +103,15 @@ $(function(){
 	if( $('#cancel-button').closest('.ui-dialog').length === 0 ) {
 
 		$('#cancel-button').click(function(){
-			if( $(this).hasClass('back-to-list') || confirm( message_alert_edit_form ) )
+			
+			if( $(this).hasClass('back-to-list') )
 			{
 				window.location = list_url;
+			}else{
+				alertify.confirm( message_alert_edit_form ,
+				  function(){
+				    window.location = list_url;
+				  });
 			}
 
 			return false;

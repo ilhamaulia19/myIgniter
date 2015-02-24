@@ -99,14 +99,21 @@ $(function(){
 		if( $('#cancel-button').closest('.ui-dialog').length === 0 ) {
 
 			$('#cancel-button').click(function(){
-				if( confirm( message_alert_add_form ) )
+				alertify.confirm( message_alert_add_form ,
+				  function(){
+				    window.location = list_url;
+				  });
+			});
+/*	
+			$('#cancel-button').click(function(){
+				if( alertify.confirm( message_alert_add_form ) )
 				{
 					window.location = list_url;
 				}
 
 				return false;
 			});
-
+*/
 		}
 	});
 

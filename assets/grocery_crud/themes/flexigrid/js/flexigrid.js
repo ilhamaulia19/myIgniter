@@ -141,9 +141,9 @@ $(function(){
 
 		var this_container = $(this).closest('.flexigrid');
 
-		if( confirm( message_alert_delete ) )
-		{
-			$.ajax({
+		alertify.confirm( message_alert_delete ,
+		  function(){
+		    $.ajax({
 				url: delete_url,
 				dataType: 'json',
 				success: function(data)
@@ -152,16 +152,16 @@ $(function(){
 					{
 						this_container.find('.ajax_refresh_and_loading').trigger('click');
 
-						success_message(data.success_message);
+						alertify.success(data.success_message);
 					}
 					else
 					{
-						error_message(data.error_message);
+						alertify.error(data.error_message);
 
 					}
 				}
 			});
-		}
+		  });
 
 		return false;
 	});

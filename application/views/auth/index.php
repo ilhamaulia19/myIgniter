@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-users"></i> 
-        	<?php echo lang('index_heading');?> <br><small><?php echo lang('index_subheading');?></small>
+        	<?php echo lang('index_heading');?> 
         </h1>
     </div>
     <!-- /.col-lg-12 -->
@@ -14,13 +14,21 @@
                 <h3 class="panel-title"><i class="fa fa-table"></i> Users</h3>
             </div>
             <div class="panel-body">
-            	<p><a href="<?php echo site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo lang('index_create_user_link')?></a>
-            	<a href="<?php echo site_url('auth/create_group') ?>" class="btn btn-success"><i class="fa fa-users"></i> <?php echo lang('index_create_group_link')?></a></p>
-
+            	<div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            <a href="<?php echo site_url('auth/create_user') ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo lang('index_create_user_link')?></a>
+                        </p>
+                    </div>   
+                    <div class="col-sm-6 text-right">
+                        <p>
+                        	<a href="<?php echo site_url('auth/create_group') ?>" class="btn btn-info"><i class="fa fa-users"></i> <?php echo lang('index_create_group_link')?></a>
+                        </p>
+                    </div>   
+                </div>
                 <?php echo $message; ?>
 
-        		<div class="table-responsive">
-        		<table class="table table-hover table-bordered" id="dataTables">
+        		<table class="table table-bordered table-hover table-striped" id="dataTables">
         			<thead>
         				<tr>
         					<th><?php echo lang('index_fname_th');?></th>
@@ -50,8 +58,14 @@
         			<?php endforeach;?>
         			</tbody>
         		</table>
-        		</div>
             </div>
         </div>
 	</div>
 </div>
+<script type="text/javascript" src="<?php echo base_url('assets/grocery_crud/themes/flexigrid/js/plugins/dataTables/jquery.dataTables.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/grocery_crud/themes/flexigrid/js/plugins/dataTables/dataTables.bootstrap.js') ?>"></script>
+<script>
+$(document).ready(function() {
+    $('#dataTables').dataTable();
+});
+</script>

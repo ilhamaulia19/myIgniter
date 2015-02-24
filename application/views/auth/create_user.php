@@ -13,10 +13,8 @@
         <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-plus-circle"></i> User</h3>
         </div>
-    <div class="panel-body">        
-  <?php echo  $message;?>
-  
-  <?php echo form_open("auth/create_user");?>
+    <div class="panel-body">          
+      <?php echo form_open("auth/create_user");?>
         <div class="row" >
           <div class="col-lg-2">
             <label> 
@@ -99,7 +97,7 @@
         </div>
         </div>
         <br>
-
+         <?php echo  $message;?>
           <button type="submit" class="btn btn-primary"><?php echo  lang('create_user_submit_btn') ?></button>
           <a href="<?php echo  site_url('auth/ion_auth_admin') ?>" class="btn btn-default">Cancel</a>
   <?php echo form_close();?>

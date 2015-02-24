@@ -19,6 +19,8 @@
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/plugins/metisMenu/metisMenu.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/sb-admin-2.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/alertify.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/default.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/a-design.css') ?>" rel="stylesheet">
     <!--Font-->
 	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
@@ -75,7 +77,7 @@
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
                     <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" id="search-menu" placeholder="Search...">
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="button">
                             <i class="fa fa-search"></i>
@@ -96,7 +98,12 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?php echo  site_url('auth/ion_auth_admin')?>"><i class="fa fa-lock fa-fw"></i> Ion Auth</a>
+                    <a href="#"><i class="fa fa-lock fa-fw"></i> Auth <span class="fa arrow fa-fw"></span></b></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="<?php echo  site_url('crud/users')?>">Users</a></li>
+                        <li><a href="<?php echo  site_url('crud/users_groups')?>">Users Groups</a></li>
+                        <li><a href="<?php echo  site_url('crud/groups')?>">Groups</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -115,6 +122,7 @@
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/sb-admin-2.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/alertify.min.js') ?>"></script>
 <script>
     var site = '<?= site_url(); ?>';
     var ur_class = '<?= $this->uri->segment(1); ?>';

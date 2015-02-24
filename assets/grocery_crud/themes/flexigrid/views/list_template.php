@@ -3,11 +3,7 @@
 	$this->set_css($this->default_theme_path.'/flexigrid/css/awesome.css');
 
 	//iki jqueryne
-	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);
-	
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
+	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);	
 	$this->set_js_lib($this->default_javascript_path.'/common/lazyload-min.js');
 
 	if (!$this->is_IE7()) {
@@ -83,7 +79,7 @@
 			        </p>
 		            <?php }?>
 				</div>
-				<div class="tDiv3 col-sm-6" align="right">
+				<div class="tDiv3 col-sm-6 text-right">
 					<?php if(!$unset_export) { ?>
 					<p>
 			        	<a class="export-anchor btn btn-info" data-url="<?php echo $export_url; ?>" target="_blank">

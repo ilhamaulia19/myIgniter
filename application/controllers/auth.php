@@ -60,6 +60,7 @@ class Auth extends CI_Controller {
 				$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
 
+			$data['css_files'] = array(base_url('assets/grocery_crud/themes/flexigrid/css/plugins/dataTables/dataTables.bootstrap.css'), base_url('assets/grocery_crud/themes/flexigrid/css/awesome.css'));
 			$view = 'auth/index';
 			$this->output_ionauth_admin($data, $view);
 		}
