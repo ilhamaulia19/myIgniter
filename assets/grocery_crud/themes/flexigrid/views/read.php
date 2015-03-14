@@ -18,7 +18,7 @@
 		<div class='row' id="<?php echo $field->field_name; ?>_field_box">
 			<div class='form-display-as-box col-lg-2' id="<?php echo $field->field_name; ?>_display_as_box">
 				<label>
-				<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?>
+				<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?> :
 				</label>
 			</div>
 			<div class='form-input-box col-lg-10' id="<?php echo $field->field_name; ?>_input_box">

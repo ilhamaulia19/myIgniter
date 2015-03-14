@@ -8,11 +8,6 @@ class Crud extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-
-		$this->lang->load('auth');
-		$this->load->helper('language');
-
 		$this->auth();
     }
  	
@@ -37,7 +32,7 @@ class Crud extends CI_Controller {
 		}
 	}
 
-	//Output Grocery here
+	//OUTPUT GROCERY CRUD
     function output_grocery($output = null, $data = null)
     {
 		$data['title'] = 'myIgniter';
@@ -45,7 +40,7 @@ class Crud extends CI_Controller {
 		$this->load->view('template/admin_template', $data);
     }
 
-    //Users Management
+    //USERS MANAGEMENT
     public function users()
     {
     	$crud = new grocery_CRUD();
@@ -56,19 +51,24 @@ class Crud extends CI_Controller {
     	if ($this->uri->segment(3) !== 'read')
 		{
 	    	$crud->add_fields('first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
+			$crud->edit_fields('first_name', 'last_name', 'email', 'phone', 'last_login','old_password','new_password');
+		}else{
+			$crud->edit_fields('first_name', 'last_name', 'email', 'phone', 'last_login');
 		}
-		$crud->edit_fields('first_name', 'last_name', 'email', 'phone', 'last_login');
-
+		
 		//VALIDATION
 		$crud->required_fields('first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
 		$crud->set_rules('phone', 'Phone', 'required|numeric|exact_length[10]');
 		$crud->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-    
+   		$crud->set_rules('new_password', 'New password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+
 		//FIELD TYPES
 		$crud->change_field_type('last_login', 'readonly');
 		$crud->change_field_type('password', 'password');
 		$crud->change_field_type('password_confirm', 'password');
+		$crud->change_field_type('old_password', 'password');
+		$crud->change_field_type('new_password', 'password');
 
 		//CALLBACKS
 		$crud->callback_insert(array($this, 'create_user_callback'));
@@ -150,17 +150,24 @@ class Crud extends CI_Controller {
 	function edit_user_callback($post_array, $primary_key = null) {
 
 		$username = $post_array['first_name'] . ' ' . $post_array['last_name'];
-		$email = $post_array['email'];
-		$groups = $post_array['groups'];
-		$data = array(
-					'username' => $username,
-					'email' => $email,
-					'phone' => $post_array['phone'],
+		$email    = $post_array['email'];
+		$old 	  = $post_array['old_password'];
+		$new 	  = $post_array['new_password'];
+		$data     = array(
+					'username'   => $username,
+					'email'      => $email,
+					'phone'      => $post_array['phone'],
 					'first_name' => $post_array['first_name'],
-					'last_name' => $post_array['last_name']
+					'last_name'  => $post_array['last_name']
 				);
+		
+		if ($old === null) {
+			$change = $this->ion_auth_model->update($primary_key, $data);
+		}else{
+			$change = $this->ion_auth_model->update($primary_key, $data) && $this->ion_auth->change_password($email, $old, $new);
+		}
 
-		if ($this->ion_auth_model->update($primary_key, $data)) {
+		if ($change) {
 			return true;
 		}else{
 			return false;
@@ -183,7 +190,7 @@ class Crud extends CI_Controller {
 		return $this->db->insert_id();
 	}
 
-	//Crud Table Start Here
+	//CRUD EXAMPLES HERE
 	public function offices_management()
 	{
 		try{

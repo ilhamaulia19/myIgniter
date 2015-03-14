@@ -22,13 +22,14 @@
                             <input type="password" name="password" class="form-control" required="required">
                           </div>
 
+                          <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-sign-in"></i> <?php echo lang('login_submit_btn')?></button>
+
                           <div class="checkbox">
                             <label for="remember">
                                 <input type="checkbox" value="1"><?php echo lang('login_remember_label');?>
                             </label>
                           </div>
 
-                          <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-sign-in"></i> <?php echo lang('login_submit_btn')?></button>
                       </form>
 
                         <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
