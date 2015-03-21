@@ -50,14 +50,14 @@ class Crud extends CI_Controller {
     	$crud->columns('username','email','active');
     	if ($this->uri->segment(3) !== 'read')
 		{
-	    	$crud->add_fields('first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
-			$crud->edit_fields('first_name', 'last_name', 'email', 'phone', 'last_login','old_password','new_password');
+	    	$crud->add_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
+			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone', 'last_login','old_password','new_password');
 		}else{
-			$crud->edit_fields('first_name', 'last_name', 'email', 'phone', 'last_login');
+			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone', 'last_login');
 		}
 		
 		//VALIDATION
-		$crud->required_fields('first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
+		$crud->required_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
 		$crud->set_rules('phone', 'Phone', 'required|numeric|exact_length[10]');
 		$crud->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -149,7 +149,7 @@ class Crud extends CI_Controller {
 
 	function edit_user_callback($post_array, $primary_key = null) {
 
-		$username = $post_array['first_name'] . ' ' . $post_array['last_name'];
+		$username = $post_array['username'];
 		$email    = $post_array['email'];
 		$old 	  = $post_array['old_password'];
 		$new 	  = $post_array['new_password'];
@@ -161,7 +161,7 @@ class Crud extends CI_Controller {
 					'last_name'  => $post_array['last_name']
 				);
 		
-		if ($old === null) {
+		if ($old === '') {
 			$change = $this->ion_auth_model->update($primary_key, $data);
 		}else{
 			$change = $this->ion_auth_model->update($primary_key, $data) && $this->ion_auth->change_password($email, $old, $new);
@@ -176,7 +176,7 @@ class Crud extends CI_Controller {
 
 	function create_user_callback($post_array, $primary_key = null) {
 
-		$username = $post_array['first_name'] . ' ' . $post_array['last_name'];
+		$username = $post_array['username'];
 		$password = $post_array['password'];
 		$email = $post_array['email'];
 		$data = array(
