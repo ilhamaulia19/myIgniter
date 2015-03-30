@@ -7,16 +7,19 @@
     <meta name="keyword" content="Codeigniter, bootstrap, Grocerycrud">
     <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
+    <title><?php echo $title ?></title>
 
 	<!--Bootstrap-->
-    <title><?php echo $title ?></title>
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/plugins/metisMenu/metisMenu.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/sb-admin-2.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/animate.css') ?>" rel="stylesheet">       
+    <!--FontAwesome-->
+    <link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <!--AdminLTE-->
+    <link href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <!--CSS Plugins-->
+    <link href="<?php echo base_url('assets/css/animate.min.css') ?>" rel="stylesheet">       
+    <link href="<?php echo base_url('assets/js/plugins/iCheck/square/blue.css') ?>" rel="stylesheet">
+    <!--Custom CSS-->
     <link href="<?php echo base_url('assets/css/a-design.css') ?>" rel="stylesheet">
-    <!--Font-->
-	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,21 +28,24 @@
     <![endif]-->
 
     <!--jQuery-->
-    <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js') ?>"></script> 
+    <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script> 
+    <!--JS Plugins-->
+    <script src="<?php echo base_url('assets/js/plugins/iCheck/icheck.min.js') ?>"></script>
 </head>
 <body>
-<!-- Page Content -->
-<?php echo $page ?>
-<!-- /#page-wrapper -->
 
+    <!-- Page Content -->
+    <?php echo $page ?>
+    <!-- /#page-wrapper -->
+
+<!--Bootstrap JS-->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/sb-admin-2.js') ?>"></script>
 <script>
     var site = '<?= site_url(); ?>';
     var ur_class = '<?= $this->uri->segment(1); ?>';
     var url_function = '<?= $this->uri->segment(2); ?>';
 </script>
+<!--Custom JS-->
 <script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>
 </body>
 </html>

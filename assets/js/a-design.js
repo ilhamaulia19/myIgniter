@@ -1,11 +1,12 @@
 $(document).ready(function () {
     var url = site + '/' + ur_class + '/' + url_function;
         
-    $('ul.nav a').filter(function() {
+    $('ul.sidebar-menu a').filter(function() {
          return this.href == url;
-    }).addClass('active');
+    }).parent().addClass('active');
 
-    $('.nav-second-level li a.active').parent().parent().addClass('in').parent().addClass('active');
+    $('.treeview li.active').parent().parent().addClass('active');
+    $('.treeview .level-2 li.active').parent().parent().parent().parent().addClass('active');
 
     //grocery fix bug
     $('.chzn-container').css('width', '100%');

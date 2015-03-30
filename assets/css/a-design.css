@@ -8,7 +8,7 @@
     background: #424242;
 }
 .info{
-	margin-top: 12%;
+	margin-top: 14%;
 }
 /*fix bug grocery*/
 .small-loading{
@@ -21,4 +21,63 @@
 }
 .datepicker-input-clear{
 	cursor: pointer;
+}
+
+.menu-search{
+    height: 45px;
+    font-size: 18px;
+    padding-left: 19px;
+}
+
+.form-horizontal .control-label{
+    text-align: left;
+}
+
+.panel-list, .layanan-pasien{
+    display: none;
+}
+
+/* Autocomplete jquery ui theme */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #3c8dbc;
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+.ui-autocomplete .ui-menu-item > a.ui-corner-all {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #555555;
+  white-space: nowrap;
+}
+.ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-hover, .ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
 }

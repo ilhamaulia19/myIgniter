@@ -3,20 +3,20 @@
 	$this->set_js_lib($this->default_theme_path.'/flexigrid/js/jquery.form.js');
 	$this->set_js_config($this->default_theme_path.'/flexigrid/js/flexigrid-add.js');
 
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
+	//$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
-<div class="flexigrid crud-form panel panel-default" data-unique-hash="<?php echo $unique_hash; ?>">
-	<div class="panel-heading">
-		<h3 class="panel-title"><i class="fa fa-plus-circle"></i> <?php echo $this->l('form_add'); ?> <?php echo $subject?> </h3>
+<div class="flexigrid crud-form box" data-unique-hash="<?php echo $unique_hash; ?>">
+	<div class="box-header">
+		<h3 class="box-title"><i class="fa fa-plus-circle fa-fw"></i> <?php echo $this->l('form_add'); ?> <?php echo $subject?> </h3>
 	</div>
 
-	<div id='main-table-box' class="panel-body">
-	<?php echo form_open( $insert_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
+	<div id='main-table-box' class="box-body">
+	<?php echo form_open( $insert_url, 'method="post" class="form-horizontal" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
     
 			<?php foreach($fields as $field) {	?>
 			<div class='row' id="<?php echo $field->field_name; ?>_field_box">
-				<div class='form-display-as-box col-lg-2' id="<?php echo $field->field_name; ?>_display_as_box">
+				<div class='form-display-as-box col-lg-2 control-label' id="<?php echo $field->field_name; ?>_display_as_box">
 					<label>
 						<?php echo $input_fields[$field->field_name]->display_as; ?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""; ?>
 					</label>
@@ -46,7 +46,7 @@
 			<button type="button" id="save-and-go-back-button" class="btn btn-info"><?php echo $this->l('form_save_and_go_back'); ?></button>
 			<button type="button" id="cancel-button" class="btn btn-default"><?php echo $this->l('form_cancel'); ?></button>
 			<?php 	} ?>
-			<span class='small-loading' id='FormLoading'><img src="<?php echo base_url('assets/svg/gear.svg') ?>" alt="loading..."> <?php echo $this->l('form_insert_loading'); ?></span>
+			<span class='small-loading' id='FormLoading'><img src="<?php echo base_url('assets/svg/loading-spin-primary.svg') ?>" alt="loading..."> <?php echo $this->l('form_insert_loading'); ?></span>
 	<?php echo form_close(); ?>
 	</div>
 </div>

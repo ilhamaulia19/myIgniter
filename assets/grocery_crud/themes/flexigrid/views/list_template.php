@@ -48,11 +48,11 @@
 </div>
 
 <!--panel-->
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-table"></i> <?php echo $subject?></h3>
-    </div>
-    <div class="panel-body">
+<div class="box">
+	<div class="box-header">
+		<h3 class="box-title"><?php echo $subject ?></h3>
+	</div>
+    <div class="box-body">
 		<div class="flexigrid" data-unique-hash="<?php echo $unique_hash; ?>">
 			<div id="hidden-operations" class="hidden-operations"></div>
 			<!--
@@ -71,22 +71,22 @@
 			<div class="tDiv row">
 				<div class="tDiv2 col-sm-6">
 					<?php if(!$unset_add){?>
-					<p>
+					<p> <!-- Button ADD  -->
 			        	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='add-anchor add_button btn btn-primary'>
 			                <i class="fa fa-plus-circle"></i> 
 							<span class="add"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
 			            </a>
-			        </p>
+			        </p> <!-- Akhir Button ADD  -->
 		            <?php }?>
 				</div>
 				<div class="tDiv3 col-sm-6 text-right">
 					<?php if(!$unset_export) { ?>
-					<p>
+					<p> <!-- Button Export  -->
 			        	<a class="export-anchor btn btn-info" data-url="<?php echo $export_url; ?>" target="_blank">
 							<i class="fa fa-print"></i> 
 							<span class="export"><?php echo $this->l('list_export');?></span>
 			            </a>
-			        </p>
+			        </p> <!-- Akhir Button Export  -->
 					<?php } ?>
 					<?php if($unset_print) { ?>
 			        	<a class="print-anchor btn btn-info" data-url="<?php echo $print_url; ?>">

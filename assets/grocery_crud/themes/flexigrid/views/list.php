@@ -39,11 +39,11 @@
 			<td align="right" width='20%'>
 				<div class='tools'>				
                     <?php if(!$unset_read){?>
-						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-search'></span> Detail &nbsp;</a>   
+						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-list'></span> Detail</a> &nbsp;   
 					<?php }?>
                                         
                     <?php if(!$unset_edit){?>
-						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-pencil'></span> Edit &nbsp;</a> 
+						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-pencil'></span> Edit</a> &nbsp; 
 					<?php }?>
 
                     <?php if(!$unset_delete){?>
