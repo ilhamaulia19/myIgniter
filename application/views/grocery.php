@@ -1,11 +1,4 @@
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header"><i class="fa fa-cogs"></i> myIgniter 2.0</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
 	<div class="col-lg-12">
 		<p>myIgniter is a custom PHP framework for web developer. 
 		Combined between Codeigniter with Bootstrap and fontawesome User Interface,

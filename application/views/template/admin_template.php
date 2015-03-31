@@ -130,7 +130,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            <?php echo $title ?>
+            <i class="fa fa-cogs"></i> myIgniter 3.1
           </h1>
           <ol class="breadcrumb">
             <li>
@@ -158,7 +158,7 @@
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 3.0  
+            <b>Version</b> 3.1  
         </div>
         <strong>Copyright &copy; 2014-2015 <a href="#">Asrul Hanafi</a>.</strong> All rights reserved.
     </footer>
