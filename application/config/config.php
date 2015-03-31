@@ -180,7 +180,7 @@ $config['allow_get_array']		= TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger']	= 'c';
 $config['function_trigger']		= 'm';
-$config['directory_trigger']	= 'd'; // experimental not currently in use
+$config['directory_trigger']	= 'd'; 
 
 /*
 |--------------------------------------------------------------------------
@@ -393,6 +393,9 @@ $config['standardize_newlines'] = FALSE;
 | Determines whether the XSS filter is always active when GET, POST or
 | COOKIE data is encountered
 |
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
 */
 $config['global_xss_filtering'] = FALSE;
 
@@ -468,14 +471,15 @@ $config['rewrite_short_tags'] = FALSE;
 | Reverse Proxy IPs
 |--------------------------------------------------------------------------
 |
-| If your server is behind a reverse proxy, you must whitelist the proxy IP
-| addresses from which CodeIgniter should trust the HTTP_X_FORWARDED_FOR
-| header in order to properly identify the visitor's IP address.
-| Comma-delimited, e.g. '10.0.1.200,10.0.1.201'
+| If your server is behind a reverse proxy, you must whitelist the proxy
+| IP addresses from which CodeIgniter should trust headers such as
+| HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
+| the visitor's IP address.
 |
+| You can use both an array or a comma-separated list of proxy addresses,
+| as well as specifying whole subnets. Here are a few examples:
+|
+| Comma-separated:	'10.0.1.200,192.168.5.0/24'
+| Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
-
-/* End of file config.php */
-/* Location: ./application/config/config.php */

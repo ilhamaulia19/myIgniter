@@ -100,7 +100,8 @@
                 </div>
             </form>
             <ul class="sidebar-menu">
-                <li class="header">NAVIGASI</li>
+                <li class="header">MAIN NAVIGATION</li>
+                <li><a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
@@ -133,7 +134,7 @@
           </h1>
           <ol class="breadcrumb">
             <li>
-                <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
             </li>
             <?php if ($this->uri->segment(3)){ ?>
                 <li>

@@ -107,7 +107,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * Sanitizes the save_path directory.
 	 *
 	 * @param	string	$save_path	Path to session files' directory
-	 * @param	string	$name		Session cookie name, unused
+	 * @param	string	$name		Session cookie name
 	 * @return	bool
 	 */
 	public function open($save_path, $name)
@@ -269,7 +269,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 *
 	 * Releases locks and closes file descriptor.
 	 *
-	 * @return	void
+	 * @return	bool
 	 */
 	public function close()
 	{
@@ -299,7 +299,9 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	{
 		if ($this->close())
 		{
-			return unlink($this->_file_path.$session_id) && $this->_cookie_destroy();
+			return file_exists($this->_file_path.$session_id)
+				? (unlink($this->_file_path.$session_id) && $this->_cookie_destroy())
+				: TRUE;
 		}
 		elseif ($this->_file_path !== NULL)
 		{
@@ -324,7 +326,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 */
 	public function gc($maxlifetime)
 	{
-		if ( ! is_dir($this->_config['save_path']) OR ($files = scandir($this->_config['save_path'])) === FALSE)
+		if ( ! is_dir($this->_config['save_path']) OR ($directory = opendir($this->_config['save_path'])) === FALSE)
 		{
 			log_message('debug', "Session: Garbage collector couldn't list files under directory '".$this->_config['save_path']."'.");
 			return FALSE;
@@ -332,10 +334,16 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 		$ts = time() - $maxlifetime;
 
-		foreach ($files as $file)
+		$pattern = sprintf(
+			'/^%s[0-9a-f]{%d}$/',
+			preg_quote($this->_config['cookie_name'], '/'),
+			($this->_config['match_ip'] === TRUE ? 72 : 40)
+		);
+
+		while (($file = readdir($directory)) !== FALSE)
 		{
 			// If the filename doesn't match this pattern, it's either not a session file or is not ours
-			if ( ! preg_match('/(?:[0-9a-f]{32})?[0-9a-f]{40}$/i', $file)
+			if ( ! preg_match($pattern, $file)
 				OR ! is_file($this->_config['save_path'].DIRECTORY_SEPARATOR.$file)
 				OR ($mtime = filemtime($this->_config['save_path'].DIRECTORY_SEPARATOR.$file)) === FALSE
 				OR $mtime > $ts)
@@ -345,6 +353,8 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 			unlink($this->_config['save_path'].DIRECTORY_SEPARATOR.$file);
 		}
+
+		closedir($directory);
 
 		return TRUE;
 	}
