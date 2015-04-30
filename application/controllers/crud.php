@@ -221,7 +221,7 @@ class Crud extends CI_Controller {
 			$crud->required_fields('lastName');
 			$crud->unset_columns('lastName', 'email');
 
-			$crud->set_field_upload('file_url','assets/uploads/files');
+			$crud->set_field_upload('file_url','assets/uploads/files', 'pdf');
 
 			$output = $crud->render();
 		

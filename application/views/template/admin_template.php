@@ -8,7 +8,13 @@
     <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
-    
+   
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
+    <script type="text/javascript">
+        paceOptions = {
+                  elements: true
+                };
+    </script> 
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>

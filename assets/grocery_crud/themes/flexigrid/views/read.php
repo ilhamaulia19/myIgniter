@@ -3,7 +3,7 @@
 	$this->set_js_lib($this->default_theme_path.'/flexigrid/js/jquery.form.js');
 	$this->set_js_config($this->default_theme_path.'/flexigrid/js/flexigrid-edit.js');
 
-	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
+	//$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
 <div class="flexigrid crud-form box" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">

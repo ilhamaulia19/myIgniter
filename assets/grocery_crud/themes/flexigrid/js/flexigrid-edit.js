@@ -57,7 +57,7 @@ $(function(){
 										window.location = data.success_list_url;
 									} else {
 										$(".ui-dialog-content").dialog("close");
-										success_message(data.success_message);
+										form_success_message(data.success_message);
 									}
 
 									return true;
@@ -92,7 +92,7 @@ $(function(){
 				}
 			},
 			error: function(){
-				alert( message_update_error );
+				alertify.alert( message_update_error );
 				$("#FormLoading").hide();
 
 			}

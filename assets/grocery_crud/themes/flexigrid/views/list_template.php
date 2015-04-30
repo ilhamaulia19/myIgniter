@@ -4,6 +4,7 @@
 
 	//iki jqueryne
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);	
+	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 	$this->set_js_lib($this->default_javascript_path.'/common/lazyload-min.js');
 
 	if (!$this->is_IE7()) {
@@ -14,7 +15,8 @@
 	$this->set_js($this->default_theme_path.'/flexigrid/js/plugins/dataTables/dataTables.bootstrap.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
-	$this->set_js($this->default_theme_path.'/flexigrid/js/jquery.form.js');
+
+    $this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.form.min.js');
 	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.numeric.min.js');
 
 	/** Fancybox */

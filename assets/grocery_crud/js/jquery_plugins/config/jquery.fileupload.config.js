@@ -30,6 +30,7 @@ $(function(){
 	    $(this).fileupload({
 	        dataType: 'json',
 	        url: uploader_url,
+	        dropZone: $(this).closest('.form-field-box'), 
 	        cache: false,
 	        acceptFileTypes:  file_upload_info.accepted_file_types,
 			beforeSend: function(){
@@ -61,7 +62,7 @@ $(function(){
 	            
 	            if(errors != '')
 	            {
-	            	alert(errors);
+	            	alertify.alert(errors);
 	            	return false;
 	            }
 				
@@ -106,19 +107,19 @@ $(function(){
 				}
 				else if(typeof data.result.message != 'undefined')
 				{
-					alert(data.result.message);
+					alertify.alert(data.result.message);
 					show_upload_button(unique_id, uploader_element);
 				}
 				else
 				{
-					alert(error_on_uploading);
+					alertify.alert(error_on_uploading);
 					show_upload_button(unique_id, uploader_element);
 				}
 	        },
 	        autoUpload: true,
 	        error: function()
 	        {
-	        	alert(error_on_uploading);
+	        	alertify.alert(error_on_uploading);
 	        	show_upload_button(unique_id, uploader_element);
 	        },
 	        fail: function(e, data)
@@ -126,7 +127,7 @@ $(function(){
 	            // data.errorThrown
 	            // data.textStatus;
 	            // data.jqXHR;	        	
-	        	alert(error_on_uploading);
+	        	alertify.alert(error_on_uploading);
 	        	show_upload_button(unique_id, uploader_element);
 	        },	        
 	        progress: function (e, data) {
