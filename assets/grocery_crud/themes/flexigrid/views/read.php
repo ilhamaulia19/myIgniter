@@ -7,7 +7,7 @@
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
 <div class="flexigrid crud-form box" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
-	<div class="box-header">
+	<div class="box-header with-border">
 		<h3 class="box-title"><i class="fa fa-list fa-fw"></i> <?php echo $this->l('list_record'); ?> <?php echo $subject?></h3>
 	</div>
 	<div id='main-table-box' class="box-body">

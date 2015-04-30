@@ -70,16 +70,16 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" id="user" data-toggle="dropdown" href="#">
                             <?php echo  $this->ion_auth->user()->row()->username ?> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="<?php echo site_url('crud/users/read').'/'.$this->ion_auth->user()->row()->id ?>"><i class="fa fa-user fa-fw"></i> Profile</a>
+                            <li><a href="<?php echo site_url('crud/users/read').'/'.$this->ion_auth->user()->row()->id ?>"><i class="fa fa-user "></i> Profile</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <li><a href="#"><i class="fa fa-gear "></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="<?php echo  site_url('auth/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="<?php echo  site_url('auth/logout')?>"><i class="fa fa-sign-out "></i> Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -103,7 +103,7 @@
                 <li class="header">MAIN NAVIGATION</li>
                 <li><a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-table fa-fw"></i> Grocery Crud <i class="fa fa-angle-left pull-right"></i></b></a>
+                    <a href="#"><i class="fa fa-table "></i> Grocery Crud <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
                         <li><a href='<?php echo  site_url('crud/offices_management')?>'><i class="fa fa-circle-o"></i> Offices</a></li>
                         <li><a href='<?php echo  site_url('crud/employees_management')?>'><i class="fa fa-circle-o"></i> Employees</a></li>
@@ -114,7 +114,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-lock fa-fw"></i> Ion Auth <i class="fa fa-angle-left pull-right"></i></b></a>
+                    <a href="#"><i class="fa fa-lock "></i> Ion Auth <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo  site_url('crud/users')?>"><i class="fa fa-circle-o"></i> Users</a></li>
                         <li><a href="<?php echo  site_url('crud/users_groups')?>"><i class="fa fa-circle-o"></i> Users Groups</a></li>

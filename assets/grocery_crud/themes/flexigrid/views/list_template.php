@@ -49,7 +49,7 @@
 
 <!--panel-->
 <div class="box">
-	<div class="box-header">
+	<div class="box-header with-border">
 		<h3 class="box-title"><?php echo $subject ?></h3>
 	</div>
     <div class="box-body">

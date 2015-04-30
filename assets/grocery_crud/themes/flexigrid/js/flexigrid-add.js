@@ -89,7 +89,7 @@ $(function(){
 					}
 				},
 				error: function(){
-					error_message (message_insert_error);
+					form_error_message (message_insert_error);
 					$("#FormLoading").hide();
 				}
 			});
