@@ -46,6 +46,8 @@ $(function(){
 			 dataType: 'json',
 			 beforeSend: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').addClass('loading');
+				 $('#btn-refresh').addClass('disabled');
+				 $('#btn-refresh span').addClass('spin');
 			 },
 			 complete: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').removeClass('loading');

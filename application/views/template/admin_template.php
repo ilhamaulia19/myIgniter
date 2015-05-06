@@ -10,11 +10,7 @@
     <title><?php echo $title ?></title>
    
     <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
-    <script type="text/javascript">
-        paceOptions = {
-                  elements: true
-                };
-    </script> 
+    <script type="text/javascript">paceOptions={elements: true};</script> 
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>
@@ -96,35 +92,37 @@
     </header>
 
     <aside class="main-sidebar">
-        <section class="sidebar">
+        <section class="sidebar" id="menuSidebar">
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="" class="form-control" placeholder="Search..."/>
+                    <input type="text" class="form-control search" id="searchSidebar" placeholder="Search..."/>
                     <span class="input-group-btn">
                         <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu list" id="menuList">
+            </ul>
+            <ul class="sidebar-menu list" id="menuSub">
                 <li class="header">MAIN NAVIGATION</li>
-                <li><a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="<?php echo site_url('crud/index') ?>" class="name"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-table "></i> Grocery Crud <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
-                        <li><a href='<?php echo  site_url('crud/offices_management')?>'><i class="fa fa-circle-o"></i> Offices</a></li>
-                        <li><a href='<?php echo  site_url('crud/employees_management')?>'><i class="fa fa-circle-o"></i> Employees</a></li>
-                        <li><a href='<?php echo  site_url('crud/customers_management')?>'><i class="fa fa-circle-o"></i> Customers</a></li>
-                        <li><a href='<?php echo  site_url('crud/orders_management')?>'><i class="fa fa-circle-o"></i> Orders</a></li>
-                        <li><a href='<?php echo  site_url('crud/products_management')?>'><i class="fa fa-circle-o"></i> Products</a></li>
-                        <li><a href='<?php echo  site_url('crud/film_management')?>'><i class="fa fa-circle-o"></i> Films</a></li>                 
+                        <li><a href='<?php echo  site_url('crud/offices_management')?>' class="name"><i class="fa fa-circle-o"></i> Offices</a></li>
+                        <li><a href='<?php echo  site_url('crud/employees_management')?>' class="name"><i class="fa fa-circle-o"></i> Employees</a></li>
+                        <li><a href='<?php echo  site_url('crud/customers_management')?>' class="name"><i class="fa fa-circle-o"></i> Customers</a></li>
+                        <li><a href='<?php echo  site_url('crud/orders_management')?>' class="name"><i class="fa fa-circle-o"></i> Orders</a></li>
+                        <li><a href='<?php echo  site_url('crud/products_management')?>' class="name"><i class="fa fa-circle-o"></i> Products</a></li>
+                        <li><a href='<?php echo  site_url('crud/film_management')?>' class="name"><i class="fa fa-circle-o"></i> Films</a></li>                 
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-lock "></i> Ion Auth <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo  site_url('crud/users')?>"><i class="fa fa-circle-o"></i> Users</a></li>
-                        <li><a href="<?php echo  site_url('crud/users_groups')?>"><i class="fa fa-circle-o"></i> Users Groups</a></li>
-                        <li><a href="<?php echo  site_url('crud/groups')?>"><i class="fa fa-circle-o"></i> Groups</a></li>
+                        <li><a href="<?php echo  site_url('crud/users')?>" class="name"><i class="fa fa-circle-o"></i> Users</a></li>
+                        <li><a href="<?php echo  site_url('crud/users_groups')?>" class="name"><i class="fa fa-circle-o"></i> Users Groups</a></li>
+                        <li><a href="<?php echo  site_url('crud/groups')?>" class="name"><i class="fa fa-circle-o"></i> Groups</a></li>
                     </ul>
                 </li>
             </ul>
@@ -182,6 +180,7 @@
     var ur_class = '<?= $this->uri->segment(1); ?>';
     var url_function = '<?= $this->uri->segment(2); ?>';
 </script>
+<script src="<?php echo base_url('assets/js/list.min.js') ?>"></script>
 <!--Custom JS-->
 <script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>
 </body>

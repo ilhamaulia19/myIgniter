@@ -73,22 +73,22 @@
 			<div class="tDiv row">
 				<div class="tDiv2 col-sm-6">
 					<?php if(!$unset_add){?>
-					<p> <!-- Button ADD  -->
+					<!-- Button ADD  -->
 			        	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='add-anchor add_button btn btn-primary'>
 			                <i class="fa fa-plus-circle"></i> 
 							<span class="add"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
 			            </a>
-			        </p> <!-- Akhir Button ADD  -->
+			        <!-- Akhir Button ADD  -->
 		            <?php }?>
 				</div>
 				<div class="tDiv3 col-sm-6 text-right">
 					<?php if(!$unset_export) { ?>
-					<p> <!-- Button Export  -->
+					<!-- Button Export  -->
 			        	<a class="export-anchor btn btn-info" data-url="<?php echo $export_url; ?>" target="_blank">
 							<i class="fa fa-print"></i> 
 							<span class="export"><?php echo $this->l('list_export');?></span>
 			            </a>
-			        </p> <!-- Akhir Button Export  -->
+			         <!-- Akhir Button Export  -->
 					<?php } ?>
 					<?php if($unset_print) { ?>
 			        	<a class="print-anchor btn btn-info" data-url="<?php echo $print_url; ?>">
@@ -96,6 +96,15 @@
 							<span class="print"><?php echo $this->l('list_print');?></span>
 			            </a>
 					<?php }?>
+					<div class="pDiv" style="display: inline">
+						<div class="pDiv2" style="display: inline">
+							<div class="pGroup" style="display: inline">
+								<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading' style="display: inline">
+									<button type="button" id="btn-refresh" class="btn btn-info"><span class='fa fa-refresh'></span></button>
+								</div>
+							</div>
+						</div>
+					</div>		
 				</div>        
 			</div>
 			<?php } ?>
@@ -185,15 +194,6 @@
 
 		    </div>
 			-->
-			<div class="pDiv">
-				<div class="pDiv2">
-					<div class="pGroup">
-						<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading'>
-							<span></span>
-						</div>
-					</div>
-				</div>
-			</div>
 		     
 			<?php echo form_close(); ?>
 		</div>

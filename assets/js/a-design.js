@@ -8,8 +8,26 @@ $(document).ready(function () {
     $('.treeview li.active').parent().parent().addClass('active');
     $('.treeview .level-2 li.active').parent().parent().parent().parent().addClass('active');
 
+    //list.js
+    var options = {
+      valueNames: [ 'name' ]
+    };
+    $("#searchSidebar").focus(function() {
+        menune = $('.name').parent().clone();
+        $('#menuList').html(menune);
+        $('#menuSub').hide();
+        var menuSidebarList = new List('menuSidebar', options);
+    }).focusout(function() {
+        if (!$(this).val()) {
+            $('#menuList').html('');
+            $('#menuSub').show();
+        };
+    });
+    
     //grocery fix bug
     $('.chzn-container').css('width', '100%');
     $('.chzn-drop').css('width', '100%');
     $('.chzn-search input').css('width', '100%');
+
+    //grocery real-time table
 });

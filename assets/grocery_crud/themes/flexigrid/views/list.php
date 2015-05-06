@@ -6,22 +6,10 @@
 			<tr class='hDiv'>
 				<th>No.</th>
 				<?php foreach($columns as $column){?>
-				<th>
-					<!--
-					<div class="text-left field-sorting <?php if(isset($order_by[0]) &&  $column->field_name == $order_by[0]){?><?php echo $order_by[1]?><?php }?>" 
-						rel='<?php echo $column->field_name?>'>
-					-->
-						<?php echo $column->display_as?>
-					<!--
-					</div>
-					-->
-				</th>
-
+				<th><?php echo $column->display_as?></th>
 				<?php }?>
 				<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
-				<th abbr="tools" axis="col1">
-					<?php echo $this->l('list_actions'); ?>
-				</th>
+				<th abbr="tools" axis="col1"><?php echo $this->l('list_actions'); ?></th>
 				<?php }?>
 			</tr>
 		</thead>		
@@ -50,18 +38,17 @@
                     	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" >
                     			<span class='fa fa-trash-o'></span> Delete</a> 
                     <?php }?>
-
                     <?php 
 					if(!empty($row->action_urls)){
 						foreach($row->action_urls as $action_unique_id => $action_url){ 
 							$action = $actions[$action_unique_id];
 					?>
-							<a href="<?php echo $action_url; ?>" class="<?php echo $action->css_class; ?> crud-action" title="<?php echo $action->label?>"><?php 
-								if(!empty($action->image_url))
-								{
-									?><img src="<?php echo $action->image_url; ?>" alt="<?php echo $action->label?>" /><?php 	
-								}
-							?></a>		
+							<a href="<?php echo $action_url; ?>" class="<?php echo $action->css_class; ?> crud-action" title="<?php echo $action->label?>">
+							<span class="<?php echo $action->image_url ?>"></span>
+								<?php 
+								echo $action->label;
+								?>
+							</a>		
 					<?php }
 					}
 					?>					
@@ -82,5 +69,8 @@
 <script>
 $(document).ready(function() {
 	$('#flex1').dataTable();
+
+    $('#btn-refresh').removeClass('disabled');
+	$('#btn-refresh span').removeClass('spin');    
 });
 </script>
