@@ -29,5 +29,8 @@ $(document).ready(function () {
     $('.chzn-drop').css('width', '100%');
     $('.chzn-search input').css('width', '100%');
 
-    //grocery real-time table
+    //Pace done
+    Pace.on("done", function(){
+        $('.cover').fadeOut('20000');
+    });
 });

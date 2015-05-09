@@ -53,7 +53,7 @@ class Crud extends CI_Controller {
 	    	$crud->add_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone', 'last_login','old_password','new_password');
 		}else{
-			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone', 'last_login');
+			$crud->set_read_fields('username','first_name', 'last_name', 'email', 'phone','last_login');
 		}
 		
 		//VALIDATION

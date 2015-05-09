@@ -9,8 +9,6 @@
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
    
-    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
-    <script type="text/javascript">paceOptions={elements: true};</script> 
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>
@@ -50,13 +48,16 @@
         <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script>             
     <?php } ?>       
     <!--JS Plugins-->
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
+    <script type="text/javascript">paceOptions={elements: true};Pace.on("start", function(){$('.cover').show();});</script> 
     <?php if (isset($js_plugins)): ?>
         <?php foreach ($js_plugins as $url_plugin): ?>
             <script src="<?php echo base_url("$url_plugin") ?>"></script>                
         <?php endforeach ?>
     <?php endif ?>      
 </head>
-<body class="skin-green fixed">
+<body class="skin-red fixed">
+<div class='cover'></div>
 <!-- Site wrapper -->
 <div class="wrapper">  
     <header class="main-header">
@@ -72,7 +73,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" id="user" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" id="user-menu" data-toggle="dropdown" href="#">
                             <?php echo  $this->ion_auth->user()->row()->username ?> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-user">

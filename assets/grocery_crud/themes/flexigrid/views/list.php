@@ -1,6 +1,5 @@
 <?php if(!empty($list)){ ?>
-
-<div class="bDiv " >
+<div class="bDiv" >
 	<table class="table table-bordered table-hover table-striped" id="flex1">
 		<thead>
 			<tr class='hDiv'>
@@ -35,8 +34,7 @@
 					<?php }?>
 
                     <?php if(!$unset_delete){?>
-                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" >
-                    			<span class='fa fa-trash-o'></span> Delete</a> 
+                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" ><span class='fa fa-trash-o'></span> Delete</a> &nbsp;
                     <?php }?>
                     <?php 
 					if(!empty($row->action_urls)){
@@ -69,8 +67,6 @@
 <script>
 $(document).ready(function() {
 	$('#flex1').dataTable();
-
-    $('#btn-refresh').removeClass('disabled');
-	$('#btn-refresh span').removeClass('spin');    
+	$('#mini-refresh i').removeClass('fa-spin');   
 });
 </script>

@@ -1,4 +1,9 @@
 $(function(){
+	$('#mini-refresh').click(function() {
+		$('#btn-refresh').trigger('click');
+		$('.bDiv').css('pointer-events', 'none');
+	});
+
 	$('.quickSearchButton').click(function(){
 		$(this).closest('.flexigrid').find('.quickSearchBox').slideToggle('normal');
 	});
@@ -46,8 +51,7 @@ $(function(){
 			 dataType: 'json',
 			 beforeSend: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').addClass('loading');
-				 $('#btn-refresh').addClass('disabled');
-				 $('#btn-refresh span').addClass('spin');
+				 $('#mini-refresh i').addClass('fa-spin');
 			 },
 			 complete: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').removeClass('loading');

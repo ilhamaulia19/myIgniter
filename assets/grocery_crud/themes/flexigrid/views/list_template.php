@@ -53,6 +53,10 @@
 <div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title"><?php echo $subject ?></h3>
+		<div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			<button class="btn btn-box-tool" id="mini-refresh"><i class='fa fa-refresh'></i></button>
+		</div>
 	</div>
     <div class="box-body">
 		<div class="flexigrid" data-unique-hash="<?php echo $unique_hash; ?>">
@@ -96,7 +100,7 @@
 							<span class="print"><?php echo $this->l('list_print');?></span>
 			            </a>
 					<?php }?>
-					<div class="pDiv" style="display: inline">
+					<div class="pDiv" style="display: none">
 						<div class="pDiv2" style="display: inline">
 							<div class="pGroup" style="display: inline">
 								<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading' style="display: inline">
@@ -199,4 +203,4 @@
 		</div>
 	</div>
 </div>
-    <!-- /.panel-body -->
+<!-- /.panel-body -->
