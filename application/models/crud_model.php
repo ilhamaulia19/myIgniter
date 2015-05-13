@@ -7,16 +7,20 @@ class Crud_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function select($table, $rows, $where = null, $limit= null)
+	function select($table, $fields, $where = null, $limit = null, $order = null)
 	{
 		$this->db->from($table);
-		$this->db->select($rows);
+		$this->db->select($fields);
 		if ($where != null) {
 			$this->db->where($where);
 		}
 
 		if ($limit != null) {
 			$this->db->limit($limit);
+		}
+
+		if ($order != null) {
+			$this->db->order_by($order);
 		}
 
 		return $this->db->get();
@@ -37,6 +41,32 @@ class Crud_model extends CI_Model {
 	{
         $this->db->where($where);
         $this->db->delete($table);
+	}
+
+	function get_id()
+	{
+		$id = $this->db->insert_id();
+		return $id;
+	}
+
+	function columns($table)
+	{
+		return $this->db->list_fields($table);
+	}
+
+	function sum($table, $fields, $where = null)
+	{
+		$this->db->select_sum($fields);
+		if ($where != null) {
+			$this->db->where($where);
+		}
+
+		return $this->db->get($table);
+	}
+
+	function tables()
+	{
+		return $this->db->list_tables();
 	}
 }
 /* End of file crud_model.php */

@@ -9,6 +9,8 @@
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
    
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
+    <script type="text/javascript">paceOptions={elements:true};</script> 
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>
@@ -45,23 +47,24 @@
     <?php if (isset($js_files)) { foreach($js_files as $file): ?> 
         <script src="<?php echo $file; ?>"></script>
     <?php endforeach; } else { ?>
-        <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script>             
+        <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.4.min.js') ?>"></script>             
     <?php } ?>       
     <!--JS Plugins-->
-    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
-    <script type="text/javascript">paceOptions={elements: true};Pace.on("start", function(){$('.cover').show();});</script> 
     <?php if (isset($js_plugins)): ?>
         <?php foreach ($js_plugins as $url_plugin): ?>
             <script src="<?php echo base_url("$url_plugin") ?>"></script>                
         <?php endforeach ?>
     <?php endif ?>      
 </head>
-<body class="skin-red fixed">
+<body class="skin-red sidebar-mini fixed sidebar-collapse">
 <div class='cover'></div>
 <!-- Site wrapper -->
 <div class="wrapper">  
     <header class="main-header">
-        <a href="<?php echo site_url('crud/index') ?>" class="logo"><b>My</b>Igniter</a>
+        <a href="<?php echo site_url('crud/index') ?>" class="logo">
+           <span class="logo-mini"><b>I</b>gnit</span>
+           <span class="logo-lg"><b>My</b>Igniter</span>
+        </a>
 
         <nav class="navbar navbar-static-top" role="navigation">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -96,9 +99,9 @@
         <section class="sidebar" id="menuSidebar">
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" class="form-control search" id="searchSidebar" placeholder="Search..."/>
+                    <input type="text" class="form-control search" id="searchSidebar" placeholder="Search..." autocomplete="off"/>
                     <span class="input-group-btn">
-                        <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        <button type='button' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
@@ -106,9 +109,9 @@
             </ul>
             <ul class="sidebar-menu list" id="menuSub">
                 <li class="header">MAIN NAVIGATION</li>
-                <li><a href="<?php echo site_url('crud/index') ?>" class="name"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="<?php echo site_url('crud/index') ?>" class="name"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-table "></i> Grocery Crud <i class="fa fa-angle-left pull-right"></i></b></a>
+                    <a href="#"><i class="fa fa-table "></i> <span>Grocery Crud</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href='<?php echo  site_url('crud/offices_management')?>' class="name"><i class="fa fa-circle-o"></i> Offices</a></li>
                         <li><a href='<?php echo  site_url('crud/employees_management')?>' class="name"><i class="fa fa-circle-o"></i> Employees</a></li>
@@ -119,7 +122,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-lock "></i> Ion Auth <i class="fa fa-angle-left pull-right"></i></b></a>
+                    <a href="#"><i class="fa fa-lock "></i> <span>Ion Auth</span> <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo  site_url('crud/users')?>" class="name"><i class="fa fa-circle-o"></i> Users</a></li>
                         <li><a href="<?php echo  site_url('crud/users_groups')?>" class="name"><i class="fa fa-circle-o"></i> Users Groups</a></li>
@@ -159,8 +162,8 @@
         <section class="content">
             <?php echo $page ?>
         </section><!-- /.content -->
-
     </div><!-- /.content-wrapper -->
+
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>Version</b> 3.1  
@@ -168,6 +171,7 @@
         <strong>Copyright &copy; 2014-2015 <a href="#">Asrul Hanafi</a>.</strong> All rights reserved.
     </footer>
 </div><!-- ./wrapper -->
+
 <!--Bootstrap JS-->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 <!--Alertify JS-->

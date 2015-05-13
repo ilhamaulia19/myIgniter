@@ -87,7 +87,6 @@
 }
 /*PACE LOADING*/
 .cover{
-  display: none;
   position:fixed;
   z-index:1999;
   top:0;

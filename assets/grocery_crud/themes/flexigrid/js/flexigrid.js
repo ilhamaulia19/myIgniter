@@ -1,7 +1,6 @@
 $(function(){
 	$('#mini-refresh').click(function() {
 		$('#btn-refresh').trigger('click');
-		$('.bDiv').css('pointer-events', 'none');
 	});
 
 	$('.quickSearchButton').click(function(){
@@ -52,6 +51,7 @@ $(function(){
 			 beforeSend: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').addClass('loading');
 				 $('#mini-refresh i').addClass('fa-spin');
+				 $('#overlayTable').show();
 			 },
 			 complete: function(){
 				 this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').removeClass('loading');

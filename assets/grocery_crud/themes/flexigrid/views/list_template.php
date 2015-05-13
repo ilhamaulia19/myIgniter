@@ -1,8 +1,7 @@
 <?php
-	$this->set_css($this->default_theme_path.'/flexigrid/css/plugins/dataTables/dataTables.bootstrap.css');
-	$this->set_css($this->default_theme_path.'/flexigrid/css/awesome.css');
+	$this->set_css('assets/js/plugins/datatables/dataTables.bootstrap.css');
 
-	//iki jqueryne
+	// Jquery
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);	
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 	$this->set_js_lib($this->default_javascript_path.'/common/lazyload-min.js');
@@ -11,8 +10,9 @@
 		$this->set_js_lib($this->default_javascript_path.'/common/list.js');
 	}
 
-	$this->set_js($this->default_theme_path.'/flexigrid/js/plugins/dataTables/jquery.dataTables.js');
-	$this->set_js($this->default_theme_path.'/flexigrid/js/plugins/dataTables/dataTables.bootstrap.js');
+	$this->set_js('assets/js/plugins/datatables/jquery.dataTables.min.js');
+	$this->set_js('assets/js/plugins/datatables/dataTables.bootstrap.min.js');
+
 	$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
 
@@ -75,7 +75,7 @@
 
 			<?php if(!$unset_add || !$unset_export || !$unset_print){?>
 			<div class="tDiv row">
-				<div class="tDiv2 col-sm-6">
+				<div class="tDiv2 col-xs-6">
 					<?php if(!$unset_add){?>
 					<!-- Button ADD  -->
 			        	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='add-anchor add_button btn btn-primary'>
@@ -85,7 +85,7 @@
 			        <!-- Akhir Button ADD  -->
 		            <?php }?>
 				</div>
-				<div class="tDiv3 col-sm-6 text-right">
+				<div class="tDiv3 col-xs-6 text-right">
 					<?php if(!$unset_export) { ?>
 					<!-- Button Export  -->
 			        	<a class="export-anchor btn btn-info" data-url="<?php echo $export_url; ?>" target="_blank">
@@ -201,6 +201,9 @@
 		     
 			<?php echo form_close(); ?>
 		</div>
+	</div>
+	<div class="overlay" id="overlayTable" style="display:none;">
+		<i class="fa fa-refresh fa-spin"></i>
 	</div>
 </div>
 <!-- /.panel-body -->

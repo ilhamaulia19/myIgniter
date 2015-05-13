@@ -39,7 +39,7 @@
   position: relative;
   height: 34px;
   line-height: 24px;
-  padding: 4px 0 0 8px;
+  padding: 4px 0 0 15px;
   color: #444444;
   text-decoration: none;
 }
@@ -100,7 +100,8 @@
   background: url('chosen-sprite.png') no-repeat 100% -22px, linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   */
   margin: 1px 0;
-  padding: 4px 20px 4px 5px;
+  height: 34px;
+  padding: 6px 12px;
   outline: 0;
   border: 1px solid #ccc;
   font-family: sans-serif;
@@ -220,7 +221,7 @@
 .chzn-container .chzn-results li {
   display: none;
   line-height: 15px;
-  padding: 5px 6px;
+  padding: 5px 15px;
   margin: 0;
   list-style: none;
 }
@@ -290,7 +291,7 @@
 
 /* @group Active  */
 .chzn-container-active .chzn-single {
-  border-color: #66afe9;
+  border-color: #3c8dbc;
   outline: 0;
 }
 .chzn-container-active .chzn-single-with-drop {
@@ -317,7 +318,7 @@
   background-position: -18px 1px;
 }
 .chzn-container-active .chzn-choices {
-  border-color: #66afe9;
+  border-color: #3c8dbc;
   outline: 0;
  }
 .chzn-container-active .chzn-choices .search-field input {
