@@ -23,8 +23,8 @@ $(document).ready(function () {
             $('#menuSub').show();
         };
     });
-    $('.sidebar').mouseout(function() {
-        $('#searchSidebar').val('');
+    $('.slimScrollDiv').mouseleave(function() {
+        $('#searchSidebar').val('');        
     });
     
     //grocery fix bug
