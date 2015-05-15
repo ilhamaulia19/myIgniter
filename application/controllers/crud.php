@@ -27,17 +27,62 @@ class Crud extends CI_Controller {
 		}
 		else
 		{
-			$notif = "<div class='alert alert-danger alert-dismissible' role='alert'>There's no table selected</div>";
-			$this->output_grocery((object)array('data' => '' , 'output' => $notif , 'js_files' => null , 'css_files' => null));
+			$output = (object)array('data' => '' , 'output' => '' , 'js_files' => null , 'css_files' => null);
+			
+			$data['judul'] = 'Dashboard';
+
+			$template = 'admin_template';
+			$view = 'grocery';
+			$this->output_grocery($view, $output, $data, $template);
 		}
 	}
 
+	//OUTPUT DATA
+	function data_output($data_add)
+	{
+		$data['settings']                = $this->crud_model->select('settings','*','','1')->row();
+		$whereGroups['user_id'] = $this->ion_auth->user()->row()->id;
+		$groups = $this->crud_model->select('users_groups','*');
+		$i = 0;
+		$id_groups = '';
+		foreach ($groups->result() as $groups) {
+			if ($i != 0) {
+				$id_groups .= ",";
+			}
+			$id_groups .= $groups->group_id;
+			$i++;
+		}
+		$whereAkses  = "id_groups in (".$id_groups.")";
+		$whereMenu 	 = "level_one = '0' and level_two = '0' and ".$whereAkses;
+		$whereLvlOne = "level_one != '0' and level_two = '0' and ".$whereAkses;
+		$whereLvlTwo = "level_one != '0' and level_two != '0' and ".$whereAkses;
+
+		$data['header_menu'] = $this->crud_model->select('view_header_menu','*',$whereAkses,'','','id_header_menu');
+		$data['menu']        = $this->crud_model->select('view_menu','*',$whereMenu,'','order ASC','id_menu');
+		$data['menu_lvlOne'] = $this->crud_model->select('view_menu','*',$whereLvlOne,'','order ASC','id_menu');
+		$data['menu_lvlTwo'] = $this->crud_model->select('view_menu','*',$whereLvlTwo,'','order ASC','id_menu');
+		$data['title']       = $data['settings']->judul;
+		foreach ($data_add as $key => $value) {
+			$data[$key] = $value;
+		}
+
+		return $data;
+	}
+
+    //OUTPUT MANUAL
+    function output_view($view, $data_add = null, $template)
+	{
+		$data         = $this->data_output($data_add);
+		$data['page'] = $this->load->view($view, $data, TRUE);
+		$this->load->view('template/'.$template, $data);
+	}
+
 	//OUTPUT GROCERY CRUD
-    function output_grocery($output = null, $data = null)
+    function output_grocery($view, $output = null, $data_add = null, $template)
     {
-		$data['title'] = 'myIgniter';
-		$data['page'] = $this->load->view('grocery', $output, TRUE); 
-		$this->load->view('template/admin_template', $data);
+		$data         = $this->data_output($data_add);
+		$data['page'] = $this->load->view($view, $output, TRUE);
+		$this->load->view('template/'.$template, $data);
     }
 
     //USERS MANAGEMENT
@@ -78,7 +123,12 @@ class Crud extends CI_Controller {
 
 		//VIEW
 		$output = $crud->render();
-		$this->output_grocery($output);
+		$data['judul'] = 'Users';
+		$data['crumb'] = array( 'Users' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
     }
 
     public function users_groups() {
@@ -98,7 +148,12 @@ class Crud extends CI_Controller {
 
 		//VIEW
 		$output = $crud->render();
-		$this->output_grocery($output);
+		$data['judul'] = 'Users groups';
+		$data['crumb'] = array( 'Users groups' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	public function groups() {
@@ -109,7 +164,12 @@ class Crud extends CI_Controller {
 
 		//VIEW
 		$output = $crud->render();
-		$this->output_grocery($output);
+		$data['judul'] = 'Groups';
+		$data['crumb'] = array( 'Groups' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	function active_callback($value, $row)
@@ -190,6 +250,189 @@ class Crud extends CI_Controller {
 		return $this->db->insert_id();
 	}
 
+	//CRUD SETTINGS HERE
+	public function settings()
+	{
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('settings');
+		$crud->set_field_upload('logo','assets/img/logo');
+		$crud->columns('logo','judul','nama_perusahaan','alamat');
+		$crud->unset_add();
+		$crud->unset_delete();
+		$crud->unset_export();
+
+		$output = $crud->render();
+		$data['judul'] = "Settings";
+		$data['crumb'] = array( 'Settings' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
+	}
+
+	public function header_menu()
+	{
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('header_menu');
+		$crud->set_subject('Header menu');
+		$crud->display_as('id_header_menu','Order');
+		$crud->set_relation_n_n('Akses', 'groups_header', 'groups', 'id_header_menu', 'id_groups', 'name');
+		$crud->add_action('Menu', 'fa fa-list', '', '',array($this,'link_menu'));
+		$crud->unset_read();
+
+		$output = $crud->render();
+		$data['judul'] = "Header menu";
+		$data['crumb'] = array( 'Header menu' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
+	}
+
+	function link_menu($primary_key, $row)
+	{
+	    return site_url('crud/menu').'/'.$primary_key;
+	}
+
+	public function menu($id_header_menu)
+	{
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('menu');
+		$where['id_header_menu'] = $id_header_menu;
+		$header = $this->crud_model->select('header_menu','*',$where)->row();
+		$crud->set_subject('Menu '.$header->header);
+		$crud->where('level_one','0');
+		$crud->where('level_two','0');
+		$crud->where('id_header_menu',$id_header_menu);
+		$crud->change_field_type('id_header_menu','invisible');
+
+		$crud->order_by('order','ASC');
+		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
+		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
+		$crud->unset_read();
+		$crud->unset_fields('level_one','level_two');
+		$crud->add_action('Sub menu', 'fa fa-list', '', '',array($this,'link_sub_menu'));
+	    $crud->callback_before_insert(array($this,'call_header_menu'));
+
+		$output = $crud->render();
+		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$output->data = $data;
+		$data['judul'] = "Menu";
+		$data['crumb'] = array( 'Header menu' => 'crud/header_menu',
+								'Menu' => ''
+							  );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
+	}
+
+	function call_header_menu($post_array) 
+	{
+		$post_array['id_header_menu'] = $this->uri->segment(3);
+		return $post_array;
+	}   
+
+	function link_sub_menu($primary_key, $row)
+	{
+	    return site_url('crud/sub_menu').'/'.$row->id_header_menu.'/'.$primary_key;
+	}
+
+	public function sub_menu($id_header_menu, $level_one)
+	{
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('menu');
+		$where['id_header_menu'] = $id_header_menu;
+		$header = $this->crud_model->select('header_menu','*',$where)->row();
+		$crud->set_subject('Menu '.$header->header);
+		$crud->where('level_one', $level_one);
+		$crud->where('level_two','0');
+		$crud->change_field_type('id_header_menu','invisible');
+		$crud->change_field_type('level_one','invisible');
+
+		$crud->order_by('order','ASC');
+		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
+		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
+		$crud->unset_read();
+		$crud->unset_fields('level_two');
+		$crud->add_action('Sub menu 2', 'fa fa-list', '', '',array($this,'link_sub_menu_2'));
+	    $crud->callback_before_insert(array($this,'call_sub_menu'));
+
+		$output = $crud->render();
+		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$output->data = $data;
+		$data['judul'] = "Sub menu";
+		$data['crumb'] = array( 
+						'Header menu' => 'crud/header_menu',
+						'Menu' => 'crud/menu/'.$id_header_menu,
+						'Sub menu' => ''
+					  );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
+	}
+
+	function call_sub_menu($post_array) 
+	{
+		$post_array['id_header_menu'] = $this->uri->segment(3);
+		$post_array['level_one'] = $this->uri->segment(4);
+		return $post_array;
+	}  
+
+	function link_sub_menu_2($primary_key, $row)
+	{
+	    return site_url('crud/sub_menu_2').'/'.$row->id_header_menu.'/'.$row->level_one.'/'.$primary_key;
+	}
+
+	public function sub_menu_2($id_header_menu, $level_one, $level_two)
+	{
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('menu');
+		$where['id_header_menu'] = $id_header_menu;
+		$header = $this->crud_model->select('header_menu','*',$where)->row();
+		$crud->set_subject('Menu '.$header->header);
+		$crud->where('level_one', $level_one);
+		$crud->where('level_two', $level_two);
+		$crud->change_field_type('id_header_menu','invisible');
+		$crud->change_field_type('level_one','invisible');
+		$crud->change_field_type('level_two','invisible');
+
+		$crud->order_by('order','ASC');
+		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
+		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
+		$crud->unset_read();
+	    $crud->callback_before_insert(array($this,'call_sub_menu_2'));
+
+		$output = $crud->render();
+		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$output->data = $data;
+		$data['judul'] = "Sub menu 2";
+		$data['crumb'] = array( 
+						'Header menu' => 'crud/header_menu',
+						'Menu' => 'crud/menu/'.$id_header_menu, 
+						'Sub menu' => 'crud/sub_menu/'.$id_header_menu.'/'.$level_one,
+						'Sub menu 2' => ''
+					  );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
+	}
+
+	function call_sub_menu_2($post_array) 
+	{
+		$post_array['id_header_menu'] = $this->uri->segment(3);
+		$post_array['level_one'] = $this->uri->segment(4);
+		$post_array['level_two'] = $this->uri->segment(5);
+		return $post_array;
+	}  
+
 	//CRUD EXAMPLES HERE
 	public function offices_management()
 	{
@@ -202,7 +445,12 @@ class Crud extends CI_Controller {
 			$crud->columns('city','country','phone','addressLine1','postalCode');
 
 			$output = $crud->render();
-			$this->output_grocery($output);
+			$data['judul'] = 'Offices';
+			$data['crumb'] = array( 'Offices' => '' );
+
+			$template = 'admin_template';
+			$view = 'grocery';
+			$this->output_grocery($view, $output, $data, $template);
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -211,69 +459,89 @@ class Crud extends CI_Controller {
 
 	public function employees_management()
 	{
-			$crud = new grocery_CRUD();
+		$crud = new grocery_CRUD();
 
-			$crud->set_table('employees');
-			$crud->set_relation('officeCode','offices','city');
-			$crud->display_as('officeCode','Office City');
-			$crud->set_subject('Employee');
+		$crud->set_table('employees');
+		$crud->set_relation('officeCode','offices','city');
+		$crud->display_as('officeCode','Office City');
+		$crud->set_subject('Employee');
 
-			$crud->required_fields('lastName');
-			$crud->unset_columns('lastName', 'email');
+		$crud->required_fields('lastName');
+		$crud->unset_columns('lastName', 'email');
 
-			$crud->set_field_upload('file_url','assets/uploads/files', 'pdf');
+		$crud->set_field_upload('file_url','assets/uploads/files', 'pdf');
 
-			$output = $crud->render();
-		
-			$this->output_grocery($output);
+		$output = $crud->render();
+	
+		$data['judul'] = 'Employees';
+		$data['crumb'] = array( 'Employees' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	public function customers_management()
 	{
-			$crud = new grocery_CRUD();
+		$crud = new grocery_CRUD();
 
-			$crud->set_table('customers');
-			$crud->columns('customerName','phone','city','country');
-			$crud->display_as('salesRepEmployeeNumber','from Employeer')
-				 ->display_as('customerName','Name')
-				 ->display_as('contactLastName','Last Name');
-			$crud->set_subject('Customer');
-			$crud->set_relation('salesRepEmployeeNumber','employees','lastName');
-			
-			$output = $crud->render();
+		$crud->set_table('customers');
+		$crud->columns('customerName','phone','city','country');
+		$crud->display_as('salesRepEmployeeNumber','from Employeer')
+			 ->display_as('customerName','Name')
+			 ->display_as('contactLastName','Last Name');
+		$crud->set_subject('Customer');
+		$crud->set_relation('salesRepEmployeeNumber','employees','lastName');
 		
-			$this->output_grocery($output);
+		$output = $crud->render();
+	
+		$data['judul'] = 'Customers';
+		$data['crumb'] = array( 'Customers' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	public function orders_management()
 	{
-			$crud = new grocery_CRUD();
+		$crud = new grocery_CRUD();
 
-			$crud->set_relation('customerNumber','customers','{contactLastName} {contactFirstName}');
-			$crud->display_as('customerNumber','Customer');
-			$crud->set_table('orders');
-			$crud->set_subject('Order');
-			$crud->unset_add();
-			$crud->unset_delete();
-			$crud->unset_columns('comments');
+		$crud->set_relation('customerNumber','customers','{contactLastName} {contactFirstName}');
+		$crud->display_as('customerNumber','Customer');
+		$crud->set_table('orders');
+		$crud->set_subject('Order');
+		$crud->unset_add();
+		$crud->unset_delete();
+		$crud->unset_columns('comments');
 
-			$output = $crud->render();
-		
-			$this->output_grocery($output);
+		$output = $crud->render();
+	
+		$data['judul'] = 'Orders';
+		$data['crumb'] = array( 'Orders' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	public function products_management()
 	{
-			$crud = new grocery_CRUD();
+		$crud = new grocery_CRUD();
 
-			$crud->set_table('products');
-			$crud->set_subject('Product');
-			$crud->unset_columns('productDescription','productName','productVendor','MSRP');
-			$crud->callback_column('buyPrice',array($this,'valueToEuro'));
+		$crud->set_table('products');
+		$crud->set_subject('Product');
+		$crud->unset_columns('productDescription','productName','productVendor','MSRP');
+		$crud->callback_column('buyPrice',array($this,'valueToEuro'));
 
-			$output = $crud->render();
-		
-			$this->output_grocery($output);
+		$output = $crud->render();
+	
+		$data['judul'] = 'Products';
+		$data['crumb'] = array( 'Products' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 
 	public function valueToEuro($value, $row)
@@ -294,7 +562,12 @@ class Crud extends CI_Controller {
 
 		$output = $crud->render();
 		
-		$this->output_grocery($output);
+		$data['judul'] = 'Films';
+		$data['crumb'] = array( 'Films' => '' );
+
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->output_grocery($view, $output, $data, $template);
 	}
 }
  

@@ -62,7 +62,7 @@
 <div class="wrapper">  
     <header class="main-header">
         <a href="<?php echo site_url('crud/index') ?>" class="logo">
-           <span class="logo-mini"><b>I</b>gnit</span>
+           <span class="logo-mini"><b>M</b>I</span>
            <span class="logo-lg"><b>My</b>Igniter</span>
         </a>
 
@@ -108,27 +108,61 @@
             <ul class="sidebar-menu list" id="menuList">
             </ul>
             <ul class="sidebar-menu list" id="menuSub">
-                <li class="header">MAIN NAVIGATION</li>
+                <?php foreach ($header_menu->result() as $header): ?>
+                    <li class="header"><?php echo $header->header ?></li>
+                    <?php foreach ($menu->result() as $key => $menu_item): ?>
+                        <?php if ($header->id_header_menu == $menu_item->id_header_menu): ?>
+                            <?php if ($menu_item->url == "#" && $menu_item->level_one == "0") { ?>
+                                <li class="treeview">
+                                    <a href="#"><i class="fa fa-<?php echo $menu_item->icon ?>"></i> <span><?php echo $menu_item->label ?></span> <i class="fa fa-angle-left pull-right"></i></a>
+                                    <ul class="treeview-menu">
+                                        <?php foreach ($menu_lvlOne->result() as $lvlOne): ?>
+                                            <?php if ($menu_item->id_menu == $lvlOne->level_one): ?>                                        
+                                                <?php if ($lvlOne->url == "#") { ?>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-<?php echo $lvlOne->icon ?>"></i> <span><?php echo $lvlOne->label ?></span> <i class="fa fa-angle-left pull-right"></i></a>
+                                                        <ul class="treeview-menu level-2">
+                                                            <?php foreach ($menu_lvlTwo->result() as $lvlTwo): ?>
+                                                                <?php if ($lvlOne->id_menu == $lvlTwo->level_two): ?>
+                                                                    <li id="<?php echo $lvlTwo->menu_id ?>"><a href="<?php echo site_url($lvlTwo->url) ?>" class="name"><i class="fa fa-<?php echo $lvlTwo->icon ?>" class="name"></i> <?php echo $lvlTwo->label ?></a></li>
+                                                                <?php endif ?>                                    
+                                                            <?php endforeach ?>
+                                                        </ul>
+                                                    </li>
+                                                <?php }else{ ?>
+                                                    <li id="<?php echo $lvlOne->menu_id ?>"><a href="<?php echo site_url($lvlOne->url) ?>" class="name"><i class="fa fa-<?php echo $lvlOne->icon ?>" class="name"></i> <?php echo $lvlOne->label ?></a></li>
+                                                <?php } ?>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </li>
+                            <?php }else{ ?>
+                                <li id="<?php echo $menu_item->menu_id ?>"><a href="<?php echo site_url($menu_item->url) ?>" class="name"><i class="fa fa-<?php echo $menu_item->icon ?>"></i> <span><?php echo $menu_item->label ?></span></a></li>
+                            <?php } ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                <?php endforeach ?>
+                <!-- <li class="header">MAIN NAVIGATION</li>
                 <li><a href="<?php echo site_url('crud/index') ?>" class="name"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-table "></i> <span>Grocery Crud</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href='<?php echo  site_url('crud/offices_management')?>' class="name"><i class="fa fa-circle-o"></i> Offices</a></li>
-                        <li><a href='<?php echo  site_url('crud/employees_management')?>' class="name"><i class="fa fa-circle-o"></i> Employees</a></li>
-                        <li><a href='<?php echo  site_url('crud/customers_management')?>' class="name"><i class="fa fa-circle-o"></i> Customers</a></li>
-                        <li><a href='<?php echo  site_url('crud/orders_management')?>' class="name"><i class="fa fa-circle-o"></i> Orders</a></li>
-                        <li><a href='<?php echo  site_url('crud/products_management')?>' class="name"><i class="fa fa-circle-o"></i> Products</a></li>
-                        <li><a href='<?php echo  site_url('crud/film_management')?>' class="name"><i class="fa fa-circle-o"></i> Films</a></li>                 
+                        <li><a href='<?php echo site_url('crud/offices_management')?>' class="name"><i class="fa fa-circle-o"></i> Offices</a></li>
+                        <li><a href='<?php echo site_url('crud/employees_management')?>' class="name"><i class="fa fa-circle-o"></i> Employees</a></li>
+                        <li><a href='<?php echo site_url('crud/customers_management')?>' class="name"><i class="fa fa-circle-o"></i> Customers</a></li>
+                        <li><a href='<?php echo site_url('crud/orders_management')?>' class="name"><i class="fa fa-circle-o"></i> Orders</a></li>
+                        <li><a href='<?php echo site_url('crud/products_management')?>' class="name"><i class="fa fa-circle-o"></i> Products</a></li>
+                        <li><a href='<?php echo site_url('crud/film_management')?>' class="name"><i class="fa fa-circle-o"></i> Films</a></li>                 
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-lock "></i> <span>Ion Auth</span> <i class="fa fa-angle-left pull-right"></i></b></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo  site_url('crud/users')?>" class="name"><i class="fa fa-circle-o"></i> Users</a></li>
-                        <li><a href="<?php echo  site_url('crud/users_groups')?>" class="name"><i class="fa fa-circle-o"></i> Users Groups</a></li>
-                        <li><a href="<?php echo  site_url('crud/groups')?>" class="name"><i class="fa fa-circle-o"></i> Groups</a></li>
+                        <li><a href="<?php echo site_url('crud/users')?>" class="name"><i class="fa fa-circle-o"></i> Users</a></li>
+                        <li><a href="<?php echo site_url('crud/users_groups')?>" class="name"><i class="fa fa-circle-o"></i> Users Groups</a></li>
+                        <li><a href="<?php echo site_url('crud/groups')?>" class="name"><i class="fa fa-circle-o"></i> Groups</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </section>
     </aside>
@@ -138,24 +172,29 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            <i class="fa fa-cogs"></i> myIgniter 3.1
+            <?php echo $judul ?>
           </h1>
           <ol class="breadcrumb">
-            <li>
-                <a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
-            </li>
-            <?php if ($this->uri->segment(3)){ ?>
-                <li>
-                    <a href="<?php echo site_url().'/'.$this->uri->segment(1).'/'.$this->uri->segment(2) ?>" title=""><?php echo $this->uri->segment(2) ?></a>
-                </li>
-                <li>
-                    <?php echo $this->uri->segment(3) ?>
-                </li> 
-            <?php }else{ ?>
+            <?php if (!isset($crumb)){ ?>
                 <li class="active">
-                    <?php echo $this->uri->segment(2) ?>
-                </li>                     
-            <?php } ?> 
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </li>            
+            <?php }else{ ?>
+                <li>
+                    <a href="<?php echo site_url('crud/index') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+                </li>            
+                <?php foreach ($crumb as $label => $link): ?>
+                    <?php if ($link == ''){ ?>
+                        <li class="active">
+                            </i><?php echo $label ?>
+                        </li>
+                    <?php }else{ ?>
+                        <li>
+                            <a href="<?php echo site_url($link) ?>"></i> <?php echo $label ?></a>
+                        </li>            
+                    <?php } ?>
+                <?php endforeach ?>
+            <?php } ?>
           </ol>
         </section>
         <!-- Main content -->

@@ -7,7 +7,7 @@ class Crud_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function select($table, $fields, $where = null, $limit = null, $order = null)
+	function select($table, $fields, $where = null, $limit = null, $order = null, $group_by = null)
 	{
 		$this->db->from($table);
 		$this->db->select($fields);
@@ -21,6 +21,10 @@ class Crud_model extends CI_Model {
 
 		if ($order != null) {
 			$this->db->order_by($order);
+		}
+
+		if ($group_by != null) {
+			$this->db->group_by($group_by);
 		}
 
 		return $this->db->get();

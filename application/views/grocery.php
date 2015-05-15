@@ -14,13 +14,16 @@
 	</div><!-- /.box-body -->
 </div>
 <div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header"> Grocery CRUD examples</h3>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<div class="row">
 	<div class="col-lg-12">
 		<div><?php echo $output; ?></div>
 	</div>
 </div>
+<script>
+function afterDatatables()
+{
+    site = '<?= site_url(); ?>';
+    ur_class = '<?= $this->uri->segment(1); ?>';
+    url_function = '<?= $this->uri->segment(2); ?>';
+	<?php if (isset($data['script_grocery'])) { echo $data['script_grocery']; }; ?>	
+}
+</script>

@@ -69,5 +69,6 @@ $(document).ready(function() {
 	$('#flex1').dataTable();
 	$('#mini-refresh i').removeClass('fa-spin');   
 	$('#overlayTable').fadeOut(500);
+	afterDatatables();	
 });
 </script>

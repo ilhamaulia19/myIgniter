@@ -32,8 +32,4 @@ $(document).ready(function () {
     $('.chzn-drop').css('width', '100%');
     $('.chzn-search input').css('width', '100%');
     $('.fileinput-button').removeClass('qq-upload-button').addClass('btn btn-success').prepend('<i class="fa fa-upload"></i> '); 
-    //Pace done
-    Pace.on("done", function(){
-        $('.cover').fadeOut('20000');
-    });
 });
