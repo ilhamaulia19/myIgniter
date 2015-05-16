@@ -57,7 +57,7 @@ class Crud extends CI_Controller {
 		$whereLvlOne = "level_one != '0' and level_two = '0' and ".$whereAkses;
 		$whereLvlTwo = "level_one != '0' and level_two != '0' and ".$whereAkses;
 
-		$data['header_menu'] = $this->crud_model->select('view_header_menu','*',$whereAkses,'','','id_header_menu');
+		$data['header_menu'] = $this->crud_model->select('view_header_menu','*',$whereAkses,'','order ASC','id_header_menu');
 		$data['menu']        = $this->crud_model->select('view_menu','*',$whereMenu,'','order ASC','id_menu');
 		$data['menu_lvlOne'] = $this->crud_model->select('view_menu','*',$whereLvlOne,'','order ASC','id_menu');
 		$data['menu_lvlTwo'] = $this->crud_model->select('view_menu','*',$whereLvlTwo,'','order ASC','id_menu');
@@ -280,6 +280,7 @@ class Crud extends CI_Controller {
 		$crud->display_as('id_header_menu','Order');
 		$crud->set_relation_n_n('Akses', 'groups_header', 'groups', 'id_header_menu', 'id_groups', 'name');
 		$crud->add_action('Menu', 'fa fa-list', '', '',array($this,'link_menu'));
+		$crud->order_by('order','ASC');
 		$crud->unset_read();
 
 		$output = $crud->render();
@@ -318,7 +319,7 @@ class Crud extends CI_Controller {
 	    $crud->callback_before_insert(array($this,'call_header_menu'));
 
 		$output = $crud->render();
-		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active')";
 		$output->data = $data;
 		$data['judul'] = "Menu";
 		$data['crumb'] = array( 'Header menu' => 'crud/header_menu',
@@ -363,7 +364,7 @@ class Crud extends CI_Controller {
 	    $crud->callback_before_insert(array($this,'call_sub_menu'));
 
 		$output = $crud->render();
-		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active')";
 		$output->data = $data;
 		$data['judul'] = "Sub menu";
 		$data['crumb'] = array( 
@@ -410,7 +411,7 @@ class Crud extends CI_Controller {
 	    $crud->callback_before_insert(array($this,'call_sub_menu_2'));
 
 		$output = $crud->render();
-		$data['script_grocery'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active')";
 		$output->data = $data;
 		$data['judul'] = "Sub menu 2";
 		$data['crumb'] = array( 

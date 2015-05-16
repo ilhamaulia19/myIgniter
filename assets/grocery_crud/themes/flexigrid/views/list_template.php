@@ -100,15 +100,6 @@
 							<span class="print"><?php echo $this->l('list_print');?></span>
 			            </a>
 					<?php }?>
-					<div class="pDiv" style="display: none">
-						<div class="pDiv2" style="display: inline">
-							<div class="pGroup" style="display: inline">
-								<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading' style="display: inline">
-									<button type="button" id="btn-refresh" class="btn btn-info"><span class='fa fa-refresh'></span></button>
-								</div>
-							</div>
-						</div>
-					</div>		
 				</div>        
 			</div>
 			<?php } ?>
@@ -198,7 +189,15 @@
 
 		    </div>
 			-->
-		     
+			<div class="pDiv" style="display: none">
+				<div class="pDiv2" style="display: inline">
+					<div class="pGroup" style="display: inline">
+						<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading' style="display: inline">
+							<button type="button" id="btn-refresh" class="btn btn-info"><span class='fa fa-refresh'></span></button>
+						</div>
+					</div>
+				</div>
+			</div>		
 			<?php echo form_close(); ?>
 		</div>
 	</div>

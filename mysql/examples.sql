@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2015 at 09:49 PM
+-- Generation Time: May 16, 2015 at 07:37 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -106,16 +106,17 @@ INSERT INTO `groups_menu` (`id_groups`, `id_menu`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `header_menu` (
-  `id_header_menu` int(11) NOT NULL,
+`id_header_menu` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
   `header` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `header_menu`
 --
 
-INSERT INTO `header_menu` (`id_header_menu`, `header`) VALUES
-(1, 'MAIN NAVIGATION');
+INSERT INTO `header_menu` (`id_header_menu`, `order`, `header`) VALUES
+(1, 1, 'MAIN NAVIGATION');
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', '', 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1431701021, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
+(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', '', 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1431736422, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -251,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `view_header_menu` (
 `id_groups` int(11)
 ,`id_header_menu` int(11)
 ,`header` varchar(50)
+,`order` int(11)
 );
 -- --------------------------------------------------------
 
@@ -276,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `view_menu` (
 --
 DROP TABLE IF EXISTS `view_header_menu`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_header_menu` AS select `gh`.`id_groups` AS `id_groups`,`hm`.`id_header_menu` AS `id_header_menu`,`hm`.`header` AS `header` from (`groups_header` `gh` join `header_menu` `hm` on((`gh`.`id_header_menu` = `hm`.`id_header_menu`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_header_menu` AS select `gh`.`id_groups` AS `id_groups`,`hm`.`id_header_menu` AS `id_header_menu`,`hm`.`header` AS `header`,`hm`.`order` AS `order` from (`groups_header` `gh` join `header_menu` `hm` on((`gh`.`id_header_menu` = `hm`.`id_header_menu`)));
 
 -- --------------------------------------------------------
 
@@ -342,6 +344,11 @@ ALTER TABLE `users_groups`
 --
 ALTER TABLE `groups`
 MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `header_menu`
+--
+ALTER TABLE `header_menu`
+MODIFY `id_header_menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --

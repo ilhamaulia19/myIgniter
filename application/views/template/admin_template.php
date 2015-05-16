@@ -223,6 +223,7 @@
     var site = '<?= site_url(); ?>';
     var ur_class = '<?= $this->uri->segment(1); ?>';
     var url_function = '<?= $this->uri->segment(2); ?>';
+    <?php if (isset($script)) { echo $script; }; ?>
 </script>
 <script src="<?php echo base_url('assets/js/list.min.js') ?>"></script>
 <!--Custom JS-->
