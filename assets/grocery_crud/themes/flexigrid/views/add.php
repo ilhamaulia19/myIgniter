@@ -57,5 +57,5 @@
 
 	var message_alert_add_form = "<?php echo $this->l('alert_add_form')?>";
 	var message_insert_error = "<?php echo $this->l('insert_error')?>";
-	$('input').addClass('form-control');
+	$('input, textarea').addClass('form-control');
 </script>

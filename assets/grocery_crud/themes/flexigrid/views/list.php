@@ -1,6 +1,6 @@
 <?php if(!empty($list)){ ?>
 <div class="bDiv" >
-	<table class="table table-bordered table-hover table-striped" id="flex1">
+	<table class="table table-bordered table-striped" id="flex1">
 		<thead>
 			<tr class='hDiv'>
 				<th>No.</th>
@@ -17,40 +17,36 @@
 		<tr>
 			<td><?= $i ?></td>
 			<?php foreach($columns as $column){?>
-				<td>
-					<?php echo $row->{$column->field_name} != '' ? $row->{$column->field_name} : '&nbsp;' ; ?>
-				</td>
+				<td><?php echo $row->{$column->field_name} != '' ? $row->{$column->field_name} : '&nbsp;' ; ?></td>
 			<?php }?>
 
 			<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
-			<td align="right" width='20%'>
-				<div class='tools'>				
+			<td class="td-action">
+				<ul class='tools list-unstyled table-menu'>				
+                    <?php if(!empty($row->action_urls)){ foreach($row->action_urls as $action_unique_id => $action_url){ $action = $actions[$action_unique_id]; ?>
+					<li>
+						<a href="<?php echo $action_url; ?>" class="<?php echo $action->css_class; ?> crud-action" title="<?php echo $action->label?>"><i class="<?php echo $action->image_url ?>"></i> <?php echo $action->label; ?></a>	
+					</li>
+					<?php }	} ?>					
+
                     <?php if(!$unset_read){?>
-						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-list'></span> Detail</a> &nbsp;   
+                    <li>
+						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><i class='fa fa-list'></i> Detail</a>   
+					</li>
 					<?php }?>
                                         
                     <?php if(!$unset_edit){?>
-						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='fa fa-pencil'></span> Edit</a> &nbsp; 
+					<li>
+						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><i class='fa fa-pencil'></i> Edit</a> 
+					</li>
 					<?php }?>
 
                     <?php if(!$unset_delete){?>
-                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" ><span class='fa fa-trash-o'></span> Delete</a> &nbsp;
+                    <li>
+                    	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" ><i class='fa fa-trash-o'></i> Delete</a>
+                    </li>
                     <?php }?>
-                    <?php 
-					if(!empty($row->action_urls)){
-						foreach($row->action_urls as $action_unique_id => $action_url){ 
-							$action = $actions[$action_unique_id];
-					?>
-							<a href="<?php echo $action_url; ?>" class="<?php echo $action->css_class; ?> crud-action" title="<?php echo $action->label?>">
-							<span class="<?php echo $action->image_url ?>"></span>
-								<?php 
-								echo $action->label;
-								?>
-							</a>		
-					<?php }
-					}
-					?>					
-				</div>
+				</ul>
 			</td>
 			<?php }?>
 		</tr>
@@ -71,7 +67,6 @@ $(document).ready(function() {
 	}else{
 		$('#flex1').dataTable();
 	};
-	$('#flex1').dataTable();
 	$('#mini-refresh i').removeClass('fa-spin');   
 	$('#overlayTable').fadeOut(250);
 	afterDatatables();	

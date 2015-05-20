@@ -29,8 +29,9 @@ class Auth extends CI_Controller {
 	//Output Ionauth
 	function output_ionauth($data, $view)
 	{
-		$data['title'] = 'myIgniter';
-		$data['page'] = $this->load->view($view, $data, TRUE); 
+		$data['settings']    = $this->crud_model->select('settings','*','','1')->row();
+		$data['title']       = $data['settings']->judul;
+		$data['page'] 		 = $this->load->view($view, $data, TRUE); 
 		$this->load->view('template/auth_template', $data);
 	}
 

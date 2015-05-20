@@ -40,14 +40,7 @@
 <div id='list-report-error' class='report-div error ' ></div>
 
 <!--alert-->
-<div id='list-report-success' class='report-div success report-list'  <?php if($success_message !== null){?>style="display:block"<?php }?>><?php
-	if($success_message !== null) { ?>
-	<div class="alert alert-info">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<?php echo $success_message; ?>
-	</div>
-	<?php }	?>
-</div>
+<div id='list-report-success' class='report-div success report-list' ></div>
 
 <!--panel-->
 <div class="box">
@@ -206,3 +199,11 @@
 	</div>
 </div>
 <!-- /.panel-body -->
+<?php if($success_message !== null) { ?>
+<script>
+	$(function(){
+		pesan = "<?php echo $success_message; ?>";
+		alertify.success(pesan);
+	});
+</script>
+<?php }	?>

@@ -42,7 +42,7 @@ class Crud extends CI_Controller {
 	{
 		$data['settings']                = $this->crud_model->select('settings','*','','1')->row();
 		$whereGroups['user_id'] = $this->ion_auth->user()->row()->id;
-		$groups = $this->crud_model->select('users_groups','*');
+		$groups = $this->crud_model->select('users_groups','*',$whereGroups);
 		$i = 0;
 		$id_groups = '';
 		foreach ($groups->result() as $groups) {

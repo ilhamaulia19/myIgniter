@@ -29,18 +29,15 @@
 .tDiv3{
   margin: 0 0 10px;
 }
-.menu-search{
-    height: 45px;
-    font-size: 18px;
-    padding-left: 19px;
+.table-menu>li{
+  float: left;
+  position: relative;
+  display: block;
+  margin-left: 10px;
 }
-.form-horizontal .control-label{
-    text-align: left;
+.td-action{
+  width: 20%;
 }
-.panel-list, .layanan-pasien{
-    display: none;
-}
-
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {
   position: absolute;

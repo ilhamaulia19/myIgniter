@@ -55,5 +55,5 @@
 
 	var message_alert_edit_form = "<?php echo $this->l('alert_edit_form')?>";
 	var message_update_error = "<?php echo $this->l('update_error')?>";
-	$('input').addClass('form-control');
+	$('input, textarea').addClass('form-control');
 </script>
