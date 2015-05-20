@@ -18,6 +18,7 @@
 
     $this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.form.min.js');
 	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.numeric.min.js');
+	$this->set_js($this->default_theme_path.'/flexigrid/js/jquery.printElement.min.js');
 
 	/** Fancybox */
 	$this->set_css($this->default_css_path.'/jquery_plugins/fancybox/jquery.fancybox.css');
@@ -79,20 +80,22 @@
 		            <?php }?>
 				</div>
 				<div class="tDiv3 col-xs-6 text-right">
+					<div class="btn-group">
 					<?php if(!$unset_export) { ?>
 					<!-- Button Export  -->
 			        	<a class="export-anchor btn btn-info" data-url="<?php echo $export_url; ?>" target="_blank">
-							<i class="fa fa-print"></i> 
+							<i class="fa fa-file-excel-o"></i> 
 							<span class="export"><?php echo $this->l('list_export');?></span>
 			            </a>
 			         <!-- Akhir Button Export  -->
 					<?php } ?>
-					<?php if($unset_print) { ?>
+					<?php if(!$unset_print) { ?>
 			        	<a class="print-anchor btn btn-info" data-url="<?php echo $print_url; ?>">
-							<i class="fa fa-file-excel-o"></i>
+							<i class="fa fa-print"></i>
 							<span class="print"><?php echo $this->l('list_print');?></span>
 			            </a>
 					<?php }?>
+					</div>
 				</div>        
 			</div>
 			<?php } ?>
