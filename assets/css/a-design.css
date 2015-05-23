@@ -10,7 +10,7 @@
 .info{
 	margin-top: 14%;
 }
-#user-menu{
+.user-menu{
   text-transform: capitalize;
 }
 /*fix bug grocery*/
@@ -37,6 +37,9 @@
 }
 .td-action{
   width: 20%;
+}
+.form-horizontal .control-label{
+  text-align: left;
 }
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {

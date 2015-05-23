@@ -4,10 +4,14 @@
   </div><!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-    <?php echo $message;?>
-    <form action="<?php echo site_url('auth/login')?>" method="post">
+    <div class="message">
+      <div class="alert alert-danger">
+        Invalid login
+      </div>
+    </div>
+    <form action="<?php echo site_url('auth/ajax_login')?>" method="post">
       <div class="form-group has-feedback">
-        <input type="text" name="identity" class="form-control" placeholder="Email"/>
+        <input type="text" name="identity" class="form-control" placeholder="Email" autofocus />
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -23,17 +27,39 @@
           </div>                        
         </div><!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo lang('login_submit_btn')?></button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><span id="btnLoading" ></span> <?php echo lang('login_submit_btn')?></button>
         </div><!-- /.col -->
       </div>
     </form>
   </div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 <script>
-$('input').iCheck({
-  checkboxClass: 'icheckbox_square-blue',
-  radioClass: 'iradio_square-blue',
-  increaseArea: '20%' // optional
+$(function(){
+  redirect = '<?php echo $redirect ?>';
+  base_url = '<?php echo base_url() ?>';
+  $('input').iCheck({ checkboxClass: 'icheckbox_square-blue' });
+  $('body').addClass('login-page');
+  $('.message').hide();
+
+  $('form').on('submit',function(event){
+    event.preventDefault();
+    $("#btnLoading").addClass('disabled');
+    $("#btnLoading").html('<img src="' + base_url + 'assets/svg/loading-spin.svg" alt=""> ');
+
+    $.ajax({
+        url      : $(this).attr('action'),
+        type     : 'POST',
+        data     : $(this).serialize(),
+        success  : function(data) {
+            if (data == "false") {
+              $('input[name="identity"]').focus();
+              $('.message').hide().slideDown();
+            }else{
+              window.location.href = redirect;
+            };
+            $("#btnLoading").html('');
+        }
+    });
+  });
 });
-$('body').addClass('login-page');
 </script>

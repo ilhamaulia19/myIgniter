@@ -50,7 +50,7 @@
 			</td>
 			<?php }?>
 		</tr>
-<?php $i = $i+1; } ?>        
+		<?php $i = $i+1; } ?>        
 		</tbody>
 		</table>
 	</div>

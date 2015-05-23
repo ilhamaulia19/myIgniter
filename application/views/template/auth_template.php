@@ -16,7 +16,6 @@
     <!--AdminLTE-->
     <link href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>" rel="stylesheet">
     <!--CSS Plugins-->
-    <link href="<?php echo base_url('assets/css/animate.min.css') ?>" rel="stylesheet">       
     <link href="<?php echo base_url('assets/js/plugins/iCheck/square/blue.css') ?>" rel="stylesheet">
     <!--Custom CSS-->
     <link href="<?php echo base_url('assets/css/a-design.css') ?>" rel="stylesheet">

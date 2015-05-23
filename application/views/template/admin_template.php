@@ -75,20 +75,23 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" id="user-menu" data-toggle="dropdown" href="#">
-                            <?php echo  $this->ion_auth->user()->row()->username ?> <span class="caret"></span>
+                    <li class="dropdown user user-menu" >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="<?php echo base_url('assets/img/logo/khotaxdev.png') ?>" class="user-image" alt="User Image"/>
+                            <span class="hidden-xs"><?php echo $this->ion_auth->user()->row()->username ?></span>
                         </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="<?php echo site_url('crud/users/read').'/'.$this->ion_auth->user()->row()->id ?>"><i class="fa fa-user "></i> Profile</a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="<?php echo base_url('assets/img/logo/khotaxdev.png') ?>" class="img-circle" alt="User Image" />
+                                <p>
+                                  <?php echo $this->ion_auth->user()->row()->first_name ?> <?php echo $this->ion_auth->user()->row()->last_name ?>
+                                  <small><?php echo date('d-F-Y') ?></small>
+                                </p>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear "></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="<?php echo  site_url('auth/logout')?>"><i class="fa fa-sign-out "></i> Logout</a>
+                            <li class="user-footer no-padding">
+                                <a href="<?php echo  site_url('auth/logout')?>" class="btn btn-default btn-flat">Logout</a>
                             </li>
                         </ul>
-                        <!-- /.dropdown-user -->
                     </li>
                 </ul>
             </div>

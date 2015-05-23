@@ -6,8 +6,6 @@ class Crud extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->library('grocery_CRUD');
-		$this->load->library('form_validation');
-
 		$this->auth();
     }
  	
@@ -15,7 +13,7 @@ class Crud extends CI_Controller {
     {
      	if (!$this->ion_auth->logged_in())
 		{
-			redirect('auth/login', 'refresh');
+			redirect('auth/login');
 		}
     }
 
@@ -104,7 +102,7 @@ class Crud extends CI_Controller {
 		//VALIDATION
 		$crud->required_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
-		$crud->set_rules('phone', 'Phone', 'required|numeric|exact_length[10]');
+		$crud->set_rules('phone', 'Phone', 'required|numeric');
 		$crud->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
    		$crud->set_rules('new_password', 'New password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
 
@@ -131,36 +129,12 @@ class Crud extends CI_Controller {
 		$this->output_grocery($view, $output, $data, $template);
     }
 
-    public function users_groups() {
-		$crud = new grocery_CRUD();
-
-		$crud->set_table('users');
-		$crud->unset_add();
-		$crud->unset_delete();
-
-		$crud->change_field_type('username', 'readonly');
-
-		$crud->columns('username', 'email', 'groups');
-		$crud->edit_fields('username', 'groups', 'id');
-		$crud->change_field_type('id', 'hidden');
-
-		$crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
-
-		//VIEW
-		$output = $crud->render();
-		$data['judul'] = 'Users groups';
-		$data['crumb'] = array( 'Users groups' => '' );
-
-		$template = 'admin_template';
-		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
-	}
-
 	public function groups() {
 		$crud = new grocery_CRUD();
 
 		$crud->set_table('groups');
 		$crud->set_subject('Groups');
+		$crud->set_relation_n_n('Users', 'users_groups', 'users', 'group_id', 'user_id', 'username');
 
 		//VIEW
 		$output = $crud->render();
@@ -276,16 +250,16 @@ class Crud extends CI_Controller {
 		$crud = new grocery_CRUD();
 
 		$crud->set_table('header_menu');
-		$crud->set_subject('Header menu');
+		$crud->set_subject('Header Menu');
 		$crud->display_as('id_header_menu','Order');
 		$crud->set_relation_n_n('Akses', 'groups_header', 'groups', 'id_header_menu', 'id_groups', 'name');
-		$crud->add_action('Menu', 'fa fa-list', '', '',array($this,'link_menu'));
+		$crud->add_action('Menu', 'fa fa-plus-circle', '', '',array($this,'link_menu'));
 		$crud->order_by('order','ASC');
 		$crud->unset_read();
 
 		$output = $crud->render();
-		$data['judul'] = "Header menu";
-		$data['crumb'] = array( 'Header menu' => '' );
+		$data['judul'] = "Header Menu";
+		$data['crumb'] = array( 'Header Menu' => '' );
 
 		$template = 'admin_template';
 		$view = 'grocery';
@@ -304,7 +278,7 @@ class Crud extends CI_Controller {
 		$crud->set_table('menu');
 		$where['id_header_menu'] = $id_header_menu;
 		$header = $this->crud_model->select('header_menu','*',$where)->row();
-		$crud->set_subject('Menu '.$header->header);
+		$crud->set_subject('Menu');
 		$crud->where('level_one','0');
 		$crud->where('level_two','0');
 		$crud->where('id_header_menu',$id_header_menu);
@@ -315,11 +289,13 @@ class Crud extends CI_Controller {
 		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
 		$crud->unset_read();
 		$crud->unset_fields('level_one','level_two');
-		$crud->add_action('Sub menu', 'fa fa-list', '', '',array($this,'link_sub_menu'));
+		$crud->add_action('Sub menu', 'fa fa-plus-circle', '', '',array($this,'link_sub_menu'));
 	    $crud->callback_before_insert(array($this,'call_header_menu'));
+		$crud->callback_after_delete(array($this,'menu_after_delete'));
 
 		$output = $crud->render();
 		$data['script'] = "$('#menu-menu').addClass('active')";
+		$data['script_grocery'] = "$('a[href=\"#hidden\"]').replaceWith('<span style=\"color:#777\"><i class=\"fa fa-circle\"></i> Sub menu</span>')";
 		$output->data = $data;
 		$data['judul'] = "Menu";
 		$data['crumb'] = array( 'Header menu' => 'crud/header_menu',
@@ -337,9 +313,20 @@ class Crud extends CI_Controller {
 		return $post_array;
 	}   
 
+	function menu_after_delete($primary_key)
+	{
+		$where['level_one'] = $primary_key;
+		return $this->crud_model->delete('menu',$where);
+	}
+
 	function link_sub_menu($primary_key, $row)
 	{
-	    return site_url('crud/sub_menu').'/'.$row->id_header_menu.'/'.$primary_key;
+		if ($row->url == "#") {
+			$url = site_url('crud/sub_menu').'/'.$row->id_header_menu.'/'.$primary_key;
+		}else{
+			$url = "#hidden";
+		}
+	    return $url;
 	}
 
 	public function sub_menu($id_header_menu, $level_one)
@@ -349,7 +336,7 @@ class Crud extends CI_Controller {
 		$crud->set_table('menu');
 		$where['id_header_menu'] = $id_header_menu;
 		$header = $this->crud_model->select('header_menu','*',$where)->row();
-		$crud->set_subject('Menu '.$header->header);
+		$crud->set_subject('Sub Menu');
 		$crud->where('level_one', $level_one);
 		$crud->where('level_two','0');
 		$crud->change_field_type('id_header_menu','invisible');
@@ -360,11 +347,13 @@ class Crud extends CI_Controller {
 		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
 		$crud->unset_read();
 		$crud->unset_fields('level_two');
-		$crud->add_action('Sub menu 2', 'fa fa-list', '', '',array($this,'link_sub_menu_2'));
+		$crud->add_action('Sub menu 2', 'fa fa-plus-circle', '', '',array($this,'link_sub_menu_2'));
 	    $crud->callback_before_insert(array($this,'call_sub_menu'));
+		$crud->callback_after_delete(array($this,'sub_menu_after_delete'));
 
 		$output = $crud->render();
 		$data['script'] = "$('#menu-menu').addClass('active')";
+		$data['script_grocery'] = "$('a[href=\"#hidden\"]').replaceWith('<span style=\"color:#777\"><i class=\"fa fa-circle\"></i> Sub menu 2</span>')";		
 		$output->data = $data;
 		$data['judul'] = "Sub menu";
 		$data['crumb'] = array( 
@@ -385,9 +374,20 @@ class Crud extends CI_Controller {
 		return $post_array;
 	}  
 
+	function sub_menu_after_delete($primary_key)
+	{
+		$where['level_two'] = $primary_key;
+		return $this->crud_model->delete('menu',$where);
+	}
+
 	function link_sub_menu_2($primary_key, $row)
 	{
-	    return site_url('crud/sub_menu_2').'/'.$row->id_header_menu.'/'.$row->level_one.'/'.$primary_key;
+		if ($row->url == "#") {
+			$url = site_url('crud/sub_menu_2').'/'.$row->id_header_menu.'/'.$row->level_one.'/'.$primary_key;
+		}else{
+			$url = "#hidden";
+		}
+	    return $url;
 	}
 
 	public function sub_menu_2($id_header_menu, $level_one, $level_two)
@@ -397,7 +397,7 @@ class Crud extends CI_Controller {
 		$crud->set_table('menu');
 		$where['id_header_menu'] = $id_header_menu;
 		$header = $this->crud_model->select('header_menu','*',$where)->row();
-		$crud->set_subject('Menu '.$header->header);
+		$crud->set_subject('Sub Menu 2');
 		$crud->where('level_one', $level_one);
 		$crud->where('level_two', $level_two);
 		$crud->change_field_type('id_header_menu','invisible');
@@ -571,4 +571,3 @@ class Crud extends CI_Controller {
 		$this->output_grocery($view, $output, $data, $template);
 	}
 }
- 

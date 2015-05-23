@@ -13,19 +13,20 @@
 	<div id='main-table-box' class="box-body">
 		<?php echo form_open( $update_url, 'method="post" class="form-horizontal" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
 
-		<?php foreach($fields as $field) { ?>
-		<div class='row' id="<?php echo $field->field_name; ?>_field_box">
-			<div class='form-display-as-box col-lg-2 control-label' id="<?php echo $field->field_name; ?>_display_as_box">
-				<label>
-					<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?>
-				</label>
+		<?php $focus = 'none'; $i=1; foreach($fields as $field) { ?>
+			<div class='row' id="<?php echo $field->field_name; ?>_field_box">
+				<div class='form-display-as-box col-lg-2 control-label' id="<?php echo $field->field_name; ?>_display_as_box">
+					<label>
+						<?php echo $input_fields[$field->field_name]->display_as?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""?>
+					</label>
+				</div>
+				<div class='form-input-box  col-lg-10' id="<?php echo $field->field_name; ?>_input_box">
+					<?php echo $input_fields[$field->field_name]->input?>
+				</div>
 			</div>
-			<div class='form-input-box  col-lg-10' id="<?php echo $field->field_name; ?>_input_box">
-				<?php echo $input_fields[$field->field_name]->input?>
-			</div>
-		</div>
-		<br>
-		<?php }?>
+			<br>
+			<?php if ($i == 1): $focus = "field-".$field->field_name; endif ?>
+		<?php $i++; } ?>
 
 		<?php if(!empty($hidden_fields)){?>
 		<!-- Start of hidden inputs -->
@@ -52,7 +53,7 @@
 <script>
 	var validation_url = '<?php echo $validation_url?>';
 	var list_url = '<?php echo $list_url?>';
-
+	$('#<?php echo $focus ?>').attr('autofocus', '');
 	var message_alert_edit_form = "<?php echo $this->l('alert_edit_form')?>";
 	var message_update_error = "<?php echo $this->l('update_error')?>";
 	$('input, textarea').addClass('form-control');
