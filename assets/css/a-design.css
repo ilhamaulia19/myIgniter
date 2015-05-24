@@ -41,6 +41,16 @@
 .form-horizontal .control-label{
   text-align: left;
 }
+.form-horizontal .radio{
+  float: left;
+}
+.form-horizontal .radio{
+  padding-top: 2px;
+}
+.pretty-radio-buttons>label{
+  text-transform: capitalize;
+  margin-right: 14px;
+}
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {
   position: absolute;

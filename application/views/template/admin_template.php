@@ -102,7 +102,7 @@
         <section class="sidebar" id="menuSidebar">
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" class="form-control search" id="searchSidebar" placeholder="Search..." autocomplete="off"/>
+                    <input type="text" class="form-control searchlist" id="searchSidebar" placeholder="Search..." autocomplete="off"/>
                     <span class="input-group-btn">
                         <button type='button' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                     </span>
@@ -145,27 +145,6 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 <?php endforeach ?>
-                <!-- <li class="header">MAIN NAVIGATION</li>
-                <li><a href="<?php echo site_url('crud/index') ?>" class="name"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-table "></i> <span>Grocery Crud</span> <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href='<?php echo site_url('crud/offices_management')?>' class="name"><i class="fa fa-circle-o"></i> Offices</a></li>
-                        <li><a href='<?php echo site_url('crud/employees_management')?>' class="name"><i class="fa fa-circle-o"></i> Employees</a></li>
-                        <li><a href='<?php echo site_url('crud/customers_management')?>' class="name"><i class="fa fa-circle-o"></i> Customers</a></li>
-                        <li><a href='<?php echo site_url('crud/orders_management')?>' class="name"><i class="fa fa-circle-o"></i> Orders</a></li>
-                        <li><a href='<?php echo site_url('crud/products_management')?>' class="name"><i class="fa fa-circle-o"></i> Products</a></li>
-                        <li><a href='<?php echo site_url('crud/film_management')?>' class="name"><i class="fa fa-circle-o"></i> Films</a></li>                 
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-lock "></i> <span>Ion Auth</span> <i class="fa fa-angle-left pull-right"></i></b></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo site_url('crud/users')?>" class="name"><i class="fa fa-circle-o"></i> Users</a></li>
-                        <li><a href="<?php echo site_url('crud/users_groups')?>" class="name"><i class="fa fa-circle-o"></i> Users Groups</a></li>
-                        <li><a href="<?php echo site_url('crud/groups')?>" class="name"><i class="fa fa-circle-o"></i> Groups</a></li>
-                    </ul>
-                </li> -->
             </ul>
         </section>
     </aside>

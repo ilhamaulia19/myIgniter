@@ -52,8 +52,9 @@ $(function(){
         data     : $(this).serialize(),
         success  : function(data) {
             if (data == "false") {
-              $('input[name="identity"]').focus();
               $('.message').hide().slideDown();
+              $('input').val('');
+              $('input[name="identity"]').focus();
             }else{
               window.location.href = redirect;
             };

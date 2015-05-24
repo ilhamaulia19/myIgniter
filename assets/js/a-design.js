@@ -10,6 +10,7 @@ $(document).ready(function () {
 
     //list.js
     var options = {
+      searchClass: ['searchlist'], 
       valueNames: [ 'name' ]
     };
     $("#searchSidebar").focus(function() {
