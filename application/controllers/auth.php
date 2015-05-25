@@ -5,8 +5,9 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->lang->load('auth');
 		$this->load->helper('language');
+		$this->lang->load('auth');
+		$this->load->library('OutputView');		
 	}
 
 	function index()
@@ -18,21 +19,12 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	//OUTPUT IONAUTH
-	function output_ionauth($view, $data = null)
-	{
-		$data['settings']    = $this->crud_model->select('settings','*','','1')->row();
-		$data['title']       = $data['settings']->judul;
-		$data['page'] 		 = $this->load->view($view, $data, TRUE); 
-		$this->load->view('template/auth_template', $data);
-	}
-
 	public function login()
 	{
-		//SUCCESS LOGIN
 		$data['redirect'] = site_url('crud/index');
-		$view = 'auth/login';
-		$this->output_ionauth($view, $data);
+		$view             = 'auth/login';
+		$template         = 'auth_template';
+		$this->outputview->output_front($view, $template, $data);
 	}
 
 	function ajax_login()
@@ -46,9 +38,9 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	function logout()
+	public function logout()
 	{
 		$logout = $this->ion_auth->logout();
-		redirect('auth/login');
+		redirect('auth');
 	}
 }

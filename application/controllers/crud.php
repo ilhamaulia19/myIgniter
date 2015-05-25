@@ -6,17 +6,9 @@ class Crud extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->library('grocery_CRUD');
-		$this->auth();
+		$this->load->library('OutputView');		
     }
  	
- 	public function auth()
-    {
-     	if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-    }
-
     public function index()
     {
 		if (!$this->ion_auth->is_admin())
@@ -31,57 +23,9 @@ class Crud extends CI_Controller {
 
 			$template = 'admin_template';
 			$view = 'grocery';
-			$this->output_grocery($view, $output, $data, $template);
+			$this->outputview->output_admin($view, $template, $data, $output);
 		}
 	}
-
-	//OUTPUT DATA
-	function data_output($data_add)
-	{
-		$data['settings']                = $this->crud_model->select('settings','*','','1')->row();
-		$whereGroups['user_id'] = $this->ion_auth->user()->row()->id;
-		$groups = $this->crud_model->select('users_groups','*',$whereGroups);
-		$i = 0;
-		$id_groups = '';
-		foreach ($groups->result() as $groups) {
-			if ($i != 0) {
-				$id_groups .= ",";
-			}
-			$id_groups .= $groups->group_id;
-			$i++;
-		}
-		$whereAkses  = "id_groups in (".$id_groups.")";
-		$whereMenu 	 = "level_one = '0' and level_two = '0' and ".$whereAkses;
-		$whereLvlOne = "level_one != '0' and level_two = '0' and ".$whereAkses;
-		$whereLvlTwo = "level_one != '0' and level_two != '0' and ".$whereAkses;
-
-		$data['header_menu'] = $this->crud_model->select('view_header_menu','*',$whereAkses,'','order ASC','id_header_menu');
-		$data['menu']        = $this->crud_model->select('view_menu','*',$whereMenu,'','order ASC','id_menu');
-		$data['menu_lvlOne'] = $this->crud_model->select('view_menu','*',$whereLvlOne,'','order ASC','id_menu');
-		$data['menu_lvlTwo'] = $this->crud_model->select('view_menu','*',$whereLvlTwo,'','order ASC','id_menu');
-		$data['title']       = $data['settings']->judul;
-		foreach ($data_add as $key => $value) {
-			$data[$key] = $value;
-		}
-
-		return $data;
-	}
-
-    //OUTPUT MANUAL
-    function output_view($view, $data_add = null, $template)
-	{
-		$data         = $this->data_output($data_add);
-		$data['page'] = $this->load->view($view, $data, TRUE);
-		$this->load->view('template/'.$template, $data);
-	}
-
-	//OUTPUT GROCERY CRUD
-    function output_grocery($view, $output = null, $data_add = null, $template)
-    {
-		$data         = $this->data_output($data_add);
-		$data['page'] = $this->load->view($view, $output, TRUE);
-		$this->load->view('template/'.$template, $data);
-    }
 
     //USERS MANAGEMENT
     public function users()
@@ -126,7 +70,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
     }
 
 	public function groups() {
@@ -143,7 +87,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	function active_callback($value, $row)
@@ -242,7 +186,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	public function header_menu()
@@ -263,7 +207,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	function link_menu($primary_key, $row)
@@ -304,7 +248,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	function call_header_menu($post_array) 
@@ -364,7 +308,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	function call_sub_menu($post_array) 
@@ -423,7 +367,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	function call_sub_menu_2($post_array) 
@@ -451,7 +395,7 @@ class Crud extends CI_Controller {
 
 			$template = 'admin_template';
 			$view = 'grocery';
-			$this->output_grocery($view, $output, $data, $template);
+			$this->outputview->output_admin($view, $template, $data, $output);
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -479,7 +423,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	public function customers_management()
@@ -501,7 +445,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	public function orders_management()
@@ -523,7 +467,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	public function products_management()
@@ -542,7 +486,7 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
 	public function valueToEuro($value, $row)
@@ -568,6 +512,6 @@ class Crud extends CI_Controller {
 
 		$template = 'admin_template';
 		$view = 'grocery';
-		$this->output_grocery($view, $output, $data, $template);
+		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 }

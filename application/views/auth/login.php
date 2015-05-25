@@ -38,7 +38,6 @@ $(function(){
   redirect = '<?php echo $redirect ?>';
   base_url = '<?php echo base_url() ?>';
   $('input').iCheck({ checkboxClass: 'icheckbox_square-blue' });
-  $('body').addClass('login-page');
   $('.message').hide();
 
   $('form').on('submit',function(event){

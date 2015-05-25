@@ -9,7 +9,7 @@
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
 
-	<!--Bootstrap-->
+    <!--Bootstrap-->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!--FontAwesome-->
     <link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
@@ -31,7 +31,7 @@
     <!--JS Plugins-->
     <script src="<?php echo base_url('assets/js/plugins/iCheck/icheck.min.js') ?>"></script>
 </head>
-<body>
+<body class="login-page">
 
     <!-- Page Content -->
     <?php echo $page ?>
@@ -40,9 +40,9 @@
 <!--Bootstrap JS-->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script>
-    var site = '<?= site_url(); ?>';
-    var ur_class = '<?= $this->uri->segment(1); ?>';
-    var url_function = '<?= $this->uri->segment(2); ?>';
+    site         = '<?php echo site_url(); ?>';
+    ur_class     = '<?php echo $this->uri->segment(1); ?>';
+    url_function = '<?php echo $this->uri->segment(2); ?>';
 </script>
 <!--Custom JS-->
 <script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>

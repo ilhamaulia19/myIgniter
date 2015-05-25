@@ -27,9 +27,9 @@
 <script>
 	function afterDatatables()
 	{
-	    site = '<?= site_url(); ?>';
-	    ur_class = '<?= $this->uri->segment(1); ?>';
-	    url_function = '<?= $this->uri->segment(2); ?>';
+	    site         = '<?php echo site_url(); ?>';
+	    ur_class     = '<?php echo $this->uri->segment(1); ?>';
+	    url_function = '<?php echo $this->uri->segment(2); ?>';
 		<?php if (isset($data['script_grocery'])) { echo $data['script_grocery']; }; ?>	
 	}
 </script>
