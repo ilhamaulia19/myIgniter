@@ -34,15 +34,16 @@ class Crud extends CI_Controller {
 
     	$crud->set_table('users');
     	$crud->set_subject('Users');
-    	$crud->columns('username','email','active');
+    	$crud->columns('username','email','groups','active');
     	if ($this->uri->segment(3) !== 'read')
 		{
-	    	$crud->add_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
-			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone', 'last_login','old_password','new_password');
+	    	$crud->add_fields('username','first_name', 'last_name', 'email', 'phone','groups' , 'password', 'password_confirm');
+			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone','groups' , 'last_login','old_password','new_password');
 		}else{
-			$crud->set_read_fields('username','first_name', 'last_name', 'email', 'phone','last_login');
+			$crud->set_read_fields('username','first_name', 'last_name', 'email', 'phone','groups', 'last_login');
 		}
-		
+		$crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
+
 		//VALIDATION
 		$crud->required_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
@@ -78,7 +79,6 @@ class Crud extends CI_Controller {
 
 		$crud->set_table('groups');
 		$crud->set_subject('Groups');
-		$crud->set_relation_n_n('Users', 'users_groups', 'users', 'group_id', 'user_id', 'username');
 
 		//VIEW
 		$output = $crud->render();
@@ -125,25 +125,24 @@ class Crud extends CI_Controller {
 		}
 	}
 
-	function edit_user_callback($post_array, $primary_key = null) {
+	function edit_user_callback($post_array, $primary_key) {
 
-		$username = $post_array['username'];
-		$email    = $post_array['email'];
+		$identity = $post_array[$this->config->item('identity', 'ion_auth')];
+		$groups   = $post_array['groups'];
 		$old 	  = $post_array['old_password'];
 		$new 	  = $post_array['new_password'];
 		$data     = array(
-					'username'   => $username,
-					'email'      => $email,
+					'username'   => $post_array['username'],
+					'email'      => $post_array['email'],
 					'phone'      => $post_array['phone'],
 					'first_name' => $post_array['first_name'],
 					'last_name'  => $post_array['last_name']
 				);
-		
-		if ($old === '') {
-			$change = $this->ion_auth_model->update($primary_key, $data);
+		if ($old != '') {
+			$change = $this->ion_auth->update($primary_key, $data) && $this->ion_auth->change_password($identity, $old, $new) && $this->ion_auth->remove_from_group('', $primary_key) && $this->ion_auth->add_to_group($groups, $primary_key);
 		}else{
-			$change = $this->ion_auth_model->update($primary_key, $data) && $this->ion_auth->change_password($email, $old, $new);
-		}
+			$change = $this->ion_auth->update($primary_key, $data) && $this->ion_auth->remove_from_group('', $primary_key) && $this->ion_auth->add_to_group($groups, $primary_key);
+		};
 
 		if ($change) {
 			return true;
@@ -152,20 +151,19 @@ class Crud extends CI_Controller {
 		}
 	}
 
-	function create_user_callback($post_array, $primary_key = null) {
+	function create_user_callback($post_array, $primary_key = null) {		
 
 		$username = $post_array['username'];
 		$password = $post_array['password'];
-		$email = $post_array['email'];
-		$data = array(
-					'phone' => $post_array['phone'],
+		$email    = $post_array['email'];
+		$group 	  = $post_array['groups'];
+		$data     = array(
+					'phone'      => $post_array['phone'],
 					'first_name' => $post_array['first_name'],
-					'last_name' => $post_array['last_name']
+					'last_name'  => $post_array['last_name']
 				);
 
-		$this->ion_auth_model->register($username, $password, $email, $data);
-
-		return $this->db->insert_id();
+		return $this->ion_auth->register($username, $password, $email, $data, $group);
 	}
 
 	//CRUD SETTINGS HERE

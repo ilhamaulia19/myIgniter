@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<br>
-			<?php if ($i == 1): $focus = "field-".$field->field_name; endif ?>
+			<?php if ($i == 1): $focus = $field->field_name; endif ?>
 		<?php $i++; } ?>
 
 		<!-- Start of hidden inputs -->
@@ -55,7 +55,11 @@
 <script>
 	var validation_url = '<?php echo $validation_url?>';
 	var list_url = '<?php echo $list_url?>';
-	$('#<?php echo $focus ?>').attr('autofocus', '');
+	$('#field-<?php echo $focus ?>').attr('autofocus', '');
+	$('button[type="submit"]').click(function() {
+	    $('input[name="<?php echo $focus ?>"]').focus();
+	});
+
 	var message_alert_add_form = "<?php echo $this->l('alert_add_form')?>";
 	var message_insert_error = "<?php echo $this->l('insert_error')?>";
 	$('input, textarea').addClass('form-control');
