@@ -52,8 +52,8 @@
 		</tr>
 		<?php $i = $i+1; } ?>        
 		</tbody>
-		</table>
-	</div>
+	</table>
+</div>
 <?php }else{?>
 	<br/>
 	&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->l('list_no_items'); ?>

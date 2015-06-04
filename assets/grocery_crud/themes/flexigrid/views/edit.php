@@ -53,7 +53,11 @@
 <script>
 	var validation_url = '<?php echo $validation_url?>';
 	var list_url = '<?php echo $list_url?>';
-	$('#<?php echo $focus ?>').attr('autofocus', '');
+	$('#field-<?php echo $focus ?>').attr('autofocus', '');
+	$('button[type="submit"]').click(function() {
+	    $('input[name="<?php echo $focus ?>"]').focus();
+	});
+	
 	var message_alert_edit_form = "<?php echo $this->l('alert_edit_form')?>";
 	var message_update_error = "<?php echo $this->l('update_error')?>";
 	$('input, textarea').addClass('form-control');
