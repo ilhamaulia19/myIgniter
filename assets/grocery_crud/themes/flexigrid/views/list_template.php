@@ -10,9 +10,6 @@
 		$this->set_js_lib($this->default_javascript_path.'/common/list.js');
 	}
 
-	$this->set_js('assets/js/plugins/datatables/jquery.dataTables.min.js');
-	$this->set_js('assets/js/plugins/datatables/dataTables.bootstrap.min.js');
-
 	//$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
 	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
 
@@ -95,23 +92,14 @@
 				<?php echo $list_view?>
 			</div>	
 
-			<div class="row  show-advance">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button type="button" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-gear"></i> Advance</button>					
-				</div>
-			</div>
-
-			<div class="row advance">
+			<div class="row">
 				<div class="col-md-6">
 					<div class="sDiv quickSearchBox" id='quickSearchBox'>
 						<div class="sDiv2">
 							<div class="row">
 								<div class="col-md-6">
-									<div class="input-group input-group-sm">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary btn-flat hide-advance"><i class="fa fa-gear"></i></button>
-										</span>
-										<input type="text" class="qsbsearch_fieldox search_text form-control" placeholder="Search all data" name="search_text" size="30" id='search_text'>
+									<div class="form-group input-group input-group-sm">
+										<input type="text" class="qsbsearch_fieldox search_text form-control" placeholder="<?php echo $this->l('list_search');?>" name="search_text" size="30" id='search_text'>
 										<span class="input-group-btn">
 								            <button type="button" value="<?php echo $this->l('list_search');?>" class="crud_search btn btn-default btn-flat" id='crud_search'><i class="fa fa-search"></i></button>
 								        	<button type="button" value="<?php echo $this->l('list_clear_filtering');?>" id='search_clear' class="search_clear btn btn-default btn-flat">Clear</button>
@@ -119,12 +107,14 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<select class="form-control input-sm" name="search_field" id="search_field">
-										<option value=""><?php echo $this->l('list_search_all');?></option>
-										<?php foreach($columns as $column){?>
-										<option value="<?php echo $column->field_name?>"><?php echo $column->display_as?>&nbsp;&nbsp;</option>
-										<?php }?>
-									</select>
+									<div class="form-group ">
+										<select class="form-control input-sm" name="search_field" id="search_field">
+											<option value=""><?php echo $this->l('list_search_all');?></option>
+											<?php foreach($columns as $column){?>
+											<option value="<?php echo $column->field_name?>"><?php echo $column->display_as?>&nbsp;&nbsp;</option>
+											<?php }?>
+										</select>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -138,10 +128,13 @@
 									<div class="pGroup">
 										<span class="pcontrol">
 											<?php list($show_lang_string, $entries_lang_string) = explode('{paging}', $this->l('list_show_entries')); ?>
-											<div class="input-group input-group-sm">
+											<div class="form-group input-group input-group-sm">
 												<input type="text" name="per_page" id='per_page' class="per_page form-control input-sm" value="<?php echo $paging_options[0] ?>" >
 												<span class="input-group-btn">
-													<button type="submit" class="btn btn-default btn-flat">Limit</button>
+													<button type="submit" class="btn btn-default btn-flat">
+														<?php list($show_lang_string, $entries_lang_string) = explode('{paging}', $this->l('list_show_entries')); ?>
+														<?php echo $show_lang_string; ?>
+													</button>
 												</span>
 											</div>
 											<input type='hidden' name='order_by[0]' id='hidden-sorting' class='hidden-sorting' value='<?php if(!empty($order_by[0])){?><?php echo $order_by[0]?><?php }?>' />
@@ -151,19 +144,16 @@
 								</div>
 								<div class="col-md-12 col-lg-6">
 									<div class="pGroup">
-										<div class="input-group">
+										<div class="form-group input-group">
 											<span class="input-group-btn">
-												<button type="button" class="pPrev pButton prev-button btn btn-default btn-flat btn-sm">Previous</button>
+												<button type="button" class="pPrev pButton prev-button btn btn-default btn-flat btn-sm"><?php echo $this->l('list_paging_previous');?></button>
 											</span>
 												<?php $paging_starts_from = "<span id='page-starts-from' class='page-starts-from'>1</span>"; ?>
 												<?php $paging_ends_to = "<span id='page-ends-to' class='page-ends-to'>". ($total_results < $default_per_page ? $total_results : $default_per_page) ."</span>"; ?>
 												<?php $paging_total_results = "<span id='total_items' class='total_items'>$total_results</span>"?>
-											<span class="form-control input-sm">
-												<?php echo $paging_starts_from." - ".$paging_ends_to." OF ".$paging_total_results ?>
-											</span>
-											<input name='page' type="hidden" value="1" size="4" id='crud_page' class="crud_page form-control input-sm">
+											<input name='page' type="text" value="1" size="4" id='crud_page' class="crud_page form-control input-sm text-center">
 											<span class="input-group-btn">
-												<button type="button" class="pNext pButton next-button btn btn-default btn-flat btn-sm">Next</button>
+												<button type="button" class="pNext pButton next-button btn btn-default btn-flat btn-sm"><?php echo $this->l('list_paging_next');?></button>
 											</span>
 										</div>
 									</div>
@@ -174,6 +164,14 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<?php echo str_replace( array('{start}','{end}','{results}'),
+											array($paging_starts_from, $paging_ends_to, $paging_total_results),
+											$this->l('list_displaying')
+										   ); ?>				
 				</div>
 			</div>
 			<?php echo form_close(); ?>		

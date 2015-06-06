@@ -54,8 +54,11 @@
 #fancybox-outer{
   width: 107%;
 }
-.advance{
-  display: none;
+.field-sorting{
+  cursor: pointer;
+}
+.sort{
+  color: #b5bbc8;
 }
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {

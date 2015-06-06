@@ -13,19 +13,13 @@
 		</p>
 	</div><!-- /.box-body -->
 </div>
-<script>
-	function datatablesOptions()
-	{
-		<?php if (isset($data['script_datatables'])) { echo $data['script_datatables']; }; ?>	
-	}
-</script>
 <div class="row">
 	<div class="col-lg-12">
 		<div><?php echo $output; ?></div>
 	</div>
 </div>
 <script>
-	function afterDatatables()
+	function afterTable()
 	{
 	    site         = '<?php echo site_url(); ?>';
 	    ur_class     = '<?php echo $this->uri->segment(1); ?>';
