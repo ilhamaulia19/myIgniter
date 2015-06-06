@@ -51,6 +51,12 @@
   text-transform: capitalize;
   margin-right: 14px;
 }
+#fancybox-outer{
+  width: 107%;
+}
+.advance{
+  display: none;
+}
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {
   position: absolute;

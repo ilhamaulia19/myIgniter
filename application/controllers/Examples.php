@@ -136,7 +136,6 @@ class Examples extends CI_Controller {
 		$crud->unset_columns('special_features','description','actors','release_year','rental_duration','rental_rate','replacement_cost');
 
 		$crud->fields('title', 'description', 'actors' ,  'category' ,'release_year', 'rental_duration', 'rental_rate', 'length', 'replacement_cost', 'rating', 'special_features');
-
 		$output = $crud->render();
 		
 		$data['judul'] = 'Films';

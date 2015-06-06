@@ -1,4 +1,3 @@
-<?php if(!empty($list)){ ?>
 <div class="bDiv" >
 	<table class="table table-bordered table-striped" id="flex1">
 		<thead>
@@ -54,12 +53,6 @@
 		</tbody>
 	</table>
 </div>
-<?php }else{?>
-	<br/>
-	&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->l('list_no_items'); ?>
-	<br/>
-	<br/>
-<?php }?>	
 <script>
 $(document).ready(function() {
 	if (datatablesOptions()) {
