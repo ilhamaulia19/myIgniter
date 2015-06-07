@@ -53,6 +53,7 @@
 		</tr>
 		<?php } ?>        
 		</tbody>
+<<<<<<< HEAD
 		</table>
 	</div>
 <?php }else{?>
@@ -61,6 +62,16 @@
 	<br/>
 	<br/>
 <?php }?>
+=======
+	</table>
+</div>
+<?php }else{?>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->l('list_no_items'); ?>
+	<br/>
+	<br/>
+<?php }?>	
+>>>>>>> parent of 344b9e9... Add "Advance" button
 <script>
 $(document).ready(function() {
 	$('#mini-refresh i').removeClass('fa-spin');   

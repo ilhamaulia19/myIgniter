@@ -10,7 +10,14 @@
 		$this->set_js_lib($this->default_javascript_path.'/common/list.js');
 	}
 
+<<<<<<< HEAD
 	//$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
+=======
+	$this->set_js('assets/js/plugins/datatables/jquery.dataTables.min.js');
+	$this->set_js('assets/js/plugins/datatables/dataTables.bootstrap.min.js');
+
+	$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
+>>>>>>> parent of 344b9e9... Add "Advance" button
 	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
 
     $this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.form.min.js');
@@ -97,7 +104,9 @@
 			</div>
 			<?php } ?>
 
+			<!-- iki pencariane -->
 			<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form" autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		    <!--
@@ -220,6 +229,19 @@
 		                <span class="input-group-btn">
 		                <div class="pFirst pButton first-button btn btn-default">
 							<span>First</span>
+=======
+
+		    <!--iki tampil table'e-->
+			<div id='ajax_list' class="ajax_list">
+				<?php echo $list_view?>
+			</div>
+
+			<div class="pDiv" style="display: none">
+				<div class="pDiv2" style="display: inline">
+					<div class="pGroup" style="display: inline">
+						<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading' style="display: inline">
+							<button type="button" id="btn-refresh" class="btn btn-info"><span class='fa fa-refresh'></span></button>
+>>>>>>> parent of 344b9e9... Add "Advance" button
 						</div>
 		                <div class="pPrev pButton prev-button btn btn-default">
 							<span>Previous</span>
@@ -242,6 +264,7 @@
 		                </span>
 					</div>
 				</div>
+<<<<<<< HEAD
 
 		    </div>
 			-->
@@ -272,6 +295,11 @@
 			</div>		
 			<?php echo form_close(); ?>
 >>>>>>> parent of 985b61b... Update Alertify
+=======
+			</div>		
+			<?php echo form_close(); ?>
+			
+>>>>>>> parent of 344b9e9... Add "Advance" button
 		</div>
 	</div>
 	<div class="overlay" id="overlayTable" style="display:none;">

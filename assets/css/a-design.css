@@ -51,6 +51,7 @@
   text-transform: capitalize;
   margin-right: 14px;
 }
+<<<<<<< HEAD
 #fancybox-outer{
   width: 107%;
 }
@@ -60,6 +61,8 @@
 .sort{
   color: #b5bbc8;
 }
+=======
+>>>>>>> parent of 344b9e9... Add "Advance" button
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {
   position: absolute;
