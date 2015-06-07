@@ -20,6 +20,7 @@ class Examples extends CI_Controller {
 			$crud->set_subject('Office');
 			$crud->required_fields('city');
 			$crud->columns('city','country','phone','addressLine1','postalCode');
+			$crud->or_where('country','USA');
 
 			$output = $crud->render();
 			$data['judul'] = 'Offices';
