@@ -43,5 +43,4 @@ class Auth extends CI_Controller {
 		$logout = $this->ion_auth->logout();
 		redirect('auth');
 	}
-
 }

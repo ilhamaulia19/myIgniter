@@ -17,6 +17,7 @@
             <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
         <?php endforeach; ?>
     <?php endif ?>
+
     <!--Bootstrap-->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!--Font-->

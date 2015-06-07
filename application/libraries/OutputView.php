@@ -20,9 +20,9 @@ class OutputView {
 
     function data_output($data_add)
 	{
-		$data['settings'] = $this->CI->db->get('settings', 1)->row();
-		$this->CI->db->where('user_id', $this->CI->ion_auth->user()->row()->id);
-		$groups    = $this->CI->db->get('users_groups');
+		$data['settings']       = $this->CI->crud_model->select('settings','*','','1')->row();
+		$whereGroups['user_id'] = $this->CI->ion_auth->user()->row()->id;
+		$groups                 = $this->CI->crud_model->select('users_groups','*',$whereGroups);
 		$i         = 0;
 		$id_groups = '';
 		foreach ($groups->result() as $groups) {
@@ -37,27 +37,11 @@ class OutputView {
 		$whereLvlOne = "level_one != '0' and level_two = '0' and ".$whereAkses;
 		$whereLvlTwo = "level_one != '0' and level_two != '0' and ".$whereAkses;
 
-		$this->CI->db->where($whereAkses);
-		$this->CI->db->order_by('order', 'ASC');
-		$this->CI->db->group_by('id_header_menu');
-		$data['header_menu'] = $this->CI->db->get('view_header_menu');
-
-		$this->CI->db->where($whereMenu);
-		$this->CI->db->order_by('order', 'ASC');
-		$this->CI->db->group_by('id_menu');		
-		$data['menu']        = $this->CI->db->get('view_menu');
-
-		$this->CI->db->where($whereLvlOne);
-		$this->CI->db->order_by('order', 'ASC');
-		$this->CI->db->group_by('id_menu');
-		$data['menu_lvlOne'] = $this->CI->db->get('view_menu');
-
-		$this->CI->db->where($whereLvlTwo);
-		$this->CI->db->order_by('order', 'ASC');
-		$this->CI->db->group_by('id_menu');
-		$data['menu_lvlTwo'] = $this->CI->db->get('view_menu');
-
-		$data['title'] = $data['settings']->judul;
+		$data['header_menu'] = $this->CI->crud_model->select('view_header_menu','*',$whereAkses,'','order ASC','id_header_menu');
+		$data['menu']        = $this->CI->crud_model->select('view_menu','*',$whereMenu,'','order ASC','id_menu');
+		$data['menu_lvlOne'] = $this->CI->crud_model->select('view_menu','*',$whereLvlOne,'','order ASC','id_menu');
+		$data['menu_lvlTwo'] = $this->CI->crud_model->select('view_menu','*',$whereLvlTwo,'','order ASC','id_menu');
+		$data['title']       = $data['settings']->judul;
 		foreach ($data_add as $key => $value) {
 			$data[$key] = $value;
 		}
@@ -80,9 +64,9 @@ class OutputView {
     //OUTPUT FRONT PAGE
     public function output_front($view, $template, $data_add = null)
 	{
-		$data['settings'] = $this->CI->db->get('settings', 1)->row();
-		$data['title']    = $data['settings']->judul;
-		$data['page']     = $this->CI->load->view($view, $data_add, TRUE);
+		$data['settings']    = $this->CI->crud_model->select('settings','*','','1')->row();
+		$data['title']       = $data['settings']->judul;
+		$data['page'] 		 = $this->CI->load->view($view, $data_add, TRUE); 
 		$this->CI->load->view('template/'.$template, $data);
 	}
 }

@@ -53,8 +53,8 @@
 		</tr>
 		<?php } ?>        
 		</tbody>
-	</table>
-</div>
+		</table>
+	</div>
 <?php }else{?>
 	<br/>
 	<?php echo $this->l('list_no_items'); ?>
