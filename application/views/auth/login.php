@@ -34,11 +34,11 @@
   </div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 <script>
+$('.message').hide();
 $(function(){
   redirect = '<?php echo $redirect ?>';
   base_url = '<?php echo base_url() ?>';
   $('input').iCheck({ checkboxClass: 'icheckbox_square-blue' });
-  $('.message').hide();
 
   $('form').on('submit',function(event){
     event.preventDefault();

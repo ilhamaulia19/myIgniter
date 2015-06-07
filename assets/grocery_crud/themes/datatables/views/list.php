@@ -1,13 +1,11 @@
 <?php if(!empty($list)){ ?>
 <div class="bDiv" >
-	<table class="table table-bordered table-hover" id="flex1">
+	<table class="table table-bordered table-striped" id="flex1">
 		<thead>
 			<tr class='hDiv'>
-
+				<th>No.</th>
 				<?php foreach($columns as $column){?>
-				<th class="field-sorting <?php if(isset($order_by[0]) &&  $column->field_name == $order_by[0]){?><?php echo $order_by[1]?><?php }?>" rel='<?php echo $column->field_name?>'>
-					<?php echo $column->display_as?> <span class="sort pull-right"><i class="fa fa-sort"></i></span>
-				</th>
+				<th><?php echo $column->display_as?></th>
 				<?php }?>
 				<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
 				<th abbr="tools" axis="col1"><?php echo $this->l('list_actions'); ?></th>
@@ -15,8 +13,9 @@
 			</tr>
 		</thead>		
 		<tbody>
-		<?php foreach($list as $num_row => $row){ ?>        
+		<?php $i = 1; foreach($list as $num_row => $row){ ?>        
 		<tr>
+			<td><?= $i ?></td>
 			<?php foreach($columns as $column){?>
 				<td><?php echo $row->{$column->field_name} != '' ? $row->{$column->field_name} : '&nbsp;' ; ?></td>
 			<?php }?>
@@ -51,19 +50,25 @@
 			</td>
 			<?php }?>
 		</tr>
-		<?php } ?>        
+		<?php $i = $i+1; } ?>        
 		</tbody>
 	</table>
 </div>
 <?php }else{?>
 	<br/>
-	<?php echo $this->l('list_no_items'); ?>
+	&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->l('list_no_items'); ?>
 	<br/>
 	<br/>
-<?php }?>
+<?php }?>	
 <script>
 $(document).ready(function() {
+	if (datatablesOptions()) {
+		datatablesOptions();
+	}else{
+		$('#flex1').dataTable();
+	};
 	$('#mini-refresh i').removeClass('fa-spin');   
-	$('#overlayTable').fadeOut(100);
+	$('#overlayTable').fadeOut(250);
+	afterDatatables();	
 });
 </script>

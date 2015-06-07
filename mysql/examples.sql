@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2015 at 07:37 AM
+-- Generation Time: Jun 02, 2015 at 11:29 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -94,10 +94,10 @@ INSERT INTO `groups_menu` (`id_groups`, `id_menu`) VALUES
 (1, 89),
 (2, 89),
 (1, 92),
-(1, 93),
 (1, 94),
-(1, 95),
-(1, 96);
+(1, 96),
+(2, 93),
+(1, 93);
 
 -- --------------------------------------------------------
 
@@ -117,19 +117,6 @@ CREATE TABLE IF NOT EXISTS `header_menu` (
 
 INSERT INTO `header_menu` (`id_header_menu`, `order`, `header`) VALUES
 (1, 1, 'MAIN NAVIGATION');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login_attempts`
---
-
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-`id` int(11) unsigned NOT NULL,
-  `ip_address` varchar(15) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `time` int(11) unsigned DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -157,16 +144,15 @@ INSERT INTO `menu` (`id_menu`, `order`, `id_header_menu`, `label`, `icon`, `url`
 (83, 1, 1, 'Dashboard', 'dashboard', 'crud/index', '', 0, 0),
 (84, 2, 1, 'Grocery', 'table', '#', '', 0, 0),
 (85, 3, 1, 'Ion Auth', 'lock', '#', '', 0, 0),
-(86, 1, 1, 'Offices', 'circle-o', 'crud/offices_management', '', 84, 0),
-(87, 2, 1, 'Employees', 'circle-o', 'crud/employees_management', '', 84, 0),
-(88, 3, 1, 'Customers', 'circle-o', 'crud/customers_management', '', 84, 0),
-(89, 4, 1, 'Orders', 'circle-o', 'crud/orders_management', '', 84, 0),
-(90, 5, 1, 'Products', 'circle-o', 'crud/products_management', '', 84, 0),
-(91, 6, 1, 'Films', 'circle-o', 'crud/film_management', '', 84, 0),
+(86, 1, 1, 'Offices', 'circle-o', 'examples/offices_management', '', 84, 0),
+(87, 2, 1, 'Employees', 'circle-o', 'examples/employees_management', '', 84, 0),
+(88, 3, 1, 'Customers', 'circle-o', 'examples/customers_management', '', 84, 0),
+(89, 4, 1, 'Orders', 'circle-o', 'examples/orders_management', '', 84, 0),
+(90, 5, 1, 'Products', 'circle-o', 'examples/products_management', '', 84, 0),
+(91, 6, 1, 'Films', 'circle-o', 'examples/film_management', '', 84, 0),
 (92, 4, 1, 'Menu Management', 'bars', 'crud/header_menu', 'menu-menu', 0, 0),
 (93, 5, 1, 'Settings', 'gears', 'crud/settings', '', 0, 0),
 (94, 1, 1, 'Users', 'circle-o', 'crud/users', '', 85, 0),
-(95, 2, 1, 'Users Groups', 'circle-o', 'crud/users_groups', '', 85, 0),
 (96, 3, 1, 'Groups', 'circle-o', 'crud/groups', '', 85, 0);
 
 -- --------------------------------------------------------
@@ -221,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', '', 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1431736422, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
+(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', NULL, 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1433219019, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -233,15 +219,15 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 `id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users_groups`
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(5, 1, 1),
+(4, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -306,12 +292,6 @@ ALTER TABLE `header_menu`
  ADD PRIMARY KEY (`id_header_menu`);
 
 --
--- Indexes for table `login_attempts`
---
-ALTER TABLE `login_attempts`
- ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `menu`
 --
 ALTER TABLE `menu`
@@ -350,11 +330,6 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 ALTER TABLE `header_menu`
 MODIFY `id_header_menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `login_attempts`
---
-ALTER TABLE `login_attempts`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
@@ -373,7 +348,7 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --

@@ -26,14 +26,10 @@
 
 	//Having some options at the list paging. This is the default one that all the websites are using.
 	//Make sure that the number of grocery_crud_default_per_page variable is included to this array.
-<<<<<<< HEAD
-	$config['grocery_crud_paging_options'] = array('10');
-=======
 	$config['grocery_crud_paging_options'] = array('10','25','50','100');
->>>>>>> parent of 344b9e9... Add "Advance" button
 
     //Default theme for grocery CRUD
-    $config['grocery_crud_default_theme'] = 'flexigrid';
+    $config['grocery_crud_default_theme'] = 'datatables';
 
     //The environment is important so we can have specific configurations for specific environments
     $config['grocery_crud_environment'] = 'production';
