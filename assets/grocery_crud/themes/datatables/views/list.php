@@ -1,6 +1,6 @@
 <?php if(!empty($list)){ ?>
 <div class="bDiv" >
-	<table class="table table-bordered table-striped" id="flex1">
+	<table class="table table-bordered table-hover" id="flex1">
 		<thead>
 			<tr class='hDiv'>
 				<th>No.</th>

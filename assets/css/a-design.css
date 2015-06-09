@@ -51,6 +51,15 @@
   text-transform: capitalize;
   margin-right: 14px;
 }
+#fancybox-outer{
+  width: 107%;
+}
+.datetime-input-clear, .field-sorting {
+  cursor: pointer;
+}
+.sort{
+  color: #b5bbc8;
+}
 /* Autocomplete jquery ui theme */
 .ui-autocomplete {
   position: absolute;

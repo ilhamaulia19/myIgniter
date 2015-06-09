@@ -21,8 +21,8 @@
 	$this->set_js($this->default_theme_path.'/flexigrid/js/jquery.printElement.min.js');
 
 	/** Fancybox */
-	$this->set_css($this->default_css_path.'/jquery_plugins/fancybox/jquery.fancybox.css');
-	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.fancybox-1.3.4.js');
+	$this->set_css('assets/js/plugins/fancybox/jquery.fancybox.css');
+	$this->set_js('assets/js/plugins/fancybox/jquery.fancybox.js');
 	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.easing-1.3.pack.js');
 
 	/** Jquery UI */
@@ -46,7 +46,7 @@
 <!--panel-->
 <div class="box">
 	<div class="box-header with-border">
-		<h3 class="box-title"><?php echo $subject ?></h3>
+		<h3 class="box-title"><i class="fa fa-table"></i> <?php echo $subject ?></h3>
 		<div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			<button class="btn btn-box-tool" id="mini-refresh"><i class='fa fa-refresh'></i></button>
