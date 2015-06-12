@@ -62,11 +62,7 @@
 <?php }?>	
 <script>
 $(document).ready(function() {
-	if (datatablesOptions()) {
-		datatablesOptions();
-	}else{
-		$('#flex1').dataTable();
-	};
+	$('#flex1').dataTable(datatablesOptions());
 	$('#mini-refresh i').removeClass('fa-spin');   
 	$('#overlayTable').fadeOut(250);
 	afterDatatables();	

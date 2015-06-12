@@ -16,7 +16,8 @@
 <script>
 	function datatablesOptions()
 	{
-		<?php if (isset($data['script_datatables'])) { echo $data['script_datatables']; }; ?>	
+		var option = {<?php if (isset($data['script_datatables'])) { echo $data['script_datatables']; }; ?>};
+		return option;
 	}
 </script>
 <div class="row">
