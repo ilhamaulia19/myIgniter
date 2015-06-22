@@ -9,6 +9,8 @@
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
 
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
+    <script type="text/javascript">paceOptions={elements:true};</script> 
     <!--Bootstrap-->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!--FontAwesome-->
@@ -32,6 +34,9 @@
     <script src="<?php echo base_url('assets/js/plugins/iCheck/icheck.min.js') ?>"></script>
 </head>
 <body class="login-page">
+<div class='cover'>
+    <img src="<?php echo base_url('assets/img/logo').'/'.$settings->logo ?>" class="img-splash" alt="Image">
+</div>
 
     <!-- Page Content -->
     <?php echo $page ?>

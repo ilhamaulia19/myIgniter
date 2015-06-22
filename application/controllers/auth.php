@@ -13,9 +13,9 @@ class Auth extends CI_Controller {
 	function index()
 	{
 		if (!$this->ion_auth->logged_in()){
-			redirect('auth/login');
+			redirect('auth/login', 'refresh');
 		}else{
-			redirect('crud/index');
+			redirect('crud/index', 'refresh');
 		}
 	}
 
@@ -41,7 +41,7 @@ class Auth extends CI_Controller {
 	public function logout()
 	{
 		$logout = $this->ion_auth->logout();
-		redirect('auth');
+		redirect('auth/login', 'refresh');
 	}
 
 }

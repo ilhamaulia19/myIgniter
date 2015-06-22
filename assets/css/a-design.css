@@ -105,6 +105,23 @@
   background-image: none;
 }
 /*PACE LOADING*/
+.cover{
+  position:fixed;
+  z-index:1999;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background-color: #ecf0f5;
+}
+.img-splash{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 10%;
+  max-width: 200px;
+  max-height: 200px;
+}
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -118,7 +135,7 @@
   display: none;
 }
 .pace .pace-progress {
-  background: #fff;
+  background: #dd4b39 ;
   position: fixed;
   z-index: 2000;
   top: 0;

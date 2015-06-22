@@ -56,7 +56,9 @@
     <?php endif ?>      
 </head>
 <body class="skin-red sidebar-mini fixed sidebar-collapse">
-<div class='cover'></div>
+<div class='cover'>
+    <img src="<?php echo base_url('assets/img/logo').'/'.$settings->logo ?>" class="img-splash" alt="Image">
+</div>
 <!-- Site wrapper -->
 <div class="wrapper">  
     <header class="main-header">
