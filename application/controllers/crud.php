@@ -6,7 +6,7 @@ class Crud extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->library('grocery_CRUD');
-		$this->load->library('OutputView');		
+		$this->load->library('OutputView');
     }
  	
     public function index()
