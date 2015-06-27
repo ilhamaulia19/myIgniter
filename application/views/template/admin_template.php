@@ -8,6 +8,7 @@
     <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/img//favicon-96x96.png') ?>">
    
     <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
     <script type="text/javascript">paceOptions={elements:true};</script> 
@@ -51,7 +52,7 @@
     <!--JS Plugins-->
     <?php if (isset($js_plugins)): ?>
         <?php foreach ($js_plugins as $url_plugin): ?>
-            <script src="<?php echo base_url("$url_plugin") ?>"></script>                
+            <script src="<?php echo base_url($url_plugin) ?>"></script>                
         <?php endforeach ?>
     <?php endif ?>      
 </head>
