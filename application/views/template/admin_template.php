@@ -177,15 +177,15 @@
                                 <?php 
                                     if ($add_crumb) {
                                         $part_link = str_replace('/add', '', current_url());
-                                        $label_new = 'add';
+                                        $label_new = 'Add';
                                     }
                                     if ($edit_crumb) {
                                         $part_link = strstr(current_url(), '/edit', true);
-                                        $label_new = 'edit';
+                                        $label_new = 'Edit';
                                     }
                                     if ($read_crumb) {
                                         $part_link = strstr(current_url(), '/read', true);
-                                        $label_new = 'read';
+                                        $label_new = 'Read';
                                     }
                                 ?>
                                 <a href="<?php echo $part_link ?>"><?php echo $label ?></a>
