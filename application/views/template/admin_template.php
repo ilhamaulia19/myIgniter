@@ -56,10 +56,8 @@
         <?php endforeach ?>
     <?php endif ?>      
 </head>
-<body class="skin-red sidebar-mini fixed sidebar-collapse">
-<div class='cover'>
-    <img src="<?php echo base_url('assets/img/logo').'/'.$settings->logo ?>" class="img-splash" alt="Image">
-</div>
+<body class="<?php echo $settings->skin ?> fixed sidebar-collapse">
+
 <!-- Site wrapper -->
 <div class="wrapper">  
     <header class="main-header">
@@ -210,7 +208,7 @@
           </ol>
         </section>
         <!-- Main content -->
-        <section class="content">
+        <section class="content exspan-bottom">
             <?php echo $page ?>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->

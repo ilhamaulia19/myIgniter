@@ -108,7 +108,7 @@ class Crud extends CI_Controller {
 			$this->ion_auth->activate($id);
 		}
 
-		redirect('crud/users','refresh');
+		redirect('crud/users');
 	}
 
 	function last_login_callback($value = '', $primary_key = null)
@@ -173,7 +173,7 @@ class Crud extends CI_Controller {
 
 		$crud->set_table('settings');
 		$crud->set_field_upload('logo','assets/img/logo');
-		$crud->columns('logo','judul','nama_perusahaan','alamat');
+		$crud->columns('logo','judul','nama_perusahaan','alamat','skin');
 		$crud->unset_add();
 		$crud->unset_delete();
 		$crud->unset_export();

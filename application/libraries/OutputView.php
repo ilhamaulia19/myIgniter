@@ -14,7 +14,7 @@ class OutputView {
     {
      	if (!$this->CI->ion_auth->logged_in())
 		{
-			redirect('auth/login', 'refresh');
+			redirect('auth/login');
 		}
     }
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2015 at 11:29 AM
+-- Generation Time: Jun 28, 2015 at 09:21 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -121,6 +121,19 @@ INSERT INTO `header_menu` (`id_header_menu`, `order`, `header`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+`id` int(11) unsigned NOT NULL,
+  `ip_address` varchar(15) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `time` int(11) unsigned DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menu`
 --
 
@@ -150,8 +163,8 @@ INSERT INTO `menu` (`id_menu`, `order`, `id_header_menu`, `label`, `icon`, `url`
 (89, 4, 1, 'Orders', 'circle-o', 'examples/orders_management', '', 84, 0),
 (90, 5, 1, 'Products', 'circle-o', 'examples/products_management', '', 84, 0),
 (91, 6, 1, 'Films', 'circle-o', 'examples/film_management', '', 84, 0),
-(92, 4, 1, 'Menu Management', 'bars', 'crud/header_menu', 'menu-menu', 0, 0),
-(93, 5, 1, 'Settings', 'gears', 'crud/settings', '', 0, 0),
+(92, 5, 1, 'Menu Management', 'bars', 'crud/header_menu', 'menu-menu', 0, 0),
+(93, 6, 1, 'Settings', 'gears', 'crud/settings', '', 0, 0),
 (94, 1, 1, 'Users', 'circle-o', 'crud/users', '', 85, 0),
 (96, 3, 1, 'Groups', 'circle-o', 'crud/groups', '', 85, 0);
 
@@ -166,15 +179,16 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `judul` varchar(150) NOT NULL,
   `nama_perusahaan` varchar(150) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `logo` varchar(150) NOT NULL
+  `logo` varchar(150) NOT NULL,
+  `skin` enum('skin-blue','skin-black','skin-purple','skin-green','skin-red','skin-yellow','skin-blue-light','skin-black-light','skin-purple-light','skin-green-light','skin-red-light','skin-yellow-light') NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id_settings`, `judul`, `nama_perusahaan`, `alamat`, `logo`) VALUES
-(1, 'MyIgniter 3.1', 'Kotaxdev', 'Jember', '');
+INSERT INTO `settings` (`id_settings`, `judul`, `nama_perusahaan`, `alamat`, `logo`, `skin`) VALUES
+(1, 'MyIgniter 3.1', 'Kotaxdev', 'Jember', 'b62b7-kotaxdev_large.png', 'skin-red');
 
 -- --------------------------------------------------------
 
@@ -207,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', NULL, 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1433219019, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
+(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', NULL, 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1435457836, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -292,6 +306,12 @@ ALTER TABLE `header_menu`
  ADD PRIMARY KEY (`id_header_menu`);
 
 --
+-- Indexes for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `menu`
 --
 ALTER TABLE `menu`
@@ -329,6 +349,11 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 ALTER TABLE `header_menu`
 MODIFY `id_header_menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `menu`
 --

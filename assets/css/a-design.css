@@ -12,7 +12,10 @@
 .user-menu{
   text-transform: capitalize;
 }
-/*fix bug grocery*/
+.exspan-bottom{
+  padding-bottom: 150px;
+}
+/*FIX BUG GROCERY*/
 .small-loading{
 	padding-left:10px;
 	padding-top:1px;
@@ -86,7 +89,7 @@
   display: none;
 }
 .pace .pace-progress {
-  background: #dd4b39 ;
+  background: #fff ;
   position: fixed;
   z-index: 2000;
   top: 0;

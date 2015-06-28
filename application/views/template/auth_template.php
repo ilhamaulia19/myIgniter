@@ -35,9 +35,6 @@
     <script src="<?php echo base_url('assets/js/plugins/iCheck/icheck.min.js') ?>"></script>
 </head>
 <body class="login-page">
-<div class='cover'>
-    <img src="<?php echo base_url('assets/img/logo').'/'.$settings->logo ?>" class="img-splash" alt="Image">
-</div>
 
     <!-- Page Content -->
     <?php echo $page ?>
