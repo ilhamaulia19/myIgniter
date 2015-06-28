@@ -209,6 +209,7 @@
         </section>
         <!-- Main content -->
         <section class="content exspan-bottom">
+            <div id="announcement"></div>
             <?php echo $page ?>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->

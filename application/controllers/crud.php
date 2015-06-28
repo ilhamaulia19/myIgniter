@@ -172,11 +172,13 @@ class Crud extends CI_Controller {
 		$crud = new grocery_CRUD();
 
 		$crud->set_table('settings');
+		$crud->set_subject('Settings');
 		$crud->set_field_upload('logo','assets/img/logo');
 		$crud->columns('logo','judul','nama_perusahaan','alamat','skin');
 		$crud->unset_add();
 		$crud->unset_delete();
 		$crud->unset_export();
+		$crud->unset_print();
 
 		$output = $crud->render();
 		$data['judul'] = "Settings";
@@ -185,6 +187,40 @@ class Crud extends CI_Controller {
 		$template = 'admin_template';
 		$view = 'grocery';
 		$this->outputview->output_admin($view, $template, $data, $output);
+	}
+
+	public function announcement()
+	{
+		$crud = new grocery_CRUD();
+		
+		$crud->set_table('announcement');
+		$crud->set_subject('Announcement');
+		$crud->unset_add();
+		$crud->unset_delete();
+		$crud->unset_export();
+		$crud->unset_print();
+
+		$output = $crud->render();
+		$data['judul'] = "Announcement";
+		$data['crumb'] = array( 'Announcement' => '' );
+		
+		$template = 'admin_template';
+		$view = 'grocery';
+		$this->outputview->output_admin($view, $template, $data, $output);
+	}
+
+	public function ajax_notif()
+	{
+		$this->db->where('status', '1');
+		$status = $this->db->get('announcement')->row();
+		if ($status) {
+			echo '<div class="callout callout-'.$status->type.'">';
+			echo '<h4>'.$status->title.'</h4>';
+			echo '<p>'.$status->announcement.'</p>';
+			echo "</div>";
+		}else{
+			echo "FALSE";
+		}
 	}
 
 	public function header_menu()
