@@ -299,7 +299,7 @@ $config['cache_query_string'] = FALSE;
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'REALLY_LONG_NUMBER';
+$config['encryption_key'] = 'kotaxdev';
 
 /*
 |--------------------------------------------------------------------------

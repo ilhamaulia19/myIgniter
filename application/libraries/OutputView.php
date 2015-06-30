@@ -20,6 +20,7 @@ class OutputView {
 
     function data_output($data_add)
 	{
+		$data = $data_add;
 		$data['settings'] = $this->CI->db->get('settings', 1)->row();
 		$this->CI->db->where('user_id', $this->CI->ion_auth->user()->row()->id);
 		$groups    = $this->CI->db->get('users_groups');
@@ -58,9 +59,6 @@ class OutputView {
 		$data['menu_lvlTwo'] = $this->CI->db->get('view_menu');
 
 		$data['title'] = $data['settings']->judul;
-		foreach ($data_add as $key => $value) {
-			$data[$key] = $value;
-		}
 
 		return $data;
 	}
@@ -68,7 +66,7 @@ class OutputView {
     public function output_admin($view, $template, $data_add = null, $output = null)
 	{
 		$this->auth();
-		$data         = $this->data_output($data_add);
+		$data = $this->data_output($data_add);
 		if ($output) {
 			$data['page'] = $this->CI->load->view($view, $output, TRUE); //GROCERY CRUD PAGE
 		}else{
@@ -78,11 +76,15 @@ class OutputView {
 	}
 
     //OUTPUT FRONT PAGE
-    public function output_front($view, $template, $data_add = null)
+    public function output_front($view, $template, $data_add = null, $output = null)
 	{
 		$data['settings'] = $this->CI->db->get('settings', 1)->row();
 		$data['title']    = $data['settings']->judul;
-		$data['page']     = $this->CI->load->view($view, $data_add, TRUE);
+		if ($output) {
+			$data['page'] = $this->CI->load->view($view, $output, TRUE); //GROCERY CRUD PAGE
+		}else{
+			$data['page'] = $this->CI->load->view($view, $data_add, TRUE); //NON GROCERY CRUD
+		}
 		$this->CI->load->view('template/'.$template, $data);
 	}
 }
