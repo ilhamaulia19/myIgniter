@@ -36,25 +36,6 @@
     <?php endif ?>
     <!--Custom CSS-->
     <link href="<?php echo base_url('assets/css/a-design.css') ?>" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- GroceryCRUD JS -->
-    <?php if (isset($js_files)) { foreach($js_files as $file): ?> 
-        <script src="<?php echo $file; ?>"></script>
-    <?php endforeach; } else { ?>
-        <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.4.min.js') ?>"></script>             
-    <?php } ?>       
-    <!--JS Plugins-->
-    <?php if (isset($js_plugins)): ?>
-        <?php foreach ($js_plugins as $url_plugin): ?>
-            <script src="<?php echo base_url($url_plugin) ?>"></script>                
-        <?php endforeach ?>
-    <?php endif ?>      
 </head>
 <body class="<?php echo $settings->skin ?> fixed sidebar-collapse">
 
@@ -222,6 +203,18 @@
     </footer>
 </div><!-- ./wrapper -->
 
+<!-- GroceryCRUD JS -->
+<?php if (isset($js_files)) { foreach($js_files as $file): ?> 
+    <script src="<?php echo $file; ?>"></script>
+<?php endforeach; } else { ?>
+    <script src="<?php echo base_url('assets/js/plugins/jQuery/jQuery-2.1.4.min.js') ?>"></script>             
+<?php } ?>       
+<!--JS Plugins-->
+<?php if (isset($js_plugins)): ?>
+    <?php foreach ($js_plugins as $url_plugin): ?>
+        <script src="<?php echo base_url($url_plugin) ?>"></script>                
+    <?php endforeach ?>
+<?php endif ?>
 <!--Bootstrap JS-->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 <!--Alertify JS-->
@@ -234,7 +227,9 @@
     site         = '<?php echo site_url(); ?>';
     ur_class     = '<?php echo $this->uri->segment(1); ?>';
     url_function = '<?php echo $this->uri->segment(2); ?>';
-    <?php if (isset($script)) { echo $script; }; ?>
+    <?php echo isset($script) ? $script : '' ?>
+    function datatablesOptions() { var option = { <?php echo isset($data['script_datatables']) ? $data['script_datatables'] : ''  ?> }; return option; }
+    function afterDatatables() { <?php echo isset($data['script_grocery']) ? $data['script_grocery']: '' ?> }
 </script>
 <script src="<?php echo base_url('assets/js/list.min.js') ?>"></script>
 <!--Custom JS-->

@@ -22,6 +22,7 @@ class Examples extends CI_Controller {
 			$crud->columns('city','country','phone','addressLine1','postalCode');
 						
 			$output = $crud->render();
+
 			$data['judul'] = 'Offices';
 			$data['crumb'] = array( 'Offices' => '' );
 
@@ -110,7 +111,7 @@ class Examples extends CI_Controller {
 		$crud->set_subject('Product');
 		$crud->unset_columns('productDescription','productName','productVendor','MSRP');
 		$crud->callback_column('buyPrice',array($this,'valueToEuro'));
-
+		
 		$output = $crud->render();
 	
 		$data['judul'] = 'Products';

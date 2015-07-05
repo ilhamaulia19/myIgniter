@@ -70,7 +70,11 @@ class OutputView {
 		if ($output) {
 			$data['page'] = $this->CI->load->view($view, $output, TRUE); //GROCERY CRUD PAGE
 		}else{
-			$data['page'] = $this->CI->load->view($view, $data, TRUE); //NON GROCERY CRUD
+			$view = explode('<script', $this->CI->load->view($view, $data, TRUE));
+			$data['page'] = $view[0]; //NON GROCERY CRUD
+			if (isset($view[1])) {
+				$data['scriptView'] = '<script'.$view[1];
+			}
 		}
 		$this->CI->load->view('template/'.$template, $data);
 	}
@@ -83,7 +87,11 @@ class OutputView {
 		if ($output) {
 			$data['page'] = $this->CI->load->view($view, $output, TRUE); //GROCERY CRUD PAGE
 		}else{
-			$data['page'] = $this->CI->load->view($view, $data_add, TRUE); //NON GROCERY CRUD
+			$view = explode('<script', $this->CI->load->view($view, $data_add, TRUE));
+			$data['page'] =  $view[0]; //NON GROCERY CRUD
+			if (isset($view[1])) {
+				$data['scriptView'] = '<script'.$view[1];
+			}
 		}
 		$this->CI->load->view('template/'.$template, $data);
 	}

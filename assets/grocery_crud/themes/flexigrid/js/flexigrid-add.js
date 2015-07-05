@@ -1,4 +1,10 @@
 $(function(){
+		$('input[name="'+focus+'"]').focus();
+		$('button[type="submit"]').click(function() {
+		    $('input[name="'+focus+'"]').focus();
+		});
+		$('input, textarea').addClass('form-control');
+			
 		$('.ptogtitle').click(function(){
 			if($(this).hasClass('vsble'))
 			{

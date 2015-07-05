@@ -55,12 +55,7 @@
 <script>
 	var validation_url = '<?php echo $validation_url?>';
 	var list_url = '<?php echo $list_url?>';
-	$('#field-<?php echo $focus ?>').attr('autofocus', '');
-	$('button[type="submit"]').click(function() {
-	    $('input[name="<?php echo $focus ?>"]').focus();
-	});
-
+	var focus = '<?php echo $focus ?>';	
 	var message_alert_add_form = "<?php echo $this->l('alert_add_form')?>";
 	var message_insert_error = "<?php echo $this->l('insert_error')?>";
-	$('input, textarea').addClass('form-control');
 </script>

@@ -1,4 +1,8 @@
 $(function(){
+	if (successMesage) {
+		alertify.success(successMesage);		
+	};
+
 	$('#mini-refresh').click(function() {
 		$('#btn-refresh').trigger('click');
 	});
@@ -54,7 +58,7 @@ $(function(){
 				 $('#overlayTable').show();
 			 },
 			 complete: function(){			 	
-				this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').removeClass('loading');
+				this_form.closest('.flexigrid').find('.ajax_refresh_and_loading').removeClass('loading');				
 			 },
 			 success:    function(data){
 				this_form.closest('.flexigrid').find('.total_items').html( data.total_results);
@@ -65,6 +69,7 @@ $(function(){
 						this_form.closest('.flexigrid').find('.ajax_list').html(data);
 						call_fancybox();
 						add_edit_button_listener();
+						dataList();
 					 }
 				});
 			 }
@@ -209,6 +214,7 @@ $(function(){
 	});
 
 	$('.crud_page').numeric();
+	dataList();
 });
 
 function displaying_and_pages(this_container)
@@ -234,4 +240,11 @@ function displaying_and_pages(this_container)
 	} else {
 		this_container.find('.page-ends-to').html( crud_page*per_page );
 	}
+}
+function dataList()
+{
+	$('#flex1').dataTable(datatablesOptions());
+	$('#mini-refresh i').removeClass('fa-spin');   
+	$('#overlayTable').fadeOut(250);
+	afterDatatables();	
 }

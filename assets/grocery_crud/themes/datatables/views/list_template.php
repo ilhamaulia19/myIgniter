@@ -13,8 +13,8 @@
 	$this->set_js('assets/js/plugins/datatables/jquery.dataTables.min.js');
 	$this->set_js('assets/js/plugins/datatables/dataTables.bootstrap.min.js');
 
-	//$this->set_js($this->default_theme_path.'/flexigrid/js/cookies.js');
-	$this->set_js($this->default_theme_path.'/flexigrid/js/flexigrid.js');
+	//$this->set_js($this->default_theme_path.'/datatables/js/cookies.js');
+	$this->set_js($this->default_theme_path.'/datatables/js/flexigrid.js');
 
     $this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.form.min.js');
 	$this->set_js($this->default_javascript_path.'/jquery_plugins/jquery.numeric.min.js');
@@ -108,11 +108,6 @@
 	</div>
 </div>
 <!-- /.panel-body -->
-<?php if($success_message !== null) { ?>
 <script>
-	$(function(){
-		pesan = "<?php echo $success_message; ?>";
-		alertify.success(pesan);
-	});
+	var successMesage = "<?php echo $success_message; ?>";
 </script>
-<?php }	?>

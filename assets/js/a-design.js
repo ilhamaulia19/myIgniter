@@ -24,9 +24,9 @@ $(document).ready(function () {
             $('#menuSub').show();
         };
     });
-    $('.slimScrollDiv').mouseleave(function() {
-        $('#searchSidebar').val('');        
-    });
+    // $('.slimScrollDiv').mouseleave(function() {
+    //     $('#searchSidebar').val('');        
+    // });
     
     //grocery fix bug
     $('.chzn-container').css('width', '100%');

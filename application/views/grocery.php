@@ -13,24 +13,8 @@
 		</p>
 	</div><!-- /.box-body -->
 </div>
-<script>
-	function datatablesOptions()
-	{
-		var option = {<?php if (isset($data['script_datatables'])) { echo $data['script_datatables']; }; ?>};
-		return option;
-	}
-</script>
 <div class="row">
 	<div class="col-lg-12">
 		<div><?php echo $output; ?></div>
 	</div>
 </div>
-<script>
-	function afterDatatables()
-	{
-	    site         = '<?php echo site_url(); ?>';
-	    ur_class     = '<?php echo $this->uri->segment(1); ?>';
-	    url_function = '<?php echo $this->uri->segment(2); ?>';
-		<?php if (isset($data['script_grocery'])) { echo $data['script_grocery']; }; ?>	
-	}
-</script>

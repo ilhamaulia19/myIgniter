@@ -59,12 +59,4 @@
 	&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->l('list_no_items'); ?>
 	<br/>
 	<br/>
-<?php }?>	
-<script>
-$(document).ready(function() {
-	$('#flex1').dataTable(datatablesOptions());
-	$('#mini-refresh i').removeClass('fa-spin');   
-	$('#overlayTable').fadeOut(250);
-	afterDatatables();	
-});
-</script>
+<?php }?>

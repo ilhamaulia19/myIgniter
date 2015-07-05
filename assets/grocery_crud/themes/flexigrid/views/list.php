@@ -61,9 +61,3 @@
 	<br/>
 	<br/>
 <?php }?>
-<script>
-$(document).ready(function() {
-	$('#mini-refresh i').removeClass('fa-spin');   
-	$('#overlayTable').fadeOut(100);
-});
-</script>

@@ -1,4 +1,8 @@
 $(function(){
+	if (successMesage) {
+		alertify.success(successMesage);		
+	};
+
 	$('#mini-refresh').click(function() {
 		$('#btn-refresh').trigger('click');
 	});
@@ -70,7 +74,9 @@ $(function(){
 						call_fancybox();
 						add_edit_button_listener();
 						$('.asc .sort').html('<i class="fa fa-sort-asc"></i>');						
-						$('.desc .sort').html('<i class="fa fa-sort-desc"></i>');						
+						$('.desc .sort').html('<i class="fa fa-sort-desc"></i>');		
+						$('#mini-refresh i').removeClass('fa-spin');   
+						$('#overlayTable').fadeOut(100);				
 					 }
 				});
 			 }

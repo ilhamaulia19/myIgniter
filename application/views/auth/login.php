@@ -51,7 +51,7 @@ $(function(){
               $('input[name="identity"]').focus();
             }else{
               window.location.href = redirect;
-            };
+            }
             $("#btnLoading").html('');
         }
     });

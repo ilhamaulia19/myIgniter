@@ -182,11 +182,6 @@
 	</div>
 </div>
 <!-- /.panel-body -->
-<?php if($success_message !== null) { ?>
 <script>
-	$(function(){
-		pesan = "<?php echo $success_message; ?>";
-		alertify.success(pesan);
-	});
+	var successMesage = "<?php echo $success_message; ?>";
 </script>
-<?php }	?>
