@@ -35,16 +35,12 @@ $(document).ready(function () {
     $('.fileinput-button').removeClass('qq-upload-button').addClass('btn btn-success').prepend('<i class="fa fa-upload"></i> '); 
     $('#fancybox-outer').css('width','107%');
 
-    loadIt();
-    setInterval(loadIt, 10000);
+    (function loadIt() {
+         $.get(site + '/crud/ajax_notif', function(data) {
+            if (data != 'FALSE') {
+                $('#announcement').html(data);
+            }
+            setTimeout(loadIt, 10000);
+        });
+    }());
 });
-
-function loadIt() {
-    $.get(site + '/crud/ajax_notif', function(data) {
-        if (data != 'FALSE') {
-            $('#announcement').html(data);
-        }else{
-            $('#announcement').html('');
-        };
-    });
-}

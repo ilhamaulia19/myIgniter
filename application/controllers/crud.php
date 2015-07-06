@@ -270,7 +270,7 @@ class Crud extends CI_Controller {
 		$crud->callback_after_delete(array($this,'menu_after_delete'));
 
 		$output = $crud->render();
-		$data['script'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active');";
 		$data['script_grocery'] = "$('a[href=\"#hidden\"]').replaceWith('<span style=\"color:#777\"><i class=\"fa fa-circle\"></i> Sub menu</span>')";
 		$output->data = $data;
 		$data['judul'] = "Menu";
@@ -326,7 +326,7 @@ class Crud extends CI_Controller {
 		$crud->callback_after_delete(array($this,'sub_menu_after_delete'));
 
 		$output = $crud->render();
-		$data['script'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active');";
 		$data['script_grocery'] = "$('a[href=\"#hidden\"]').replaceWith('<span style=\"color:#777\"><i class=\"fa fa-circle\"></i> Sub menu 2</span>')";		
 		$output->data = $data;
 		$data['judul'] = "Sub menu";
@@ -383,7 +383,7 @@ class Crud extends CI_Controller {
 	    $crud->callback_before_insert(array($this,'call_sub_menu_2'));
 
 		$output = $crud->render();
-		$data['script'] = "$('#menu-menu').addClass('active')";
+		$data['script'] = "$('#menu-menu').addClass('active');";
 		$output->data = $data;
 		$data['judul'] = "Sub menu 2";
 		$data['crumb'] = array( 
