@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2015 at 11:51 AM
+-- Generation Time: Jul 07, 2015 at 11:39 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -40,6 +40,26 @@ CREATE TABLE IF NOT EXISTS `announcement` (
 
 INSERT INTO `announcement` (`id_announcement`, `title`, `announcement`, `type`, `status`) VALUES
 (1, 'I am a warning callout!', 'This is a yellow callout.', 'success', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api`
+--
+
+CREATE TABLE IF NOT EXISTS `api` (
+`id_api` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `api`
+--
+
+INSERT INTO `api` (`id_api`, `name`, `email`) VALUES
+(1, 'Jhon', 'jhon@gmail.com'),
+(2, 'Joko', 'joko@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -119,7 +139,8 @@ INSERT INTO `groups_menu` (`id_groups`, `id_menu`) VALUES
 (1, 96),
 (2, 93),
 (1, 93),
-(1, 97);
+(1, 97),
+(1, 98);
 
 -- --------------------------------------------------------
 
@@ -169,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `menu_id` varchar(150) NOT NULL,
   `level_one` int(11) NOT NULL DEFAULT '0',
   `level_two` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menu`
@@ -189,7 +210,8 @@ INSERT INTO `menu` (`id_menu`, `order`, `id_header_menu`, `label`, `icon`, `url`
 (93, 6, 1, 'Settings', 'gears', 'crud/settings', '', 0, 0),
 (94, 1, 1, 'Users', 'circle-o', 'crud/users', '', 85, 0),
 (96, 3, 1, 'Groups', 'circle-o', 'crud/groups', '', 85, 0),
-(97, 7, 1, 'Announcement', 'bullhorn', 'crud/announcement', '', 0, 0);
+(97, 7, 1, 'Announcement', 'bullhorn', 'crud/announcement', '', 0, 0),
+(98, 8, 1, 'API', 'cloud', 'api/users', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -244,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', NULL, 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1435463115, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
+(1, '127.0.0.1', 'admin', '$2y$08$v.Lr4yujxQxzZNdmCpgJWu7WLR5hzFDxkh0mRRmSuBartWDE93ySO', '', 'admin@admin.com', NULL, 'asGsHoh0iWTpOuVLM.EMUO900526bdd0557906ac', 1421981304, NULL, 1268889823, 1436236246, 1, 'Admin', 'istrator', 'ADMIN', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -323,6 +345,12 @@ ALTER TABLE `announcement`
  ADD PRIMARY KEY (`id_announcement`);
 
 --
+-- Indexes for table `api`
+--
+ALTER TABLE `api`
+ ADD PRIMARY KEY (`id_api`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -374,6 +402,11 @@ ALTER TABLE `users_groups`
 ALTER TABLE `announcement`
 MODIFY `id_announcement` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `api`
+--
+ALTER TABLE `api`
+MODIFY `id_api` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
@@ -392,7 +425,7 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
+MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT for table `settings`
 --
