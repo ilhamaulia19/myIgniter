@@ -7,10 +7,14 @@ class Api extends REST_Controller {
 
 	public function __construct()
 	{
-		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); 
-	    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-		header('Access-Control-Allow-Origin: *');
-		parent::__construct();		
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method == "OPTIONS") {
+            die();
+        }
+        parent::__construct();
 	}
 
 	function user_get()
@@ -35,7 +39,20 @@ class Api extends REST_Controller {
             $this->response(['error' => 'Api could not be found'], 404);
         }
     }
-    
+
+    function user_post()
+    {
+        $api = array(
+                        'name' => $this->post('name'), 
+                        'email' => $this->post('email')
+                    );
+
+        if ($this->post('name') && $this->post('email')) {
+            $this->db->insert('api', $api);
+        }
+
+        $this->response($api, 201);
+    }
 }
 
 /* End of file Api.php */
