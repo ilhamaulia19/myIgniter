@@ -49,9 +49,25 @@ class Api extends REST_Controller {
 
         if ($this->post('name') && $this->post('email')) {
             $this->db->insert('api', $api);
+            $message['message'] = 'Success POST';
+        }else{
+            $message['message'] = 'Error POST';
         }
 
-        $this->response($api, 201);
+        $this->response($message, 201);
+    }
+
+    function user_delete()
+    {
+        if ($this->get('id')) {
+            $this->db->where('id_api', $this->get('id'));
+            $this->db->delete('api');
+            $message['message'] = 'Success DELETE';
+        }else{
+            $message['message'] = 'Error DELETE';
+        }
+
+        $this->response($message, 204);
     }
 }
 
