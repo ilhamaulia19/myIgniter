@@ -229,10 +229,10 @@ class Crud extends CI_Controller {
 
 		$crud->set_table('header_menu');
 		$crud->set_subject('Header Menu');
-		$crud->display_as('id_header_menu','Order');
+		$crud->display_as('id_header_menu','Sort');
 		$crud->set_relation_n_n('Akses', 'groups_header', 'groups', 'id_header_menu', 'id_groups', 'name');
 		$crud->add_action('Menu', 'fa fa-plus-circle', '', '',array($this,'link_menu'));
-		$crud->order_by('order','ASC');
+		$crud->order_by('sort','ASC');
 		$crud->unset_read();
 
 		$output = $crud->render();
@@ -260,7 +260,7 @@ class Crud extends CI_Controller {
 		$crud->where('id_header_menu',$id_header_menu);
 		$crud->change_field_type('id_header_menu','invisible');
 
-		$crud->order_by('order','ASC');
+		$crud->order_by('sort','ASC');
 		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
 		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
 		$crud->unset_read();
@@ -316,7 +316,7 @@ class Crud extends CI_Controller {
 		$crud->change_field_type('id_header_menu','invisible');
 		$crud->change_field_type('level_one','invisible');
 
-		$crud->order_by('order','ASC');
+		$crud->order_by('sort','ASC');
 		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
 		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
 		$crud->unset_read();
@@ -376,7 +376,7 @@ class Crud extends CI_Controller {
 		$crud->change_field_type('level_one','invisible');
 		$crud->change_field_type('level_two','invisible');
 
-		$crud->order_by('order','ASC');
+		$crud->order_by('sort','ASC');
 		$crud->set_relation_n_n('Akses', 'groups_menu', 'groups', 'id_menu', 'id_groups', 'name');
 		$crud->unset_columns('level_one','level_two','icon','menu_id','id_header_menu');
 		$crud->unset_read();

@@ -8,34 +8,32 @@
     <meta name="description" content="Custom Framework Codeigniter and bootstrap">
     <meta name="author" content="Asrul Hanafi">
     <title><?php echo $title ?></title>
-    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/img//favicon-96x96.png') ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/img/favicon-96x96.png') ?>">
    
-    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
-    <script type="text/javascript">paceOptions={elements:true};</script> 
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>
-            <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+            <link rel="stylesheet" type="text/css" href="<?php echo $file; ?>" />
         <?php endforeach; ?>
     <?php endif ?>
     <!--Bootstrap-->
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <!--Font-->
-    <link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
     <!--AdminLTE-->
-    <link href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/skins/_all-skins.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/skins/_all-skins.min.css') ?>">
     <!--Alertify-->
-    <link href="<?php echo base_url('assets/css/alertify.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/default.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/alertify.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/default.min.css') ?>">
     <!--CSS PLUGINS-->
     <?php if (isset($css_plugins)): ?>
         <?php foreach ($css_plugins as $url_plugin): ?>
-            <link href="<?php echo base_url("$url_plugin") ?>" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url("$url_plugin") ?>">
         <?php endforeach ?>
     <?php endif ?>
     <!--Custom CSS-->
-    <link href="<?php echo base_url('assets/css/a-design.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/a-design.css') ?>">
 </head>
 <body class="<?php echo $settings->skin ?> fixed sidebar-collapse">
 
@@ -228,7 +226,7 @@
     ur_class     = '<?php echo $this->uri->segment(1); ?>';
     url_function = '<?php echo $this->uri->segment(2); ?>';
     <?php echo isset($script) ? $script : '' ?>
-    function datatablesOptions() { var option = { <?php echo isset($data['script_datatables']) ? $data['script_datatables'] : ''  ?> }; return option; }
+    function datatablesOptions() { var option = { "orderClasses": false, <?php echo isset($data['script_datatables']) ? $data['script_datatables'] : ''  ?> }; return option; }
     function afterDatatables() { <?php echo isset($data['script_grocery']) ? $data['script_grocery']: '' ?> }
 </script>
 <script src="<?php echo base_url('assets/js/list.min.js') ?>"></script>

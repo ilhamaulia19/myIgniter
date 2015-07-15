@@ -39,22 +39,22 @@ class OutputView {
 		$whereLvlTwo = "level_one != '0' and level_two != '0' and ".$whereAkses;
 
 		$this->CI->db->where($whereAkses);
-		$this->CI->db->order_by('order', 'ASC');
+		$this->CI->db->order_by('sort', 'ASC');
 		$this->CI->db->group_by('id_header_menu');
 		$data['header_menu'] = $this->CI->db->get('view_header_menu');
 
 		$this->CI->db->where($whereMenu);
-		$this->CI->db->order_by('order', 'ASC');
+		$this->CI->db->order_by('sort', 'ASC');
 		$this->CI->db->group_by('id_menu');		
 		$data['menu']        = $this->CI->db->get('view_menu');
 
 		$this->CI->db->where($whereLvlOne);
-		$this->CI->db->order_by('order', 'ASC');
+		$this->CI->db->order_by('sort', 'ASC');
 		$this->CI->db->group_by('id_menu');
 		$data['menu_lvlOne'] = $this->CI->db->get('view_menu');
 
 		$this->CI->db->where($whereLvlTwo);
-		$this->CI->db->order_by('order', 'ASC');
+		$this->CI->db->order_by('sort', 'ASC');
 		$this->CI->db->group_by('id_menu');
 		$data['menu_lvlTwo'] = $this->CI->db->get('view_menu');
 
