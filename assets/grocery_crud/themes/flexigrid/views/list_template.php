@@ -1,6 +1,4 @@
 <?php
-	$this->set_css('assets/js/plugins/datatables/dataTables.bootstrap.css');
-
 	// Jquery
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);	
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');

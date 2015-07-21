@@ -13,27 +13,27 @@
     <!--GroceryCRUD CSS-->
     <?php if (isset($css_files)) : ?>
         <?php foreach($css_files as $file): ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo $file; ?>" />
+            <link rel="stylesheet" href="<?php echo $file; ?>" />
         <?php endforeach; ?>
     <?php endif ?>
     <!--Bootstrap-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <!--Font-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
     <!--AdminLTE-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/skins/_all-skins.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$settings->skin.'.min.css') ?>">
     <!--Alertify-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/alertify.min.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/default.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/alertify.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/default.min.css') ?>">
     <!--CSS PLUGINS-->
     <?php if (isset($css_plugins)): ?>
         <?php foreach ($css_plugins as $url_plugin): ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url("$url_plugin") ?>">
+            <link rel="stylesheet" href="<?php echo base_url("$url_plugin") ?>">
         <?php endforeach ?>
     <?php endif ?>
     <!--Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/a-design.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/a-design.css') ?>">
 </head>
 <body class="<?php echo $settings->skin ?> fixed sidebar-collapse">
 
@@ -230,6 +230,7 @@
     function afterDatatables() { <?php echo isset($data['script_grocery']) ? $data['script_grocery']: '' ?> }
 </script>
 <script src="<?php echo base_url('assets/js/list.min.js') ?>"></script>
+<?php echo isset($scriptView) ? $scriptView : ''; ?>
 <!--Custom JS-->
 <script src="<?php echo base_url('assets/js/a-design.js') ?>"></script>
 </body>
